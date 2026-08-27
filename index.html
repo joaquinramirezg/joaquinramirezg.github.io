@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joaquin Ramirez · ML Engineer / Data Scientist</title>
+<meta name="description" content="Machine Learning Engineer and Data Scientist. GenAI in production: LLM copilots, agents, RAG. MSBA candidate at UCLA Anderson.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f6f8fa;
+    --text: #1a2332;
+    --text-soft: #4b5768;
+    --line: #e3e8ee;
+    --accent: #0b5fa5;
+    --accent-soft: #eaf3fb;
+    --metric: #0b5fa5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f141b;
+      --bg-soft: #161d27;
+      --text: #e8edf3;
+      --text-soft: #9fadbd;
+      --line: #26303d;
+      --accent: #5aa9e6;
+      --accent-soft: #16283a;
+      --metric: #7cbcf0;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 68px 0 44px; }
+  .kicker {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+  .subtitle { font-size: 17.5px; color: var(--text-soft); margin-top: 16px; max-width: 640px; }
+  .meta-line { margin-top: 14px; font-size: 14.5px; color: var(--text-soft); }
+  .links { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .links a {
+    display: inline-block; padding: 9px 18px; border-radius: 8px;
+    font-size: 14.5px; font-weight: 600; text-decoration: none;
+    border: 1px solid var(--line); color: var(--text);
+    transition: border-color .15s, background .15s;
+  }
+  .links a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .links a:hover { border-color: var(--accent); }
+  .links a.primary:hover { opacity: .92; }
+
+  section { padding: 38px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 24px; }
+
+  .card {
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 24px 26px; margin-bottom: 18px; background: var(--bg);
+  }
+  .card h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+  .card .where { display: block; font-size: 13.5px; color: var(--text-soft); font-weight: 500; margin-top: 3px; }
+  .card p { font-size: 15px; color: var(--text-soft); margin-top: 12px; }
+  .metrics { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+  .metric {
+    background: var(--accent-soft); color: var(--metric);
+    font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tags { margin-top: 13px; font-size: 13px; color: var(--text-soft); }
+  .tags a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .tags a:hover { text-decoration: underline; }
+
+  .skills-grid { display: grid; grid-template-columns: 160px 1fr; gap: 12px 20px; font-size: 15px; }
+  .skills-grid dt { font-weight: 600; color: var(--text); }
+  .skills-grid dd { color: var(--text-soft); }
+  @media (max-width: 560px) { .skills-grid { grid-template-columns: 1fr; gap: 2px 0; } .skills-grid dd { margin-bottom: 12px; } }
+
+  .edu { margin-bottom: 18px; }
+  .edu h3 { font-size: 16.5px; font-weight: 700; }
+  .edu .detail { font-size: 14.5px; color: var(--text-soft); }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0 60px; }
+  footer p { font-size: 15px; color: var(--text-soft); }
+  footer a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 560px) {
+    header { padding: 46px 0 34px; }
+    h1 { font-size: 30px; }
+    .subtitle { font-size: 16.5px; }
+    .card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Machine Learning Engineer / Data Scientist</div>
+    <h1>Joaquin Ramirez</h1>
+    <p class="subtitle">I've spent the last three years building GenAI products and predictive models that made it to production: an AI copilot used by 1300+ organizations, fraud detection for a network of 35 banks, forecasting and optimization for exporters and retailers. Now an MSBA candidate at UCLA Anderson.</p>
+    <p class="meta-line">Los Angeles, CA</p>
+    <div class="links">
+      <a class="primary" href="https://github.com/joaquinramirezg">GitHub</a>
+      <a href="https://www.linkedin.com/in/joaquinramirezg">LinkedIn</a>
+      <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">Email</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Selected work</h2>
+
+    <div class="card">
+      <h3>AI copilot and agents for HR teams</h3>
+      <span class="where">Crehana (HR-tech SaaS) · Senior Machine Learning Engineer · Feb 2025 – present</span>
+      <p>I lead development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), now used by 1300+ organizations and 48K+ people across Latin America. When our data-extraction agent kept failing in production, I redesigned its routing and added reliability safeguards: failures dropped 25% and adoption of the feature grew 9x. I also present tradeoffs to our executive committee and coordinate the work of two other ML engineers.</p>
+      <div class="metrics">
+        <span class="metric">1300+ organizations</span>
+        <span class="metric">48K+ users</span>
+        <span class="metric">failures −25%</span>
+        <span class="metric">adoption 9x</span>
+      </div>
+      <p class="tags">LangChain · LangGraph · OpenAI · Python · AWS</p>
+    </div>
+
+    <div class="card">
+      <h3>The retrieval pipeline behind the copilot</h3>
+      <span class="where">Crehana · Senior Machine Learning Engineer · Feb 2025 – present</span>
+      <p>The copilot answers from each company's own documents, so the retrieval layer has to stay fresh and tenant-aware. I built and run the ingestion pipeline: 10K+ documents a week, indexed on a schedule into a search corpus of 1.2M+ vectors on Qdrant with OpenAI embeddings.</p>
+      <div class="metrics">
+        <span class="metric">10K+ docs/week</span>
+        <span class="metric">1.2M+ vectors</span>
+      </div>
+      <p class="tags">RAG · Qdrant · OpenAI embeddings · Python</p>
+    </div>
+
+    <div class="card">
+      <h3>Contract allocation for a commodity exporter</h3>
+      <span class="where">Canvia (IT consulting) · Data Scientist · Dec 2023 – Dec 2024</span>
+      <p>A fishmeal exporter planned its contract allocation by hand, two weeks per cycle. I built the product classification and allocation algorithm that now does it in under 20 minutes, raising estimated gross margin by ~55% and cutting operating costs by ~40%. I presented the results to about 15 client stakeholders, including VPs.</p>
+      <div class="metrics">
+        <span class="metric">est. gross margin +55%</span>
+        <span class="metric">costs −40%</span>
+        <span class="metric">2 weeks → &lt;20 min</span>
+      </div>
+      <p class="tags">Python · scikit-learn · optimization</p>
+    </div>
+
+    <div class="card">
+      <h3>Fraud detection across 35 financial institutions</h3>
+      <span class="where">Canvia · Data Scientist · Dec 2023 – Dec 2024</span>
+      <p>Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru's leading financial institutions. The system automatically flags the highest-risk ~2% for human review instead of asking analysts to watch everything.</p>
+      <div class="metrics">
+        <span class="metric">35 institutions</span>
+        <span class="metric">~2% flagged, real time</span>
+      </div>
+      <p class="tags">Isolation Forest · anomaly detection · Python</p>
+    </div>
+
+    <div class="card">
+      <h3>G.E.N.I.E., my undergraduate thesis</h3>
+      <span class="where">UTEC · with Alexandra Shulca · 2023</span>
+      <p>A generative chatbot specialized in our university's regulations, built back when that meant doing everything yourself. We scraped and structured the documents, generated a fine-tuning dataset, and LoRA fine-tuned Falcon-7B through 20 hyperparameter trials, taking evaluation loss down 84% (2.92 to 0.46) and perplexity from 18.5 to 1.6, then validated the answers with user testing.</p>
+      <div class="metrics">
+        <span class="metric">eval loss −84%</span>
+        <span class="metric">perplexity 18.5 → 1.6</span>
+      </div>
+      <p class="tags">Falcon-7B · LoRA · Hugging Face · <a href="https://github.com/joaquinramirezg/tesis">code →</a></p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Skills</h2>
+    <dl class="skills-grid">
+      <dt>AI &amp; ML</dt><dd>LLMs and GenAI (OpenAI, Claude, Gemini) · agentic systems (LangChain, LangGraph) · RAG · vector databases (Qdrant) · scikit-learn · NLP</dd>
+      <dt>Analytics</dt><dd>A/B testing · hypothesis testing · forecasting · anomaly detection · classification</dd>
+      <dt>Programming</dt><dd>Python (pandas, NumPy) · SQL · R · C++</dd>
+      <dt>Tools &amp; Cloud</dt><dd>AWS · Azure · GCP · Docker · Git · Tableau · Power BI</dd>
+      <dt>Languages</dt><dd>Spanish (native) · English (fluent) · German (B2)</dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="edu">
+      <h3>UCLA Anderson School of Management</h3>
+      <p class="detail">Master of Science in Business Analytics (MSBA), expected December 2027 · Anderson Merit Fellowship</p>
+    </div>
+    <div class="edu">
+      <h3>Universidad de Ingeniería y Tecnología (UTEC)</h3>
+      <p class="detail">B.S. Computer Science, 2024 · Top 10% of class, Academic Excellence Scholarship · Student Body President (2022) · Exchange year at Hochschule Luzern, Switzerland</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Los Angeles, CA · <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">email</a> · <a href="https://github.com/joaquinramirezg">GitHub</a> · <a href="https://www.linkedin.com/in/joaquinramirezg">LinkedIn</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
