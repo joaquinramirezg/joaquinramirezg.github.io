@@ -139,8 +139,8 @@
 
     <div class="card">
       <h3>AI copilot and agents for HR teams</h3>
-      <span class="where">Crehana (HR-tech SaaS) · Senior Machine Learning Engineer · Feb 2025 – present</span>
-      <p>I lead development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), now used by 1300+ organizations and 48K+ people across Latin America. When our data-extraction agent kept failing in production, I redesigned its routing and added reliability safeguards: failures dropped 25% and adoption of the feature grew 9x. I also present tradeoffs to our executive committee and coordinate the work of two other ML engineers.</p>
+      <span class="where">Crehana (HR-tech SaaS) · Senior Machine Learning Engineer · Feb 2025 – Sep 2026</span>
+      <p>I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used by 1300+ organizations and 48K+ people across Latin America. When our data-extraction agent kept failing in production, I redesigned its routing and added reliability safeguards: failures dropped 25% and adoption of the feature grew 9x. I also presented tradeoffs to our executive committee and coordinated the work of two other ML engineers.</p>
       <div class="metrics">
         <span class="metric">1300+ organizations</span>
         <span class="metric">48K+ users</span>
@@ -152,8 +152,8 @@
 
     <div class="card">
       <h3>The retrieval pipeline behind the copilot</h3>
-      <span class="where">Crehana · Senior Machine Learning Engineer · Feb 2025 – present</span>
-      <p>The copilot answers from each company's own documents, so the retrieval layer has to stay fresh and tenant-aware. I built and run the ingestion pipeline: 10K+ documents a week, indexed on a schedule into a search corpus of 1.2M+ vectors on Qdrant with OpenAI embeddings.</p>
+      <span class="where">Crehana · Senior Machine Learning Engineer · Feb 2025 – Sep 2026</span>
+      <p>The copilot answers from each company's own documents, so the retrieval layer has to stay fresh and tenant-aware. I built and ran the ingestion pipeline: 10K+ documents a week, indexed on a schedule into a search corpus of 1.2M+ vectors on Qdrant with OpenAI embeddings.</p>
       <div class="metrics">
         <span class="metric">10K+ docs/week</span>
         <span class="metric">1.2M+ vectors</span>
@@ -216,7 +216,7 @@
       <p>The data-extraction agent failed too often in production. I attacked it on several fronts: stricter schema enforcement on outputs, redesigned prompts, better validation, a fallback chain so that when a model fails the request retries on a lighter model or a different provider, and a self-critique step where the agent checks that its own answer makes sense before returning it. Failures dropped 25%, and copilot adoption, measured in weekly active prompts, grew 9x.</p>
 
       <h4>Working with the business</h4>
-      <p>I present tradeoffs to an executive committee of the CEO, CTO, and product lead: where the AI team goes next, which products the company needs, how to weigh bug fixes against new capabilities. Part of that job is advocating for what the engineering roadmap needs, not only what the business asks for.</p>
+      <p>I presented tradeoffs to an executive committee of the CEO, CTO, and product lead: where the AI team should go next, which products the company needed, how to weigh bug fixes against new capabilities. Part of that job was advocating for what the engineering roadmap needed, not only what the business asked for.</p>
 
       <a class="backlink" href="#top">Back to top ↑</a>
     </article>
@@ -226,7 +226,7 @@
       <span class="where">Crehana · multi-tenancy, messy inputs, and honest evaluation</span>
 
       <h4>What actually flows in</h4>
-      <p>It is not a static document pile. Information flows continuously from the platform's HR modules into the master database as companies edit, upload, and generate records, more than 10K documents a week. Every weekend the pipeline reindexes that into a search corpus of 1.2M+ vectors on Qdrant, using OpenAI embeddings over overlapping chunks.</p>
+      <p>It is not a static document pile. Information flowed continuously from the platform's HR modules into the master database as companies edited, uploaded, and generated records, more than 10K documents a week. Every weekend the pipeline reindexed that into a search corpus of 1.2M+ vectors on Qdrant, using OpenAI embeddings over overlapping chunks.</p>
 
       <h4>Multi-tenancy: the constraint that shapes everything</h4>
       <p>1300+ organizations share the platform, and no company may ever see another company's data. Retrieval enforces metadata filtering per organization on the vector side, on top of tenant schemas in the relational database. I also evaluated moving to separate collections per tenant, which buys stronger isolation and much simpler offboarding when a customer leaves, at the cost of operational overhead across that many organizations. Filtered search won for now; I still think the isolation argument gets stronger as the platform grows.</p>
