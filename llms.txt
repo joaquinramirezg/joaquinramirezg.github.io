@@ -1,0 +1,9 @@
+# Joaquin Ramirez
+
+> Personal portfolio of Joaquin Ramirez, machine learning engineer and data scientist. MSBA candidate at UCLA Anderson in Los Angeles. Case studies of production work: a GenAI copilot and agentic systems serving 1300+ organizations, a RAG pipeline, contract-allocation optimization, and real-time fraud detection.
+
+## Links
+
+- [Portfolio](https://joaquinramirez.dev/): single-page site with anchored case studies
+- [GitHub](https://github.com/joaquinramirezg): public code, including the GENIE thesis repo (Falcon-7B LoRA fine-tune)
+- [LinkedIn](https://www.linkedin.com/in/joaquinramirezg/)
