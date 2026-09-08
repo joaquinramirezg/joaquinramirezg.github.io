@@ -32,6 +32,7 @@
     }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg);
@@ -85,6 +86,20 @@
   .skills-grid dd { color: var(--text-soft); }
   @media (max-width: 560px) { .skills-grid { grid-template-columns: 1fr; gap: 2px 0; } .skills-grid dd { margin-bottom: 12px; } }
 
+  .case { border-top: 1px solid var(--line); padding-top: 30px; margin-top: 30px; }
+  .case:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .case h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+  .case .where { display: block; font-size: 13.5px; color: var(--text-soft); font-weight: 500; margin-top: 3px; }
+  .case h4 {
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--accent); margin-top: 20px;
+  }
+  .case p { font-size: 15px; color: var(--text-soft); margin-top: 9px; }
+  .case ul { margin: 9px 0 0 20px; font-size: 15px; color: var(--text-soft); }
+  .case ul li { margin-top: 5px; }
+  .backlink { display: inline-block; margin-top: 16px; font-size: 13.5px; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .backlink:hover { text-decoration: underline; }
+
   .edu { margin-bottom: 18px; }
   .edu h3 { font-size: 16.5px; font-weight: 700; }
   .edu .detail { font-size: 14.5px; color: var(--text-soft); }
@@ -104,7 +119,7 @@
 </head>
 <body>
 
-<header>
+<header id="top">
   <div class="wrap">
     <div class="kicker">Machine Learning Engineer / Data Scientist</div>
     <h1>Joaquin Ramirez</h1>
@@ -132,7 +147,7 @@
         <span class="metric">failures −25%</span>
         <span class="metric">adoption 9x</span>
       </div>
-      <p class="tags">LangChain · LangGraph · OpenAI · Python · AWS</p>
+      <p class="tags">LangChain · LangGraph · OpenAI · Python · AWS · <a href="#case-copilot">case study →</a></p>
     </div>
 
     <div class="card">
@@ -143,7 +158,7 @@
         <span class="metric">10K+ docs/week</span>
         <span class="metric">1.2M+ vectors</span>
       </div>
-      <p class="tags">RAG · Qdrant · OpenAI embeddings · Python</p>
+      <p class="tags">RAG · Qdrant · OpenAI embeddings · Python · <a href="#case-rag">case study →</a></p>
     </div>
 
     <div class="card">
@@ -155,7 +170,7 @@
         <span class="metric">costs −40%</span>
         <span class="metric">2 weeks → &lt;20 min</span>
       </div>
-      <p class="tags">Python · scikit-learn · optimization</p>
+      <p class="tags">Python · scikit-learn · optimization · <a href="#case-fishmeal">case study →</a></p>
     </div>
 
     <div class="card">
@@ -166,7 +181,7 @@
         <span class="metric">35 institutions</span>
         <span class="metric">~2% flagged, real time</span>
       </div>
-      <p class="tags">Isolation Forest · anomaly detection · Python</p>
+      <p class="tags">Isolation Forest · anomaly detection · Python · <a href="#case-fraud">case study →</a></p>
     </div>
 
     <div class="card">
@@ -177,8 +192,92 @@
         <span class="metric">eval loss −84%</span>
         <span class="metric">perplexity 18.5 → 1.6</span>
       </div>
-      <p class="tags">Falcon-7B · LoRA · Hugging Face · <a href="https://github.com/joaquinramirezg/tesis">code →</a></p>
+      <p class="tags">Falcon-7B · LoRA · Hugging Face · <a href="https://github.com/joaquinramirezg/genie-llm-chatbot">code and full write-up →</a></p>
     </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Case studies</h2>
+
+    <article class="case" id="case-copilot">
+      <h3>The HR copilot and its agents</h3>
+      <span class="where">Crehana · how I think about agents, reliability, and product</span>
+
+      <h4>Who uses it and for what</h4>
+      <p>HR admins, managers, and employees, each with different jobs to be done. An employee asks what their company's paternity leave policy allows, and the copilot answers from the documents their HR team uploaded. Another asks how they did against their quarterly goals, which triggers a data query and then course recommendations to close the gaps. A team leader asks who on the team is behind on which metrics and how to help them catch up. One interface, very different workflows underneath.</p>
+
+      <h4>Why agents instead of simpler automation</h4>
+      <p>The use cases that mattered were multi-step and stateful. Onboarding involves a chain of bureaucratic steps over private personal data: cleaning it, validating it, triggering downstream tasks, and, critically, surviving interruption, because managers stop mid-flow and come back later. Complex reporting needs retrieval across different components of the platform's data (we exposed them to the agents through MCP) and a back-confirmation pass before anything reaches the user. A form or a single prompt cannot hold that kind of state or recover from partial failure; an agent can.</p>
+
+      <h4>The reliability work behind the 25% failure reduction</h4>
+      <p>The data-extraction agent failed too often in production. I attacked it on several fronts: stricter schema enforcement on outputs, redesigned prompts, better validation, a fallback chain so that when a model fails the request retries on a lighter model or a different provider, and a self-critique step where the agent checks that its own answer makes sense before returning it. Failures dropped 25%, and copilot adoption, measured in weekly active prompts, grew 9x.</p>
+
+      <h4>Working with the business</h4>
+      <p>I present tradeoffs to an executive committee of the CEO, CTO, and product lead: where the AI team goes next, which products the company needs, how to weigh bug fixes against new capabilities. Part of that job is advocating for what the engineering roadmap needs, not only what the business asks for.</p>
+
+      <a class="backlink" href="#top">Back to top ↑</a>
+    </article>
+
+    <article class="case" id="case-rag">
+      <h3>The retrieval pipeline behind the copilot</h3>
+      <span class="where">Crehana · multi-tenancy, messy inputs, and honest evaluation</span>
+
+      <h4>What actually flows in</h4>
+      <p>It is not a static document pile. Information flows continuously from the platform's HR modules into the master database as companies edit, upload, and generate records, more than 10K documents a week. Every weekend the pipeline reindexes that into a search corpus of 1.2M+ vectors on Qdrant, using OpenAI embeddings over overlapping chunks.</p>
+
+      <h4>Multi-tenancy: the constraint that shapes everything</h4>
+      <p>1300+ organizations share the platform, and no company may ever see another company's data. Retrieval enforces metadata filtering per organization on the vector side, on top of tenant schemas in the relational database. I also evaluated moving to separate collections per tenant, which buys stronger isolation and much simpler offboarding when a customer leaves, at the cost of operational overhead across that many organizations. Filtered search won for now; I still think the isolation argument gets stronger as the platform grows.</p>
+
+      <h4>The pivot that taught me the most</h4>
+      <p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers. Fair expectation, wrong assumption in our design. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a more robust retrieval approach. Answer quality improved notably without giving up speed.</p>
+
+      <h4>How I evaluated it, honestly</h4>
+      <p>We maintained a golden question set and scored every change against it on answer accuracy. That is a real but limited signal: a fuller evaluation would add retrieval-level metrics like hit rate and MRR, which is where I would invest next. On infrastructure: Qdrant was chosen before I arrived, and it held up at our scale, so replacing it was never the priority.</p>
+
+      <a class="backlink" href="#top">Back to top ↑</a>
+    </article>
+
+    <article class="case" id="case-fishmeal">
+      <h3>Contract allocation for a commodity exporter</h3>
+      <span class="where">Canvia · turning a two-week manual process into a 20-minute optimization</span>
+
+      <h4>The problem, from zero</h4>
+      <p>Fishmeal sells by quality band (super prime, prime, and lower grades), and a pile's band is determined by its measured composition: protein, fat, histamine, and other metrics. The interesting part is that piles can be blended, and blending produces a new pile with a new composition. The goal is not to maximize premium volume; it is to maximize revenue across all contracts. And blending has hard constraints: some piles can be blended up into a higher band, while others can never reach it no matter what you mix them with.</p>
+      <p>Allocation adds a second layer. Clients contract tonnage per quality band, and partial fulfillment is not free: if a contract takes most of a quality's stock, the leftover tons must still meet that band's composition to be sellable later. Piles come in fractional weights and live in physical bags, and splitting a bag is expensive and slow, so the plan has to hit contract tonnage as closely as possible while splitting as few bags as possible and keeping every composition constraint intact.</p>
+
+      <h4>What existed before</h4>
+      <p>Around five analysts working across Excel sheets, hand-picking piles by trial and error, hoping to maximize revenue. Two weeks of planning even for small contracts.</p>
+
+      <h4>What I built</h4>
+      <p>A tree-search optimization over blend and allocation combinations with aggressive pruning: when partial results proved a branch could not contain a better solution, the whole branch was cut. Planning went from two weeks to under 20 minutes. The client asked for delivery through Azure Power Apps, so that is how it was deployed, and I presented results to about 15 client stakeholders, including VPs.</p>
+
+      <h4>Where the numbers come from</h4>
+      <p>The estimated 55% gross margin improvement and 40% lower operating cost come from a month of testing on the client's real data, comparing the algorithm's plans against the plans their own team produced, with the client providing the feedback and the baseline. That is why I say estimated: it is their measurement of our output against their old process, not a projection I invented.</p>
+
+      <a class="backlink" href="#top">Back to top ↑</a>
+    </article>
+
+    <article class="case" id="case-fraud">
+      <h3>Fraud detection across 35 financial institutions</h3>
+      <span class="where">Canvia · unsupervised learning under real-world constraints</span>
+
+      <h4>What it watched</h4>
+      <p>Interbank transfers between 35 of Peru's leading financial institutions, in real time. The feature engineering encoded what fraud tends to look like: account age, deviation from a person's normal transfer amounts, transfers between someone's own accounts across different banks, activity at unusual hours, unusual bank-to-bank combinations. The model then decided what was anomalous in that feature space.</p>
+
+      <h4>Why Isolation Forest</h4>
+      <p>The client could not provide fraud labels, which rules out supervised learning and is exactly the setting unsupervised anomaly detection exists for. I inherited a first MVP that flagged around 9% of transactions, far more than review capacity. I redesigned the features and the model and brought flags in line with the client's ~2% operating threshold. With labels, I would revisit the choice: semi-supervised methods or a supervised model trained on confirmed cases could well beat it.</p>
+
+      <h4>What real time required</h4>
+      <p>A fast, concurrent API (FastAPI), hosted on-premise with no cloud services allowed, which meant working hand in hand with the infrastructure team on latency and concurrency budgets.</p>
+
+      <h4>Scope, honestly</h4>
+      <p>The 2% threshold was the client's operating requirement, sized to their review capacity. A deeper analysis of false positives against missed fraud sat outside the engagement's scope: our mandate was the model and the flagging API, and the client consumed the alerts downstream. If I owned the product end to end, that precision-recall analysis is the first thing I would add.</p>
+
+      <a class="backlink" href="#top">Back to top ↑</a>
+    </article>
 
   </div>
 </section>
