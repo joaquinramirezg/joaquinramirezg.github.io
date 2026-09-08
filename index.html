@@ -71,6 +71,36 @@
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
 
+  .site-nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-nav .nav-inner {
+    max-width: 760px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; gap: 20px; height: 52px;
+  }
+  .site-nav .brand { font-weight: 800; font-size: 14.5px; letter-spacing: -0.01em; color: var(--text); text-decoration: none; margin-right: auto; }
+  .site-nav a.nav-link {
+    font-size: 13.5px; font-weight: 600; color: var(--text-soft); text-decoration: none;
+    padding: 4px 2px; border-bottom: 2px solid transparent; transition: color .15s ease, border-color .15s ease;
+  }
+  .site-nav a.nav-link:hover { color: var(--text); }
+  .site-nav a.nav-link[aria-current="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+  section[id], header[id] { scroll-margin-top: 64px; }
+  @media (max-width: 560px) {
+    .site-nav .nav-inner { gap: 14px; overflow-x: auto; }
+    .site-nav .brand { font-size: 14px; }
+    .site-nav a.nav-link { font-size: 13px; white-space: nowrap; }
+  }
+
+  .about-row { display: flex; gap: 26px; align-items: flex-start; }
+  .about-photo { width: 132px; height: 132px; border-radius: 14px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--line); }
+  .about-text p { font-size: 15px; color: var(--text-soft); margin-top: 9px; }
+  .about-text p:first-child { margin-top: 0; }
+  @media (max-width: 560px) { .about-row { flex-direction: column; } .about-photo { width: 108px; height: 108px; } }
+
   header { padding: 68px 0 44px; }
   .kicker {
     font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
@@ -148,6 +178,16 @@
 </head>
 <body>
 
+<nav class="site-nav" aria-label="Page sections">
+  <div class="nav-inner">
+    <a class="brand" href="#top">Joaquin Ramirez</a>
+    <a class="nav-link" href="#work">Work</a>
+    <a class="nav-link" href="#cases">Case studies</a>
+    <a class="nav-link" href="#skills">Skills</a>
+    <a class="nav-link" href="#about">About</a>
+  </div>
+</nav>
+
 <header id="top">
   <div class="wrap">
     <div class="kicker">Machine Learning Engineer / Data Scientist</div>
@@ -162,7 +202,7 @@
   </div>
 </header>
 
-<section>
+<section id="work">
   <div class="wrap">
     <h2>Selected work</h2>
 
@@ -227,7 +267,7 @@
   </div>
 </section>
 
-<section>
+<section id="cases">
   <div class="wrap">
     <h2>Case studies</h2>
 
@@ -311,7 +351,7 @@
   </div>
 </section>
 
-<section>
+<section id="skills">
   <div class="wrap">
     <h2>Skills</h2>
     <dl class="skills-grid">
@@ -324,7 +364,7 @@
   </div>
 </section>
 
-<section>
+<section id="education">
   <div class="wrap">
     <h2>Education</h2>
     <div class="edu">
@@ -338,11 +378,43 @@
   </div>
 </section>
 
+<section id="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <div class="about-row">
+      <div class="about-text">
+        <p>I grew up in Lima and moved to Los Angeles in September 2026 for the MSBA at UCLA Anderson. Before the move I spent six years teaching Python, from university TA sessions to independent mentoring, more than 50 students in all. Teaching is where I learned the skill I use most as an engineer: explaining a technical decision to someone who does not care about the code, only about what it changes for them.</p>
+        <p>Away from a keyboard I play football, the kind you play with your feet, and I speak Spanish, English, and German. If you want to talk about AI products, data science, or where to watch a match in Los Angeles, my inbox is open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <p>Los Angeles, CA · <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">email</a> · <a href="https://github.com/joaquinramirezg">GitHub</a> · <a href="https://www.linkedin.com/in/joaquinramirezg">LinkedIn</a></p>
   </div>
 </footer>
 
+<script>
+(function () {
+  var links = document.querySelectorAll('.site-nav a.nav-link');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        var a = map[e.target.id];
+        if (a) a.setAttribute('aria-current', 'true');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  ['work', 'cases', 'skills', 'about'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+})();
+</script>
 </body>
 </html>
