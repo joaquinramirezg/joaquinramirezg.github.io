@@ -305,7 +305,7 @@
       <p>1300+ organizations share the platform, and no company may ever see another company's data. Retrieval enforces metadata filtering per organization on the vector side, on top of tenant schemas in the relational database. I also evaluated moving to separate collections per tenant, which buys stronger isolation and much simpler offboarding when a customer leaves, at the cost of operational overhead across that many organizations. Filtered search won for now; I still think the isolation argument gets stronger as the platform grows.</p>
 
       <h4>The pivot that taught me the most</h4>
-      <p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers. Fair expectation, wrong assumption in our design. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a more robust retrieval approach. Answer quality improved notably without giving up speed.</p>
+      <p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers. Fair expectation, wrong assumption in our design. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Answer quality improved notably without giving up speed.</p>
 
       <h4>How I evaluated it, honestly</h4>
       <p>We maintained a golden set of 200 questions and scored every change against it on answer accuracy. That is a real but limited signal: a fuller evaluation would add retrieval-level metrics like hit rate and MRR, which is where I would invest next. On infrastructure: Qdrant was chosen before I arrived, and it held up at our scale, so replacing it was never the priority.</p>
@@ -388,8 +388,8 @@
     <div class="about-row">
       <img class="about-photo" src="/me.jpg" alt="Joaquin Ramirez" width="400" height="400" loading="lazy">
       <div class="about-text">
-        <p>I grew up in Lima and moved to Los Angeles in September 2026 for the MSBA at UCLA Anderson. Spanish is my first language, English is my working one, and German is the one I keep alive from an exchange year in Switzerland.</p>
-        <p>Away from a keyboard you will find me eating, a lot, and putting hot sauce on absolutely everything, breakfast included. You will find me playing football (the kind you play with your feet) or basketball, cooking a recipe I saw on TikTok exactly once, planning a trip to somewhere I have never been, or defending Dua Lipa's discography without shame. If any of that sounds like your kind of conversation, my inbox is open.</p>
+        <p>I grew up in Lima, Peru, and moved to Los Angeles in September 2026 for the MSBA at UCLA Anderson. Spanish is my first language, English is my working one, and I still speak the German I picked up during an exchange year in Switzerland.</p>
+        <p>Away from a keyboard you will find me eating, a lot, with hot sauce on absolutely everything, breakfast included. I cook recipes I watched on TikTok exactly once, play football (the kind you play with your feet) and basketball, and take any excuse to explore somewhere new. I binge entire shows in a weekend and forget the whole plot a few days later, and I will defend Dua Lipa's discography without shame. If any of that sounds like your kind of conversation, my inbox is open.</p>
       </div>
     </div>
   </div>
