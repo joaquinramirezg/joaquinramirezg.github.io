@@ -17,9 +17,8 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" sizes="48x48 32x32 16x16" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track.
-     TODO: replace UMAMI_WEBSITE_ID below with the Website ID from cloud.umami.is before pushing. -->
-<script defer src="https://cloud.umami.is/script.js" data-website-id="UMAMI_WEBSITE_ID" data-do-not-track="true"></script>
+<!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -440,16 +439,34 @@
     try { if (window.umami && window.umami.track) window.umami.track(name, data || {}); } catch (e) {}
   }
 
+  function location_of(a) {
+    if (a.closest('footer')) return 'footer';
+    if (a.closest('header')) return 'hero';
+    if (a.closest('.site-nav')) return 'nav';
+    if (a.closest('article.case')) return 'case-study';
+    if (a.closest('.card')) return 'card';
+    if (a.closest('#about')) return 'about';
+    return 'body';
+  }
+
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a') : null;
     if (!a) return;
     var href = a.getAttribute('href') || '';
-    var where = a.closest('footer') ? 'footer' : (a.closest('header') ? 'hero' : 'body');
-    if (href.indexOf('/resume.pdf') === 0) track('resume', { from: where });
-    else if (href.indexOf('github.com') > -1) track('outbound', { to: 'github', from: where });
-    else if (href.indexOf('linkedin.com') > -1) track('outbound', { to: 'linkedin', from: where });
-    else if (href.indexOf('mailto:') === 0) track('email', { from: where });
-    else if (href.indexOf('#case-') === 0) track('case-study-open', { study: href.slice(6) });
+    var from = location_of(a);
+    if (href.indexOf('/resume.pdf') === 0) {
+      track('resume', { from: from });
+    } else if (href.indexOf('mailto:') === 0) {
+      track('email', { from: from });
+    } else if (href.indexOf('linkedin.com') > -1) {
+      track('linkedin', { from: from });
+    } else if (href.indexOf('github.com/joaquinramirezg/') > -1) {
+      track('github-repo', { repo: href.split('/joaquinramirezg/')[1].replace(/\/$/, ''), from: from });
+    } else if (href.indexOf('github.com') > -1) {
+      track('github-profile', { from: from });
+    } else if (href.indexOf('#case-') === 0) {
+      track('case-study-open', { study: href.slice(6), from: from });
+    }
   }, true);
 
   var seen = {}, timers = {};
