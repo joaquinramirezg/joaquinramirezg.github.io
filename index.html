@@ -17,6 +17,9 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" sizes="48x48 32x32 16x16" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track.
+     TODO: replace UMAMI_WEBSITE_ID below with the Website ID from cloud.umami.is before pushing. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="UMAMI_WEBSITE_ID" data-do-not-track="true"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -407,7 +410,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Los Angeles, CA · <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">email</a> · <a href="https://github.com/joaquinramirezg">GitHub</a> · <a href="https://www.linkedin.com/in/joaquinramirezg">LinkedIn</a> · <a href="/resume.pdf">resume</a></p>
+    <p>Los Angeles, CA · <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">email</a> · <a href="https://github.com/joaquinramirezg">GitHub</a> · <a href="https://www.linkedin.com/in/joaquinramirezg">LinkedIn</a> · <a href="/resume.pdf">resume</a> · <a href="/privacy.html">privacy</a></p>
   </div>
 </footer>
 
@@ -429,6 +432,71 @@
     var el = document.getElementById(id);
     if (el) observer.observe(el);
   });
+})();
+</script>
+<script>
+(function () {
+  function track(name, data) {
+    try { if (window.umami && window.umami.track) window.umami.track(name, data || {}); } catch (e) {}
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var where = a.closest('footer') ? 'footer' : (a.closest('header') ? 'hero' : 'body');
+    if (href.indexOf('/resume.pdf') === 0) track('resume', { from: where });
+    else if (href.indexOf('github.com') > -1) track('outbound', { to: 'github', from: where });
+    else if (href.indexOf('linkedin.com') > -1) track('outbound', { to: 'linkedin', from: where });
+    else if (href.indexOf('mailto:') === 0) track('email', { from: where });
+    else if (href.indexOf('#case-') === 0) track('case-study-open', { study: href.slice(6) });
+  }, true);
+
+  var seen = {}, timers = {};
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var id = en.target.id;
+        if (en.isIntersecting && !seen[id]) {
+          timers[id] = setTimeout(function () {
+            seen[id] = true;
+            track('section-read', { section: id });
+          }, 3000);
+        } else if (!en.isIntersecting && timers[id]) {
+          clearTimeout(timers[id]);
+          timers[id] = null;
+        }
+      });
+    }, { threshold: 0.35 });
+    document.querySelectorAll('section[id], article.case[id]').forEach(function (t) { io.observe(t); });
+  }
+
+  var hit = {};
+  function onScroll() {
+    var h = document.documentElement;
+    var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight * 100;
+    [25, 50, 75, 100].forEach(function (m) {
+      if (pct >= (m === 100 ? 99 : m) && !hit[m]) {
+        hit[m] = true;
+        track('scroll', { depth: m + '%' });
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var start = Date.now(), sent = false;
+  function sendTime() {
+    if (sent) return;
+    sent = true;
+    var s = Math.round((Date.now() - start) / 1000);
+    var b = s < 10 ? '0-10s' : s < 30 ? '10-30s' : s < 60 ? '30-60s' : s < 180 ? '1-3min' : '3min+';
+    track('time-on-page', { bucket: b });
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') sendTime();
+  });
+  window.addEventListener('pagehide', sendTime);
 })();
 </script>
 </body>
