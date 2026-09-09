@@ -13,21 +13,23 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f141b" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://joaquinramirez.dev/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" sizes="48x48 32x32 16x16" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Joaquin Ramirez",
   "image": "https://joaquinramirez.dev/me.jpg",
+  "email": "mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu",
+  "knowsLanguage": ["Spanish", "English", "German"],
   "jobTitle": ["Machine Learning Engineer", "Data Scientist"],
   "url": "https://joaquinramirez.dev/",
   "address": { "@type": "PostalAddress", "addressLocality": "Los Angeles", "addressRegion": "CA", "addressCountry": "US" },
@@ -52,6 +54,13 @@
 }
 </script>
 <style>
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/inter-var.woff2') format('woff2');
+  }
   :root {
     --bg: #ffffff;
     --bg-soft: #f6f8fa;
@@ -86,6 +95,12 @@
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
 
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 100;
+    background: var(--accent); color: #fff; padding: 10px 16px;
+    font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 0 0 8px 0;
+  }
+  .skip-link:focus { left: 0; }
   .site-nav {
     position: sticky; top: 0; z-index: 50;
     background: color-mix(in srgb, var(--bg) 82%, transparent);
@@ -193,6 +208,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#work">Skip to content</a>
+
 <nav class="site-nav" aria-label="Page sections">
   <div class="nav-inner">
     <a class="brand" href="#top">Joaquin Ramirez</a>
@@ -210,13 +227,15 @@
     <p class="subtitle">I've spent three years building GenAI products and predictive models that made it to production: an AI copilot used by 1300+ organizations, fraud detection for a network of 35 banks, forecasting and optimization for exporters and retailers. Now an MSBA candidate at UCLA Anderson.</p>
     <p class="meta-line">Los Angeles, CA · Seeking Summer 2027 internships in AI product management and data science</p>
     <div class="links">
-      <a class="primary" href="https://github.com/joaquinramirezg">GitHub</a>
-      <a href="https://www.linkedin.com/in/joaquinramirezg">LinkedIn</a>
+      <a class="primary" href="https://github.com/joaquinramirezg" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">Email</a>
-      <a href="/resume.pdf">Resume</a>
+      <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
     </div>
   </div>
 </header>
+
+<main>
 
 <section id="work">
   <div class="wrap">
@@ -277,7 +296,7 @@
         <span class="metric">eval loss −84%</span>
         <span class="metric">perplexity 18.5 → 1.6</span>
       </div>
-      <p class="tags">Falcon-7B · LoRA · Hugging Face · <a href="https://github.com/joaquinramirezg/genie-llm-chatbot">code and full write-up →</a></p>
+      <p class="tags">Falcon-7B · LoRA · Hugging Face · <a href="https://github.com/joaquinramirezg/genie-llm-chatbot" target="_blank" rel="noopener">code and full write-up →</a></p>
     </div>
 
   </div>
@@ -407,9 +426,11 @@
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="wrap">
-    <p>Los Angeles, CA · <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">email</a> · <a href="https://github.com/joaquinramirezg">GitHub</a> · <a href="https://www.linkedin.com/in/joaquinramirezg">LinkedIn</a> · <a href="/resume.pdf">resume</a> · <a href="/privacy.html">privacy</a></p>
+    <p>Los Angeles, CA · <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">email</a> · <a href="https://github.com/joaquinramirezg" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="noopener">LinkedIn</a> · <a href="/resume.pdf" target="_blank" rel="noopener">resume</a> · <a href="/privacy.html">privacy</a></p>
   </div>
 </footer>
 
@@ -435,11 +456,30 @@
 </script>
 <script>
 (function () {
-  function track(name, data) {
-    try { if (window.umami && window.umami.track) window.umami.track(name, data || {}); } catch (e) {}
+  // ---- transport: queue events until the (deferred) analytics script is ready ----
+  var queue = [], ready = false, tries = 0;
+  function flush() {
+    if (!window.umami || !window.umami.track) return false;
+    ready = true;
+    while (queue.length) {
+      var q = queue.shift();
+      try { window.umami.track(q[0], q[1]); } catch (e) {}
+    }
+    return true;
   }
+  function track(name, data) {
+    if (ready || flush()) {
+      try { window.umami.track(name, data || {}); } catch (e) {}
+      return;
+    }
+    if (queue.length < 40) queue.push([name, data || {}]);
+  }
+  var poll = setInterval(function () {
+    if (flush() || ++tries > 40) clearInterval(poll);
+  }, 250);
 
-  function location_of(a) {
+  // ---- clicks: what was clicked, and where on the page it was clicked from ----
+  function locationOf(a) {
     if (a.closest('footer')) return 'footer';
     if (a.closest('header')) return 'hero';
     if (a.closest('.site-nav')) return 'nav';
@@ -448,12 +488,11 @@
     if (a.closest('#about')) return 'about';
     return 'body';
   }
-
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a') : null;
     if (!a) return;
     var href = a.getAttribute('href') || '';
-    var from = location_of(a);
+    var from = locationOf(a);
     if (href.indexOf('/resume.pdf') === 0) {
       track('resume', { from: from });
     } else if (href.indexOf('mailto:') === 0) {
@@ -469,32 +508,46 @@
     }
   }, true);
 
+  // ---- section-read: on screen long enough to have been read, not just scrolled past ----
   var seen = {}, timers = {};
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
+      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
       entries.forEach(function (en) {
         var id = en.target.id;
-        if (en.isIntersecting && !seen[id]) {
+        if (seen[id]) return;
+        // a section taller than the viewport can never hit a high ratio, so also
+        // accept "it fills at least half the screen"
+        var fillsScreen = en.intersectionRect && en.intersectionRect.height >= vh * 0.5;
+        var visible = en.isIntersecting && (en.intersectionRatio >= 0.35 || fillsScreen);
+        if (visible && !timers[id]) {
           timers[id] = setTimeout(function () {
+            timers[id] = null;
             seen[id] = true;
             track('section-read', { section: id });
           }, 3000);
-        } else if (!en.isIntersecting && timers[id]) {
+        } else if (!visible && timers[id]) {
           clearTimeout(timers[id]);
           timers[id] = null;
         }
       });
-    }, { threshold: 0.35 });
-    document.querySelectorAll('section[id], article.case[id]').forEach(function (t) { io.observe(t); });
+    }, { threshold: [0, 0.15, 0.25, 0.35, 0.5, 0.75] });
+    document.querySelectorAll('section[id]:not(#cases), article.case[id]').forEach(function (t) {
+      io.observe(t);
+    });
   }
 
-  var hit = {};
+  // ---- scroll depth ----
+  var hit = {}, hitCount = 0;
   function onScroll() {
+    if (hitCount >= 4) { window.removeEventListener('scroll', onScroll); return; }
     var h = document.documentElement;
-    var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight * 100;
+    var total = h.scrollHeight - window.innerHeight;
+    var pct = total > 0 ? ((h.scrollTop || window.pageYOffset || 0) / total) * 100 : 100;
     [25, 50, 75, 100].forEach(function (m) {
-      if (pct >= (m === 100 ? 99 : m) && !hit[m]) {
+      if (pct >= (m === 100 ? 98 : m) && !hit[m]) {
         hit[m] = true;
+        hitCount++;
         track('scroll', { depth: m + '%' });
       }
     });
@@ -502,16 +555,23 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  var start = Date.now(), sent = false;
+  // ---- engaged time: counts only while the tab is actually visible ----
+  var visibleSince = document.visibilityState === 'visible' ? Date.now() : 0;
+  var accrued = 0, timeSent = false;
+  function stopClock() {
+    if (visibleSince) { accrued += Date.now() - visibleSince; visibleSince = 0; }
+  }
   function sendTime() {
-    if (sent) return;
-    sent = true;
-    var s = Math.round((Date.now() - start) / 1000);
-    var b = s < 10 ? '0-10s' : s < 30 ? '10-30s' : s < 60 ? '30-60s' : s < 180 ? '1-3min' : '3min+';
-    track('time-on-page', { bucket: b });
+    if (timeSent) return;
+    timeSent = true;
+    stopClock();
+    var s = Math.round(accrued / 1000);
+    var bucket = s < 10 ? '0-10s' : s < 30 ? '10-30s' : s < 60 ? '30-60s' : s < 180 ? '1-3min' : '3min+';
+    track('time-on-page', { bucket: bucket });
   }
   document.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'hidden') sendTime();
+    if (document.visibilityState === 'hidden') { stopClock(); sendTime(); }
+    else if (!visibleSince) { visibleSince = Date.now(); }
   });
   window.addEventListener('pagehide', sendTime);
 })();

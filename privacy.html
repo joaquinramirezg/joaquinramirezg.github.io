@@ -8,10 +8,16 @@
 <link rel="canonical" href="https://joaquinramirez.dev/privacy.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
+<link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/inter-var.woff2') format('woff2');
+  }
   :root { --bg: #ffffff; --text: #1a2332; --text-soft: #4b5768; --line: #e3e8ee; --accent: #0b5fa5; }
   @media (prefers-color-scheme: dark) {
     :root { --bg: #0f141b; --text: #e8edf3; --text-soft: #9fadbd; --line: #26303d; --accent: #5aa9e6; }
@@ -56,7 +62,7 @@
   <p>My resume is a static PDF hosted here. Opening it tells me a resume link was clicked, nothing more.</p>
 
   <h2>Third parties</h2>
-  <p>Fonts load from Google Fonts, and the site itself is hosted on GitHub Pages. Both see the standard request information any web server receives.</p>
+  <p>Fonts are served from this site, not from a font provider. The site itself is hosted on GitHub Pages, and the analytics described above run on Umami Cloud. Both see the standard request information any web server receives.</p>
 
   <h2>Questions</h2>
   <p>Write to me at <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu</a> and I will answer.</p>
