@@ -201,6 +201,7 @@
       <a class="primary" href="https://github.com/joaquinramirezg">GitHub</a>
       <a href="https://www.linkedin.com/in/joaquinramirezg">LinkedIn</a>
       <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">Email</a>
+      <a href="/resume.pdf">Resume</a>
     </div>
   </div>
 </header>
@@ -212,7 +213,7 @@
     <div class="card">
       <h3>AI copilot and agents for HR teams</h3>
       <span class="where">Crehana (HR-tech SaaS) · Senior Machine Learning Engineer · Feb 2025 – Sep 2026</span>
-      <p>I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used by 1300+ organizations and 48K+ people across Latin America. When our data-extraction agent kept failing in production, I redesigned its routing and added reliability safeguards: failures dropped 25% and adoption of the feature grew 9x. I also presented tradeoffs to our executive committee and coordinated the work of two other ML engineers.</p>
+      <p>I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used by 1300+ organizations and 48K+ people across Latin America. When our data-extraction agent kept failing in production, I redesigned its routing and added reliability safeguards: failures dropped 25%, and adoption of the whole copilot grew 9x. I also presented tradeoffs to our executive committee and coordinated the work of two other ML engineers.</p>
       <div class="metrics">
         <span class="metric">1300+ organizations</span>
         <span class="metric">48K+ users</span>
@@ -285,7 +286,7 @@
       <p>The use cases that mattered were multi-step and stateful. Onboarding involves a chain of bureaucratic steps over private personal data: cleaning it, validating it, triggering downstream tasks, and, critically, surviving interruption, because managers stop mid-flow and come back later. Complex reporting needs retrieval across different components of the platform's data (we exposed them to the agents through MCP) and a back-confirmation pass before anything reaches the user. A form or a single prompt cannot hold that kind of state or recover from partial failure; an agent can.</p>
 
       <h4>The reliability work behind the 25% failure reduction</h4>
-      <p>The data-extraction agent failed too often in production. I attacked it on several fronts: stricter schema enforcement on outputs, redesigned prompts, better validation, a fallback chain so that when a model fails the request retries on a lighter model or a different provider, and a self-critique step where the agent checks that its own answer makes sense before returning it. Failures dropped 25%, and copilot adoption, measured in weekly active prompts, grew 9x.</p>
+      <p>The data-extraction agent failed too often in production: schema-invalid outputs, timeouts, wrong extractions. I attacked it on several fronts: stricter schema enforcement on outputs, redesigned prompts, better validation, a fallback chain so that when a model fails the request retries on a lighter model or a different provider, and a self-critique step where the agent checks that its own answer makes sense before returning it. Failures dropped 25%, and copilot adoption, measured in weekly active prompts, grew 9x.</p>
 
       <h4>Working with the business</h4>
       <p>I presented tradeoffs to an executive committee of the CEO, CTO, and product lead: where the AI team should go next, which products the company needed, how to weigh bug fixes against new capabilities. Part of that job was advocating for what the engineering roadmap needed, not only what the business asked for.</p>
@@ -307,7 +308,7 @@
       <p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers. Fair expectation, wrong assumption in our design. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a more robust retrieval approach. Answer quality improved notably without giving up speed.</p>
 
       <h4>How I evaluated it, honestly</h4>
-      <p>We maintained a golden question set and scored every change against it on answer accuracy. That is a real but limited signal: a fuller evaluation would add retrieval-level metrics like hit rate and MRR, which is where I would invest next. On infrastructure: Qdrant was chosen before I arrived, and it held up at our scale, so replacing it was never the priority.</p>
+      <p>We maintained a golden set of 200 questions and scored every change against it on answer accuracy. That is a real but limited signal: a fuller evaluation would add retrieval-level metrics like hit rate and MRR, which is where I would invest next. On infrastructure: Qdrant was chosen before I arrived, and it held up at our scale, so replacing it was never the priority.</p>
 
       <a class="backlink" href="#top">Back to top ↑</a>
     </article>
@@ -387,8 +388,8 @@
     <div class="about-row">
       <img class="about-photo" src="/me.jpg" alt="Joaquin Ramirez" width="400" height="400" loading="lazy">
       <div class="about-text">
-        <p>I grew up in Lima and moved to Los Angeles in September 2026 for the MSBA at UCLA Anderson. Before the move I spent six years teaching Python, from university TA sessions to independent mentoring, more than 50 students in all. Teaching is where I learned the skill I use most as an engineer: explaining a technical decision to someone who does not care about the code, only about what it changes for them.</p>
-        <p>Away from a keyboard I play football, the kind you play with your feet, and I speak Spanish, English, and German. If you want to talk about AI products, data science, or where to watch a match in Los Angeles, my inbox is open.</p>
+        <p>I grew up in Lima and moved to Los Angeles in September 2026 for the MSBA at UCLA Anderson. Before the move I spent six years teaching Python on the side, more than 50 students in all.</p>
+        <p>Away from a keyboard: eating, a lot, with hot sauce on absolutely everything, breakfast included. Football (the kind you play with your feet) and basketball. Exploring new places and the cultures that come with them, and defending Dua Lipa's discography without shame. I speak Spanish, English, and German, and my inbox is open.</p>
       </div>
     </div>
   </div>
