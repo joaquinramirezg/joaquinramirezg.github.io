@@ -102,6 +102,7 @@
   .fig figcaption { font-size: 13.5px; color: var(--text-soft); margin-top: 10px; max-width: 520px; }
   .dg-box { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.55; }
   .dg-key { fill: none; stroke: var(--accent); stroke-width: 1.75; opacity: 1; }
+  .dg-group { fill: none; stroke: var(--accent); stroke-width: 1.25; stroke-dasharray: 5 5; opacity: 0.4; }
   .dg-t { fill: var(--text); font-size: 12.5px; font-weight: 600; }
   .dg-s { fill: var(--text-soft); font-size: 11px; }
   .dg-k { fill: var(--accent); font-size: 12.5px; font-weight: 700; }
@@ -333,58 +334,55 @@
 
       <figure class="fig">
 <div class="fig-scroll">
-<svg viewBox="0 0 520 436" role="img" aria-label="Flow of a single data extraction request: the model call falls back to a lighter model and then a different provider when it fails, and schema enforcement and a self critique step send bad output back for a retry before anything is returned.">
+<svg viewBox="0 0 520 414" role="img" aria-label="The path of one data extraction request. A failed model call falls back to a lighter model and then a different provider. Whatever the call produces must clear two gates added in the redesign, schema enforcement and a self critique step; rejected output is retried instead of reaching the user.">
   <defs>
     <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" class="dg-a"/>
     </marker>
   </defs>
 
-  <rect class="dg-box" x="44" y="16" width="246" height="44" rx="10"/>
-  <text class="dg-t" x="167" y="43" text-anchor="middle">Extraction request</text>
+  <rect class="dg-box" x="46" y="14" width="250" height="44" rx="10"/>
+  <text class="dg-t" x="171" y="41" text-anchor="middle">Extraction request</text>
 
-  <rect class="dg-box" x="44" y="100" width="246" height="44" rx="10"/>
-  <text class="dg-t" x="167" y="127" text-anchor="middle">Model call</text>
+  <rect class="dg-box" x="46" y="96" width="250" height="48" rx="10"/>
+  <text class="dg-t" x="171" y="125" text-anchor="middle">Model call</text>
 
-  <rect class="dg-key" x="44" y="196" width="246" height="44" rx="10"/>
-  <text class="dg-k" x="167" y="223" text-anchor="middle">Schema enforcement</text>
+  <rect class="dg-box" x="342" y="96" width="164" height="48" rx="10"/>
+  <text class="dg-s" x="424" y="115" text-anchor="middle">Lighter model, then</text>
+  <text class="dg-s" x="424" y="131" text-anchor="middle">a different provider</text>
 
-  <rect class="dg-key" x="44" y="280" width="246" height="44" rx="10"/>
-  <text class="dg-k" x="167" y="307" text-anchor="middle">Self critique</text>
+  <rect class="dg-group" x="34" y="184" width="278" height="140" rx="14"/>
 
-  <rect class="dg-box" x="44" y="376" width="246" height="44" rx="10"/>
-  <text class="dg-t" x="167" y="403" text-anchor="middle">Returned to the user</text>
+  <rect class="dg-key" x="50" y="198" width="246" height="42" rx="10"/>
+  <text class="dg-k" x="173" y="224" text-anchor="middle">Schema enforcement</text>
 
-  <rect class="dg-box" x="336" y="100" width="164" height="40" rx="10"/>
-  <text class="dg-s" x="418" y="124" text-anchor="middle">Lighter model</text>
+  <rect class="dg-key" x="50" y="268" width="246" height="42" rx="10"/>
+  <text class="dg-k" x="173" y="294" text-anchor="middle">Self critique</text>
 
-  <rect class="dg-box" x="336" y="156" width="164" height="40" rx="10"/>
-  <text class="dg-s" x="418" y="180" text-anchor="middle">Different provider</text>
+  <rect class="dg-box" x="46" y="356" width="250" height="44" rx="10"/>
+  <text class="dg-t" x="171" y="383" text-anchor="middle">Returned to the user</text>
 
-  <line class="dg-l" x1="167" y1="60" x2="167" y2="94" marker-end="url(#ar1)"/>
+  <line class="dg-l" x1="171" y1="58" x2="171" y2="90" marker-end="url(#ar1)"/>
 
-  <line class="dg-l" x1="167" y1="144" x2="167" y2="190" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="175" y="171">output</text>
+  <line class="dg-l" x1="171" y1="144" x2="171" y2="178" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="179" y="166">output</text>
 
-  <line class="dg-l" x1="167" y1="240" x2="167" y2="274" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="175" y="261">valid</text>
+  <line class="dg-l" x1="173" y1="240" x2="173" y2="262" marker-end="url(#ar1)"/>
 
-  <line class="dg-l" x1="167" y1="324" x2="167" y2="370" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="175" y="351">holds up</text>
+  <line class="dg-l" x1="171" y1="324" x2="171" y2="350" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="179" y="344">clears both</text>
 
-  <line class="dg-l" x1="290" y1="120" x2="330" y2="120" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="310" y="112" text-anchor="middle">fails</text>
+  <line class="dg-l" x1="296" y1="120" x2="336" y2="120" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="316" y="88" text-anchor="middle">call fails</text>
 
-  <line class="dg-l" x1="418" y1="140" x2="418" y2="150" marker-end="url(#ar1)"/>
+  <path class="dg-l" d="M 424 144 L 424 252 L 318 252" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="372" y="246" text-anchor="middle">retried output</text>
 
-  <path class="dg-l" d="M 336 176 L 312 176 L 312 218 L 296 218" marker-end="url(#ar1)"/>
-
-  <path class="dg-l" d="M 44 218 L 18 218 L 18 122 L 38 122" marker-end="url(#ar1)"/>
-  <path class="dg-l" d="M 44 302 L 30 302 L 30 218" />
-  <text class="dg-s" x="24" y="170" transform="rotate(-90 24 170)" text-anchor="middle">retry</text>
+  <path class="dg-l" d="M 34 252 L 18 252 L 18 120 L 40 120" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="11" y="186" transform="rotate(-90 11 186)" text-anchor="middle">rejected, retry</text>
 </svg>
 </div>
-<figcaption>One extraction request. The gates in blue are what changed: outputs that do not match the schema, and answers that do not survive the model's own critique, go back for a retry instead of reaching the user. A failed model call falls back to a lighter model, then to a different provider.</figcaption>
+<figcaption>One extraction request. Everything the model produces, first call or fallback, has to clear both gates before anyone sees it: output that does not match the schema, and answers that do not survive the model's own critique, go back for another attempt. Those two gates are what the reliability work added.</figcaption>
 </figure>
 
       <h4>Working with the business</h4>
