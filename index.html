@@ -95,6 +95,18 @@
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
 
+  .fig { margin: 26px 0 0; }
+  .fig svg { display: block; width: 100%; max-width: 520px; height: auto; color: var(--text-soft); }
+  .fig-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  @media (max-width: 600px) { .fig svg { min-width: 470px; } }
+  .fig figcaption { font-size: 13.5px; color: var(--text-soft); margin-top: 10px; max-width: 520px; }
+  .dg-box { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.55; }
+  .dg-key { fill: none; stroke: var(--accent); stroke-width: 1.75; opacity: 1; }
+  .dg-t { fill: var(--text); font-size: 12.5px; font-weight: 600; }
+  .dg-s { fill: var(--text-soft); font-size: 11px; }
+  .dg-k { fill: var(--accent); font-size: 12.5px; font-weight: 700; }
+  .dg-l { stroke: currentColor; stroke-width: 1.25; fill: none; opacity: 0.7; }
+  .dg-a { fill: currentColor; opacity: 0.7; }
   .skip-link {
     position: absolute; left: -9999px; top: 0; z-index: 100;
     background: var(--accent); color: #fff; padding: 10px 16px;
@@ -319,6 +331,62 @@
       <h4>The reliability work behind the 25% failure reduction</h4>
       <p>The data-extraction agent failed too often in production: schema-invalid outputs, timeouts, wrong extractions. I attacked it on several fronts: stricter schema enforcement on outputs, redesigned prompts, better validation, a fallback chain so that when a model fails the request retries on a lighter model or a different provider, and a self-critique step where the agent checks that its own answer makes sense before returning it. Failures dropped 25%, and copilot adoption, measured in weekly active prompts, grew 9x.</p>
 
+      <figure class="fig">
+<div class="fig-scroll">
+<svg viewBox="0 0 520 436" role="img" aria-label="Flow of a single data extraction request: the model call falls back to a lighter model and then a different provider when it fails, and schema enforcement and a self critique step send bad output back for a retry before anything is returned.">
+  <defs>
+    <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="dg-a"/>
+    </marker>
+  </defs>
+
+  <rect class="dg-box" x="44" y="16" width="246" height="44" rx="8"/>
+  <text class="dg-t" x="167" y="43" text-anchor="middle">Extraction request</text>
+
+  <rect class="dg-box" x="44" y="100" width="246" height="44" rx="8"/>
+  <text class="dg-t" x="167" y="127" text-anchor="middle">Model call</text>
+
+  <rect class="dg-key" x="44" y="196" width="246" height="44" rx="8"/>
+  <text class="dg-k" x="167" y="223" text-anchor="middle">Schema enforcement</text>
+
+  <rect class="dg-key" x="44" y="280" width="246" height="44" rx="8"/>
+  <text class="dg-k" x="167" y="307" text-anchor="middle">Self critique</text>
+
+  <rect class="dg-box" x="44" y="376" width="246" height="44" rx="8"/>
+  <text class="dg-t" x="167" y="403" text-anchor="middle">Returned to the user</text>
+
+  <rect class="dg-box" x="336" y="100" width="164" height="40" rx="8"/>
+  <text class="dg-s" x="418" y="124" text-anchor="middle">Lighter model</text>
+
+  <rect class="dg-box" x="336" y="156" width="164" height="40" rx="8"/>
+  <text class="dg-s" x="418" y="180" text-anchor="middle">Different provider</text>
+
+  <line class="dg-l" x1="167" y1="60" x2="167" y2="94" marker-end="url(#ar1)"/>
+
+  <line class="dg-l" x1="167" y1="144" x2="167" y2="190" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="175" y="171">output</text>
+
+  <line class="dg-l" x1="167" y1="240" x2="167" y2="274" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="175" y="261">valid</text>
+
+  <line class="dg-l" x1="167" y1="324" x2="167" y2="370" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="175" y="351">holds up</text>
+
+  <line class="dg-l" x1="290" y1="120" x2="330" y2="120" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="310" y="112" text-anchor="middle">fails</text>
+
+  <line class="dg-l" x1="418" y1="140" x2="418" y2="150" marker-end="url(#ar1)"/>
+
+  <path class="dg-l" d="M 336 176 L 312 176 L 312 218 L 296 218" marker-end="url(#ar1)"/>
+
+  <path class="dg-l" d="M 44 218 L 18 218 L 18 122 L 38 122" marker-end="url(#ar1)"/>
+  <path class="dg-l" d="M 44 302 L 30 302 L 30 218" />
+  <text class="dg-s" x="24" y="170" transform="rotate(-90 24 170)" text-anchor="middle">retry</text>
+</svg>
+</div>
+<figcaption>One extraction request. The gates in blue are what changed: outputs that do not match the schema, and answers that do not survive the model's own critique, go back for a retry instead of reaching the user. A failed model call falls back to a lighter model, then to a different provider.</figcaption>
+</figure>
+
       <h4>Working with the business</h4>
       <p>I presented tradeoffs to an executive committee of the CEO, CTO, and product lead: where the AI team should go next, which products the company needed, how to weigh bug fixes against new capabilities. Part of that job was advocating for what the engineering roadmap needed, not only what the business asked for.</p>
 
@@ -334,6 +402,61 @@
 
       <h4>Multi-tenancy: the constraint that shapes everything</h4>
       <p>1300+ organizations share the platform, and no company may ever see another company's data. Retrieval enforces metadata filtering per organization on the vector side, on top of tenant schemas in the relational database. I also evaluated moving to separate collections per tenant, which buys stronger isolation and much simpler offboarding when a customer leaves, at the cost of operational overhead across that many organizations. Filtered search won for now; I still think the isolation argument gets stronger as the platform grows.</p>
+
+      <figure class="fig">
+<div class="fig-scroll">
+<svg viewBox="0 0 520 556" role="img" aria-label="The retrieval pipeline: platform records and uploaded files of every format are preprocessed, chunked with overlap and embedded into a vector store that is reindexed every weekend; at question time retrieval is filtered to the asking organization before an answer is grounded.">
+  <defs>
+    <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="dg-a"/>
+    </marker>
+  </defs>
+
+  <text class="dg-s" x="10" y="14">Every weekend</text>
+
+  <rect class="dg-box" x="10" y="26" width="240" height="46" rx="8"/>
+  <text class="dg-t" x="130" y="47" text-anchor="middle">HR platform records</text>
+  <text class="dg-s" x="130" y="63" text-anchor="middle">edited and created continuously</text>
+
+  <rect class="dg-box" x="270" y="26" width="240" height="46" rx="8"/>
+  <text class="dg-t" x="390" y="47" text-anchor="middle">Files companies upload</text>
+  <text class="dg-s" x="390" y="63" text-anchor="middle">docs, slides, sheets, PDFs, audio</text>
+
+  <rect class="dg-box" x="130" y="118" width="260" height="42" rx="8"/>
+  <text class="dg-t" x="260" y="144" text-anchor="middle">Preprocessing per format</text>
+
+  <rect class="dg-box" x="130" y="196" width="260" height="42" rx="8"/>
+  <text class="dg-t" x="260" y="222" text-anchor="middle">Chunking with overlap, embedding</text>
+
+  <rect class="dg-box" x="130" y="274" width="260" height="46" rx="8"/>
+  <text class="dg-t" x="260" y="295" text-anchor="middle">Vector store</text>
+  <text class="dg-s" x="260" y="311" text-anchor="middle">1.2M+ vectors, reindexed weekly</text>
+
+  <line class="dg-l" x1="130" y1="72" x2="200" y2="112" marker-end="url(#ar2)"/>
+  <line class="dg-l" x1="390" y1="72" x2="320" y2="112" marker-end="url(#ar2)"/>
+  <text class="dg-s" x="260" y="98" text-anchor="middle">10K+ documents a week</text>
+
+  <line class="dg-l" x1="260" y1="160" x2="260" y2="190" marker-end="url(#ar2)"/>
+  <line class="dg-l" x1="260" y1="238" x2="260" y2="268" marker-end="url(#ar2)"/>
+
+  <text class="dg-s" x="10" y="364">At question time</text>
+
+  <rect class="dg-box" x="130" y="376" width="260" height="42" rx="8"/>
+  <text class="dg-t" x="260" y="402" text-anchor="middle">Question, from one company</text>
+
+  <rect class="dg-key" x="130" y="452" width="260" height="42" rx="8"/>
+  <text class="dg-k" x="260" y="478" text-anchor="middle">Retrieval filtered to that company</text>
+
+  <path class="dg-l" d="M 390 297 L 462 297 L 462 473 L 396 473" marker-end="url(#ar2)"/>
+  <text class="dg-s" x="426" y="290" text-anchor="middle">searched</text>
+  <line class="dg-l" x1="260" y1="418" x2="260" y2="446" marker-end="url(#ar2)"/>
+  <line class="dg-l" x1="260" y1="494" x2="260" y2="524" marker-end="url(#ar2)"/>
+
+  <text class="dg-t" x="260" y="544" text-anchor="middle">Answer grounded in that company's own text</text>
+</svg>
+</div>
+<figcaption>The pipeline, and the line that matters. Retrieval is filtered to the asking organization, so one company's question can only ever be answered from that company's own material. Everything above that gate is shared plumbing; the gate is what makes it safe to share.</figcaption>
+</figure>
 
       <h4>The pivot that taught me the most</h4>
       <p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers. Fair expectation, wrong assumption in our design. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Answer quality improved notably without giving up speed.</p>
