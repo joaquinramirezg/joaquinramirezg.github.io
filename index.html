@@ -78,6 +78,11 @@
     --accent: #0b5fa5;
     --accent-soft: #eaf3fb;
     --metric: #0b5fa5;
+    /* Label on a filled accent button. White clears AA on the light accent
+       (6.6:1) but only reaches 2.5:1 on the lighter dark-mode accent, so the
+       dark theme flips to a dark label instead of darkening --accent, which
+       is also the colour of body links. */
+    --on-accent: #ffffff;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -89,6 +94,7 @@
       --accent: #5aa9e6;
       --accent-soft: #16283a;
       --metric: #7cbcf0;
+      --on-accent: #0f141b;
     }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -118,7 +124,7 @@
   .dg-a { fill: currentColor; opacity: 0.7; }
   .skip-link {
     position: absolute; left: -9999px; top: 0; z-index: 100;
-    background: var(--accent); color: #fff; padding: 10px 16px;
+    background: var(--accent); color: var(--on-accent); padding: 10px 16px;
     font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 0 0 8px 0;
   }
   .skip-link:focus { left: 0; }
@@ -167,7 +173,7 @@
     border: 1px solid var(--line); color: var(--text);
     transition: border-color .15s, background .15s;
   }
-  .links a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .links a.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   .links a:hover { border-color: var(--accent); }
   .links a.primary:hover { opacity: .92; }
 
