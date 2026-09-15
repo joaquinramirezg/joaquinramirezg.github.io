@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Ramirez;Joaquin;;;
+FN:Joaquin Ramirez
+ORG:UCLA Anderson MSBA\, Class of 2027
+TEL;TYPE=CELL,VOICE:+12135618157
+EMAIL;TYPE=INTERNET,PREF:jeramirezgu@gmail.com
+EMAIL;TYPE=INTERNET:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu
+URL:https://joaquinramirez.dev
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/joaquinramirezg
+END:VCARD
