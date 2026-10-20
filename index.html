@@ -220,6 +220,8 @@
   .card .shows b { font-weight: 600; }
   .pt-before { fill: currentColor; opacity: 0.3; }
   .pt-after { fill: var(--accent); }
+  .pt-ok { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.75; }
+  .project-thumb picture { display: block; width: 100%; height: 100%; }
   @media (max-width: 560px) {
     .project { grid-template-columns: 1fr; gap: 16px; }
   }
@@ -240,6 +242,35 @@
   .case p { font-size: 15px; color: var(--text-soft); margin-top: 9px; }
   .case ul { margin: 9px 0 0 20px; font-size: 15px; color: var(--text-soft); }
   .case ul li { margin-top: 5px; }
+  .card.compact { padding: 18px 26px; }
+  .card.compact h3 { font-size: 16.5px; }
+  .card.compact p { font-size: 14.5px; margin-top: 8px; }
+  .card.compact .metrics { margin-top: 11px; }
+
+  .case-body > summary {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+    padding: 7px 14px; border: 1px solid var(--line); border-radius: 8px;
+    font-size: 14px; font-weight: 600; color: var(--accent); cursor: pointer;
+    list-style: none; transition: border-color .15s, background .15s;
+  }
+  .case-body > summary::-webkit-details-marker { display: none; }
+  .case-body > summary::after { content: "+"; font-size: 16px; line-height: 1; }
+  .case-body[open] > summary::after { content: "\2212"; }
+  .case-body > summary:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .case-body > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .case-body .read-time { color: var(--text-soft); font-weight: 500; }
+  .case-body[open] > summary .read-time { display: none; }
+  .case-body[open] > summary { margin-bottom: 4px; }
+  .case { padding-top: 24px; margin-top: 24px; }
+  article.case[id] { scroll-margin-top: 64px; }
+
+  .card { transition: border-color .15s; }
+  .card.project:hover, .card:focus-within { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  @media (prefers-reduced-motion: reduce) { .card, .case-body > summary { transition: none; } }
+  @media print {
+    .site-nav, .skip-link, .case-body > summary { display: none; }
+    .card { break-inside: avoid; }
+  }
   .backlink { display: inline-block; margin-top: 16px; font-size: 13.5px; font-weight: 600; color: var(--accent); text-decoration: none; }
   .backlink:hover { text-decoration: underline; }
 
@@ -298,7 +329,7 @@
 <section id="work">
   <div class="wrap">
     <h2>Work</h2>
-    <p class="section-lead">Production systems I built at Crehana and Canvia.</p>
+    <p class="section-lead">Production systems, most recent first.</p>
 
     <div class="card">
       <h3>AI copilot and agents for HR teams</h3>
@@ -321,7 +352,19 @@
         <span class="metric">10K+ docs/week</span>
         <span class="metric">1.2M+ vectors</span>
       </div>
+
       <p class="tags">RAG · Qdrant · OpenAI embeddings · Python · <a href="#case-rag">case study →</a></p>
+    </div>
+
+    <div class="card compact">
+      <h3>Computer vision intake for medical recruiting</h3>
+      <span class="where">APTIM · Machine Learning Engineer · Dec 2024 – Feb 2025</span>
+      <p>I designed a computer vision intake system (Azure AI Vision) that automates document extraction from scanned records in a medical recruiting workflow processing ~250 candidates monthly. I also prototyped a delay-risk prediction model for supplier tracking that flags likely postponements two weeks earlier than manual review.</p>
+      <div class="metrics">
+        <span class="metric">~250 candidates/month</span>
+        <span class="metric">delays flagged 2 weeks earlier</span>
+      </div>
+      <p class="tags">Azure AI Vision · computer vision · Python</p>
     </div>
 
     <div class="card">
@@ -344,7 +387,19 @@
         <span class="metric">35 institutions</span>
         <span class="metric">~2% flagged, real time</span>
       </div>
+
       <p class="tags">Isolation Forest · anomaly detection · Python · <a href="#case-fraud">case study →</a></p>
+    </div>
+
+    <div class="card compact">
+      <h3>Sales forecasting for a new retail channel</h3>
+      <span class="where">Belcorp · Data Science Intern · Jan 2022 – Aug 2022</span>
+      <p>I developed a sales forecasting model for a new retail digital channel, improving forecast accuracy by ~30% (wMAPE) versus manual estimates across three brands and 15 product lines.</p>
+      <div class="metrics">
+        <span class="metric">forecast accuracy ~30% better (wMAPE)</span>
+        <span class="metric">3 brands, 15 product lines</span>
+      </div>
+      <p class="tags">forecasting · Python</p>
     </div>
 
 
@@ -393,6 +448,54 @@
           <p class="tags">Falcon-7B · LoRA · Hugging Face · <a href="https://github.com/joaquinramirezg/genie-llm-chatbot" target="_blank" rel="noopener">code and full write-up →</a></p>
         </div>
       </li>
+      <li class="card project" id="project-ray-tracing">
+        <div class="project-thumb">
+          <picture>
+            <source media="(prefers-reduced-motion: reduce)" srcset="/p/ray-tracing.webp">
+            <img src="/p/ray-tracing-anim.webp" alt="Animated render from the ray tracer: a glass bottle with moving lights inside, spheres, triangles and a cylinder on a reflective floor, seen from an orbiting camera" width="500" height="300" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="project-body">
+          <h3>A ray tracer written from scratch</h3>
+          <span class="where">Computer graphics, UTEC · 2023</span>
+          <p>Renders a scene by casting a ray through every pixel, finding what it hits, and computing the light that comes back. No graphics API and no GPU: every intersection, reflection and shading term is solved on the CPU in C++20. The animation is 300 frames of its own test scene, rendered by this code.</p>
+          <p class="shows"><b>Shows:</b> I can build the thing underneath, not only use the library on top.</p>
+          <div class="metrics">
+            <span class="metric">4 primitives, closed-form hits</span>
+            <span class="metric">mirror reflections</span>
+          </div>
+          <p class="tags">C++20 · linear algebra · <a href="https://github.com/joaquinramirezg/ray-tracing" target="_blank" rel="noopener">code and write-up →</a></p>
+        </div>
+      </li>
+      <li class="card project" id="project-safe-docs">
+        <div class="project-thumb">
+          <svg viewBox="0 0 250 150" role="img" aria-label="Safe docs flow: a webcam frame is encoded and matched against the enrolled face; a match opens the document, no match keeps it locked">
+            <rect class="dg-box" x="8" y="24" width="72" height="34" rx="6"/>
+            <text class="dg-t" x="44" y="46" text-anchor="middle">Webcam</text>
+            <rect class="dg-box" x="90" y="24" width="68" height="34" rx="6"/>
+            <text class="dg-t" x="124" y="46" text-anchor="middle">Encode</text>
+            <rect class="dg-key" x="168" y="24" width="74" height="34" rx="6"/>
+            <text class="dg-k" x="205" y="46" text-anchor="middle">Match?</text>
+            <line class="dg-l" x1="80" y1="41" x2="86" y2="41"/><path class="dg-a" d="M90 41 l-5 -3 v6 z"/>
+            <line class="dg-l" x1="158" y1="41" x2="164" y2="41"/><path class="dg-a" d="M168 41 l-5 -3 v6 z"/>
+            <line class="dg-l" x1="222" y1="58" x2="222" y2="88"/><path class="dg-a" d="M222 92 l-3 -5 h6 z"/>
+            <text class="dg-s" x="228" y="80">yes</text>
+            <polyline class="dg-l" points="186,58 186,74 58,74 58,88"/><path class="dg-a" d="M58 92 l-3 -5 h6 z"/>
+            <text class="dg-s" x="118" y="69" text-anchor="middle">no</text>
+            <rect class="dg-box" x="8" y="94" width="100" height="34" rx="6"/>
+            <text class="dg-t" x="58" y="116" text-anchor="middle">Stays locked</text>
+            <rect class="pt-ok" x="160" y="94" width="82" height="34" rx="6"/>
+            <text class="dg-t" x="201" y="116" text-anchor="middle">Doc opens</text>
+          </svg>
+        </div>
+        <div class="project-body">
+          <h3>Safe docs: a document opens only for the right face</h3>
+          <span class="where">College project, UTEC · 2020</span>
+          <p>Passwords protect the account, not the person. This web platform matches a live webcam capture against the recipient's enrolled face before a shared document opens. An honest limit: there is no anti-spoofing, so a photo could fool it, which is the first thing a production version would need.</p>
+          <p class="shows"><b>Shows:</b> a computer vision model wired into a working product, end to end.</p>
+          <p class="tags">Flask · OpenCV · face_recognition (dlib) · <a href="https://github.com/joaquinramirezg/safe-docs" target="_blank" rel="noopener">code and write-up →</a></p>
+        </div>
+      </li>
     </ul>
   </div>
 </section>
@@ -400,10 +503,13 @@
 <section id="cases">
   <div class="wrap">
     <h2>Case studies</h2>
+    <p class="section-lead">The thinking behind the work above: the tradeoffs, what failed, and how each result was measured.</p>
 
     <article class="case" id="case-copilot">
       <h3>The HR copilot and its agents</h3>
       <span class="where">Crehana · how I think about agents, reliability, and product</span>
+      <details class="case-body">
+      <summary>Read the case study <span class="read-time">· 3 min</span></summary>
 
       <h4>Who uses it and for what</h4>
       <p>HR admins, managers, and employees, each with different jobs to be done. An employee asks what their company's paternity leave policy allows, and the copilot answers from the documents their HR team uploaded. Another asks how they did against their quarterly goals, which triggers a data query and then course recommendations to close the gaps. A team leader asks who on the team is behind on which metrics and how to help them catch up. One interface, very different workflows underneath.</p>
@@ -474,11 +580,14 @@
       <p>I presented tradeoffs to an executive committee of the CEO, CTO, and product lead: where the AI team should go next, which products the company needed, how to weigh bug fixes against new capabilities. Part of that job was advocating for what the engineering roadmap needed, not only what the business asked for.</p>
 
       <a class="backlink" href="#top">Back to top ↑</a>
+      </details>
     </article>
 
     <article class="case" id="case-rag">
       <h3>The retrieval pipeline behind the copilot</h3>
       <span class="where">Crehana · multi-tenancy, messy inputs, and honest evaluation</span>
+      <details class="case-body">
+      <summary>Read the case study <span class="read-time">· 2 min</span></summary>
 
       <h4>What actually flows in</h4>
       <p>It is not a static document pile. Information flowed continuously from the platform's HR modules into the master database as companies edited, uploaded, and generated records, more than 10K documents a week. Every weekend the pipeline reindexed that into a search corpus of 1.2M+ vectors on Qdrant, using OpenAI embeddings over overlapping chunks.</p>
@@ -548,11 +657,14 @@
       <p>We maintained a golden set of 200 questions and scored every change against it on answer accuracy. That is a real but limited signal: a fuller evaluation would add retrieval-level metrics like hit rate and MRR, which is where I would invest next. On infrastructure: Qdrant was chosen before I arrived, and it held up at our scale, so replacing it was never the priority.</p>
 
       <a class="backlink" href="#top">Back to top ↑</a>
+      </details>
     </article>
 
     <article class="case" id="case-fishmeal">
       <h3>Contract allocation for a commodity exporter</h3>
       <span class="where">Canvia · turning a two-week manual process into a 20-minute optimization</span>
+      <details class="case-body">
+      <summary>Read the case study <span class="read-time">· 2 min</span></summary>
 
       <h4>The problem, from zero</h4>
       <p>Fishmeal sells by quality band (super prime, prime, and lower grades), and a pile's band is determined by its measured composition: protein, fat, histamine, and other metrics. The interesting part is that piles can be blended, and blending produces a new pile with a new composition. The goal is not to maximize premium volume; it is to maximize revenue across all contracts. And blending has hard constraints: some piles can be blended up into a higher band, while others can never reach it no matter what you mix them with.</p>
@@ -568,11 +680,14 @@
       <p>The estimated 55% gross margin improvement and 40% lower operating cost come from a month of testing on the client's real data, comparing the algorithm's plans against the plans their own team produced, with the client providing the feedback and the baseline. That is why I say estimated: it is their measurement of our output against their old process, not a projection I invented.</p>
 
       <a class="backlink" href="#top">Back to top ↑</a>
+      </details>
     </article>
 
     <article class="case" id="case-fraud">
       <h3>Fraud detection across 35 financial institutions</h3>
       <span class="where">Canvia · unsupervised learning under real-world constraints</span>
+      <details class="case-body">
+      <summary>Read the case study <span class="read-time">· 1 min</span></summary>
 
       <h4>What it watched</h4>
       <p>Interbank transfers between 35 of Peru's leading financial institutions, in real time. The feature engineering encoded what fraud tends to look like: account age, deviation from a person's normal transfer amounts, transfers between someone's own accounts across different banks, activity at unusual hours, unusual bank-to-bank combinations. The model then decided what was anomalous in that feature space.</p>
@@ -587,6 +702,7 @@
       <p>The 2% threshold was the client's operating requirement, sized to their review capacity. A deeper analysis of false positives against missed fraud sat outside the engagement's scope: our mandate was the model and the flagging API, and the client consumed the alerts downstream. If I owned the product end to end, that precision-recall analysis is the first thing I would add.</p>
 
       <a class="backlink" href="#top">Back to top ↑</a>
+      </details>
     </article>
 
   </div>
@@ -610,11 +726,11 @@
     <h2>Education</h2>
     <div class="edu">
       <h3>UCLA Anderson School of Management</h3>
-      <p class="detail">Master of Science in Business Analytics (MSBA), expected December 2027 · Anderson Merit Fellowship</p>
+      <p class="detail">Master of Science in Business Analytics (MSBA), expected December 2027 · Class President · Anderson Merit Fellowship</p>
     </div>
     <div class="edu">
       <h3>Universidad de Ingeniería y Tecnología (UTEC)</h3>
-      <p class="detail">B.S. Computer Science, 2024 · Top 10% of class, Academic Excellence Scholarship · Student Body President (2022) · Exchange year at Hochschule Luzern, Switzerland</p>
+      <p class="detail">B.S. Computer Science, 2024 · Top 10% of class, Academic Excellence Scholarship · Student Body President, Computer Science (2022) · Exchange year at Hochschule Luzern, Switzerland</p>
     </div>
   </div>
 </section>
@@ -640,6 +756,31 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  // Case studies are collapsed by default; any link or hash that points at one opens it first.
+  function openCase(id) {
+    var el = id && document.getElementById(id);
+    if (!el || !el.matches('article.case')) return;
+    var d = el.querySelector('details.case-body');
+    if (d && !d.open) d.open = true;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href^="#case-"]') : null;
+    if (a) openCase(a.getAttribute('href').slice(1));
+  });
+  window.addEventListener('hashchange', function () { openCase(location.hash.slice(1)); });
+  if (location.hash) {
+    openCase(location.hash.slice(1));
+    var el = document.getElementById(location.hash.slice(1));
+    if (el) el.scrollIntoView();
+  }
+  // Printing should include every case study, not just the open ones.
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('details.case-body').forEach(function (d) { d.open = true; });
+  });
+})();
+</script>
 <script>
 (function () {
   var links = document.querySelectorAll('.site-nav a.nav-link');
@@ -714,6 +855,13 @@
       track('case-study-open', { study: href.slice(6), from: from });
     }
   }, true);
+
+  // ---- case study expanded by the reader ----
+  document.querySelectorAll('details.case-body').forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (d.open) track('case-study-expand', { study: d.closest('article.case').id.replace('case-', '') });
+    });
+  });
 
   // ---- section-read: on screen long enough to have been read, not just scrolled past ----
   var seen = {}, timers = {};
