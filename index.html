@@ -146,9 +146,12 @@
   .site-nav a.nav-link:hover { color: var(--text); }
   .site-nav a.nav-link[aria-current="true"] { color: var(--accent); border-bottom-color: var(--accent); }
   section[id], header[id] { scroll-margin-top: 64px; }
+  .site-nav .brand-short { display: none; }
   @media (max-width: 560px) {
-    .site-nav .nav-inner { gap: 14px; overflow-x: auto; }
+    .site-nav .nav-inner { gap: 13px; padding: 0 16px; overflow-x: auto; }
     .site-nav .brand { font-size: 14px; }
+    .site-nav .brand-full { display: none; }
+    .site-nav .brand-short { display: inline; }
     .site-nav a.nav-link { font-size: 13px; white-space: nowrap; }
   }
 
@@ -159,6 +162,7 @@
   @media (max-width: 560px) { .about-row { flex-direction: column; } .about-photo { width: 108px; height: 108px; } }
 
   header { padding: 68px 0 44px; }
+  .hero-photo { display: block; width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); margin-bottom: 20px; }
   .kicker {
     font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 12px;
@@ -196,6 +200,29 @@
   .tags { margin-top: 13px; font-size: 13px; color: var(--text-soft); }
   .tags a { color: var(--accent); text-decoration: none; font-weight: 600; }
   .tags a:hover { text-decoration: underline; }
+  .section-lead { font-size: 15px; color: var(--text-soft); margin: -14px 0 22px; }
+
+  /* Projects: one card per project, thumbnail beside the text, stacked on phones.
+     The homepage carries the card only; the full write-up lives in the repo README,
+     so the page does not grow with every project. Template: portfolio/PROJECT-TEMPLATE.md */
+  .projects { list-style: none; }
+  .project { display: grid; grid-template-columns: 220px 1fr; gap: 22px; align-items: start; scroll-margin-top: 76px; }
+  .project-thumb {
+    aspect-ratio: 5 / 3; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--line); background: var(--bg-soft);
+  }
+  .project-thumb svg { color: var(--text-soft); }
+  .project-thumb .dg-t, .project-thumb .dg-k { font-size: 14px; }
+  .project-thumb .dg-s { font-size: 12.5px; }
+  .project-thumb img, .project-thumb video, .project-thumb svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .project-body h3 { margin-top: -2px; }
+  .card .shows { color: var(--text); margin-top: 10px; }
+  .card .shows b { font-weight: 600; }
+  .pt-before { fill: currentColor; opacity: 0.3; }
+  .pt-after { fill: var(--accent); }
+  @media (max-width: 560px) {
+    .project { grid-template-columns: 1fr; gap: 16px; }
+  }
 
   .skills-grid { display: grid; grid-template-columns: 160px 1fr; gap: 12px 20px; font-size: 15px; }
   .skills-grid dt { font-weight: 600; color: var(--text); }
@@ -230,6 +257,8 @@
     h1 { font-size: 30px; }
     .subtitle { font-size: 16.5px; }
     .card { padding: 20px; }
+    .links { gap: 10px; }
+    .links a { flex: 1 1 calc(50% - 5px); text-align: center; }
   }
 </style>
 </head>
@@ -239,8 +268,9 @@
 
 <nav class="site-nav" aria-label="Page sections">
   <div class="nav-inner">
-    <a class="brand" href="#top">Joaquin Ramirez</a>
+    <a class="brand" href="#top" aria-label="Joaquin Ramirez, back to top"><span class="brand-full">Joaquin Ramirez</span><span class="brand-short">JR</span></a>
     <a class="nav-link" href="#work">Work</a>
+    <a class="nav-link" href="#projects">Projects</a>
     <a class="nav-link" href="#cases">Case studies</a>
     <a class="nav-link" href="#skills">Skills</a>
     <a class="nav-link" href="#about">About</a>
@@ -249,15 +279,16 @@
 
 <header id="top">
   <div class="wrap">
+    <img class="hero-photo" src="/me.jpg" alt="Joaquin Ramirez" width="400" height="400" fetchpriority="high">
     <div class="kicker">Machine Learning Engineer / Data Scientist</div>
     <h1>Joaquin Ramirez</h1>
     <p class="subtitle">I've spent three years building GenAI products and predictive models that made it to production: an AI copilot used by 1300+ organizations, fraud detection for a network of 35 banks, forecasting and optimization for exporters and retailers. Now an MSBA candidate at UCLA Anderson.</p>
-    <p class="meta-line">Los Angeles, CA · Seeking Summer 2027 internships in AI product management and data science</p>
+    <p class="meta-line">Los Angeles, CA · Seeking Summer 2027 internships in AI product management, data science, and ML engineering</p>
     <div class="links">
-      <a class="primary" href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a>
+      <a class="primary" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
       <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener">LinkedIn</a>
       <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">Email</a>
-      <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a>
     </div>
   </div>
 </header>
@@ -266,7 +297,8 @@
 
 <section id="work">
   <div class="wrap">
-    <h2>Selected work</h2>
+    <h2>Work</h2>
+    <p class="section-lead">Production systems I built at Crehana and Canvia.</p>
 
     <div class="card">
       <h3>AI copilot and agents for HR teams</h3>
@@ -315,17 +347,53 @@
       <p class="tags">Isolation Forest · anomaly detection · Python · <a href="#case-fraud">case study →</a></p>
     </div>
 
-    <div class="card">
-      <h3>G.E.N.I.E., my undergraduate thesis</h3>
-      <span class="where">UTEC · 2023</span>
-      <p>A generative chatbot specialized in our university's regulations, built back when that meant doing everything yourself. We scraped and structured the documents, generated a fine-tuning dataset, and LoRA fine-tuned Falcon-7B through 20 hyperparameter trials, taking evaluation loss down 84% (2.92 to 0.46) and perplexity from 18.5 to 1.6, then validated the answers with user testing.</p>
-      <div class="metrics">
-        <span class="metric">eval loss −84%</span>
-        <span class="metric">perplexity 18.5 → 1.6</span>
-      </div>
-      <p class="tags">Falcon-7B · LoRA · Hugging Face · <a href="https://github.com/joaquinramirezg/genie-llm-chatbot" target="_blank" rel="noopener">code and full write-up →</a></p>
-    </div>
 
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="section-lead">Built outside a job. Each one links to its code, and the full write-up lives in the repo.</p>
+    <ul class="projects">
+<!--
+  NEW PROJECT: copy one <li> below, newest first. Checklist and field rules: portfolio/PROJECT-TEMPLATE.md
+  id="project-<slug>" is the link for LinkedIn posts: https://joaquinramirez.dev/?utm_source=linkedin&utm_campaign=<slug>#project-<slug>
+  Thumbnail: /p/<slug>.webp, 1000x600 (5:3), under 150KB, with width, height, loading="lazy" and real alt text.
+-->
+      <li class="card project" id="project-genie">
+        <div class="project-thumb">
+          <svg viewBox="0 0 250 150" role="img" aria-label="GENIE fine-tuning results: evaluation loss from 2.92 to 0.46, perplexity from 18.5 to 1.6">
+            <text class="dg-t" x="62" y="18" text-anchor="middle">Eval loss</text>
+            <rect class="pt-before" x="30" y="44" width="30" height="76" rx="3"/>
+            <rect class="pt-after" x="68" y="107" width="30" height="13" rx="3"/>
+            <text class="dg-s" x="45" y="38" text-anchor="middle">2.92</text>
+            <text class="dg-k" x="83" y="101" text-anchor="middle">0.46</text>
+            <text class="dg-t" x="187" y="18" text-anchor="middle">Perplexity</text>
+            <rect class="pt-before" x="155" y="44" width="30" height="76" rx="3"/>
+            <rect class="pt-after" x="193" y="113" width="30" height="7" rx="3"/>
+            <text class="dg-s" x="170" y="38" text-anchor="middle">18.5</text>
+            <text class="dg-k" x="208" y="107" text-anchor="middle">1.6</text>
+            <line class="dg-l" x1="20" y1="120.5" x2="230" y2="120.5"/>
+            <text class="dg-s" x="45" y="136" text-anchor="middle">before</text>
+            <text class="dg-s" x="83" y="136" text-anchor="middle">after</text>
+            <text class="dg-s" x="170" y="136" text-anchor="middle">before</text>
+            <text class="dg-s" x="208" y="136" text-anchor="middle">after</text>
+          </svg>
+        </div>
+        <div class="project-body">
+          <h3>G.E.N.I.E., my undergraduate thesis</h3>
+          <span class="where">UTEC · 2023</span>
+          <p>A generative chatbot specialized in our university's regulations, built back when that meant doing everything yourself. We scraped and structured the documents, generated a fine-tuning dataset, and LoRA fine-tuned Falcon-7B through 20 hyperparameter trials, taking evaluation loss down 84% (2.92 to 0.46) and perplexity from 18.5 to 1.6, then validated the answers with user testing.</p>
+          <p class="shows"><b>Shows:</b> the whole fine-tuning loop, from raw documents to an evaluated model.</p>
+          <div class="metrics">
+            <span class="metric">eval loss −84%</span>
+            <span class="metric">perplexity 18.5 → 1.6</span>
+          </div>
+          <p class="tags">Falcon-7B · LoRA · Hugging Face · <a href="https://github.com/joaquinramirezg/genie-llm-chatbot" target="_blank" rel="noopener">code and full write-up →</a></p>
+        </div>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -586,7 +654,7 @@
       }
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
-  ['work', 'cases', 'skills', 'about'].forEach(function (id) {
+  ['work', 'projects', 'cases', 'skills', 'about'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) observer.observe(el);
   });
@@ -622,6 +690,7 @@
     if (a.closest('header')) return 'hero';
     if (a.closest('.site-nav')) return 'nav';
     if (a.closest('article.case')) return 'case-study';
+    if (a.closest('.project')) return 'project';
     if (a.closest('.card')) return 'card';
     if (a.closest('#about')) return 'about';
     return 'body';
