@@ -134,3 +134,23 @@ header .meta-line { margin-top: 10px; }
 .footer-links { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--text-soft); }
 .footer-links li { display: inline-flex; align-items: center; gap: 7px; }
 .footer-links a { display: inline-flex; align-items: center; gap: 7px; }
+/* Skills, education and about as cards, matching the sections above */
+.skills-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.skills-cards .card, #education .card { margin-bottom: 0; }
+.skill-card h3 { font-size: 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip { font-size: 13.5px; font-weight: 500; color: var(--text); background: var(--bg-soft); border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; }
+.edu-card { position: relative; }
+.edu-icon { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); margin-bottom: 12px; }
+.edu-card .edu-degree { color: var(--text); font-weight: 600; margin-top: 6px; }
+.edu-list { list-style: none; margin-top: 10px; }
+.edu-list li { font-size: 15px; color: var(--text-soft); padding-left: 16px; position: relative; margin-top: 4px; }
+.edu-list li::before { content: ""; position: absolute; left: 2px; top: .7em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.about-card .about-row { gap: 30px; }
+.about-card .about-photo { width: 180px; height: 180px; border-radius: 16px; }
+.about-card .about-text { max-width: 760px; }
+.about-card .about-text p { font-size: 16px; }
+@media (max-width: 560px) { .about-card .about-photo { width: 120px; height: 120px; } }
+.skills-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.skills-cards > .skill-card:first-child { grid-column: span 2; }
+@media (max-width: 860px) { .skills-cards { grid-template-columns: 1fr; } .skills-cards > .skill-card:first-child { grid-column: auto; } }

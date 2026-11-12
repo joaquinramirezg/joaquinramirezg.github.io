@@ -1,0 +1,52 @@
+[
+ {
+  "area": "AI & ML",
+  "items": [
+   "LLMs and GenAI (OpenAI, Claude, Gemini)",
+   "agentic systems (LangChain, LangGraph)",
+   "RAG",
+   "vector databases (Qdrant)",
+   "scikit-learn",
+   "NLP"
+  ]
+ },
+ {
+  "area": "Analytics",
+  "items": [
+   "A/B testing",
+   "hypothesis testing",
+   "forecasting",
+   "anomaly detection",
+   "classification"
+  ]
+ },
+ {
+  "area": "Programming",
+  "items": [
+   "Python (pandas, NumPy)",
+   "SQL",
+   "R",
+   "C++"
+  ]
+ },
+ {
+  "area": "Tools & Cloud",
+  "items": [
+   "AWS",
+   "Azure",
+   "GCP",
+   "Docker",
+   "Git",
+   "Tableau",
+   "Power BI"
+  ]
+ },
+ {
+  "area": "Languages",
+  "items": [
+   "Spanish (native)",
+   "English (fluent)",
+   "German (B2)"
+  ]
+ }
+]

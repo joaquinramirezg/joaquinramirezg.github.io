@@ -3,8 +3,8 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { getCollection } from 'astro:content';
 import jsonLd from '../data/home-jsonld.json';
-import skills from '../data/skills.html?raw';
-import education from '../data/education.html?raw';
+import skills from '../data/skills.json';
+import education from '../data/education.json';
 import about from '../data/about.html?raw';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
@@ -147,21 +147,39 @@ const genie = projects.find((p) => p.id === 'genie')!;
 <section id="skills">
   <div class="wrap wide">
     <h2>Skills</h2>
-    <Fragment set:html={skills} />
+    <div class="skills-cards">
+      {skills.map((s) => (
+        <div class="card skill-card">
+          <h3>{s.area}</h3>
+          <div class="chips">{s.items.map((i) => <span class="chip">{i}</span>)}</div>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
 <section id="education">
   <div class="wrap wide">
     <h2>Education</h2>
-    <Fragment set:html={education} />
+    <div class="grid-2">
+      {education.map((e) => (
+        <article class="card edu-card">
+          <span class="edu-icon"><Icon name="school" size={22} /></span>
+          <h3>{e.school}</h3>
+          <p class="edu-degree">{e.degree}</p>
+          <ul class="edu-list">{e.details.map((d) => <li>{d}</li>)}</ul>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
 
 <section id="about">
   <div class="wrap wide">
     <h2>About</h2>
-    <Fragment set:html={about} />
+    <div class="card about-card">
+      <Fragment set:html={about} />
+    </div>
   </div>
 </section>
 
