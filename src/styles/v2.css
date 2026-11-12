@@ -115,3 +115,7 @@ header .proof { max-width: none; }
   .tile-kind { font-size: 11px; }
 }
 .demo-video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-soft); }
+/* Thumbnails fill the card width; drawn (SVG) thumbnails sit centered with breathing room */
+.project.stacked .project-thumb, .tile-visual { width: 100%; align-self: stretch; }
+.project.stacked .project-thumb > svg, .tile-visual.project-thumb > svg { width: 100%; height: 100%; padding: 16px 12%; }
+.project.stacked .project-thumb > img { object-position: center top; }
