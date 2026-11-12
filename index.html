@@ -62,7 +62,7 @@
   "url": "https://joaquinramirez.dev/"
 }
 </script>
-<link rel="stylesheet" href="/site.css?v=2">
+<link rel="stylesheet" href="/site.css?v=3">
 </head>
 <body>
 
@@ -79,18 +79,23 @@
 </nav>
 
 <header id="top">
-  <div class="wrap">
-    <img class="hero-photo" src="/me.jpg" alt="Joaquin Ramirez" width="400" height="400" fetchpriority="high">
-    <div class="kicker">Machine Learning Engineer / Data Scientist</div>
-    <h1>Joaquin Ramirez</h1>
-    <p class="subtitle">I've spent three years building GenAI products and predictive models that made it to production. Now an MSBA candidate at UCLA Anderson.</p>
-    <p class="meta-line">Los Angeles, CA · Seeking Summer 2027 internships in machine learning engineering, data science, and AI product management</p>
-    <div class="links">
-      <a class="primary" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
-      <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener">LinkedIn</a>
-      <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">Email</a>
-      <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="status"><span class="dot" aria-hidden="true"></span>Open to Summer 2027 internships</p>
+      <div class="kicker">Machine Learning Engineer / Data Scientist</div>
+      <h1>Joaquin Ramirez</h1>
+      <p class="subtitle">I've spent three years building GenAI products and predictive models that made it to production. Now an MSBA candidate at UCLA Anderson.</p>
+      <p class="meta-line">Los Angeles, CA · Seeking Summer 2027 internships in machine learning engineering, data science, and AI product management</p>
+      <div class="links">
+        <a class="primary" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener">LinkedIn</a>
+        <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">Email</a>
+        <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a>
+      </div>
     </div>
+    <img class="hero-photo" src="/me.jpg" alt="Joaquin Ramirez" width="400" height="400" fetchpriority="high">
+  </div>
+  <div class="wrap">
     <ul class="proof">
       <li><b>1300+ organizations</b><span>use the AI copilot I led</span></li>
       <li><b>35 banks</b><span>in the fraud detection network</span></li>
@@ -192,22 +197,13 @@
     <ul class="projects">
       <li class="card project" id="project-alwayshome">
         <div class="project-thumb">
-          <svg viewBox="0 0 250 150" role="img" aria-label="AlwaysHome sample Altadena home: the model estimates seven fixes from $5,600 cut the chance of losing the house if fire reaches it from 36% to 15%">
-            <text class="dg-t" x="125" y="18" text-anchor="middle">Est. chance of losing the house</text>
-            <rect class="pt-before" x="50" y="49" width="40" height="71" rx="3"/>
-            <rect class="pt-after" x="160" y="90" width="40" height="30" rx="3"/>
-            <text class="dg-s" x="70" y="43" text-anchor="middle">36%</text>
-            <text class="dg-k" x="180" y="84" text-anchor="middle">15%</text>
-            <line class="dg-l" x1="25" y1="120.5" x2="225" y2="120.5"/>
-            <text class="dg-s" x="70" y="136" text-anchor="middle">today</text>
-            <text class="dg-s" x="180" y="136" text-anchor="middle">7 fixes, $5,600</text>
-          </svg>
+          <img src="/p/alwayshome.webp" alt="AlwaysHome plan screen: fire-safety fixes ranked by payback, each with its cost, yearly value, payback time and the loss chance after it" width="800" height="480" loading="lazy" decoding="async">
         </div>
         <div class="project-body">
           <h3><a href="/projects/alwayshome/">AlwaysHome: which wildfire fixes pay back first</a></h3>
           <span class="where">UCLA Anderson MSBA Vibathon, team of three · Nov 2026</span>
-          <p>Homeowners pushed onto California's FAIR Plan are told to harden their homes but not which fix matters most for theirs. Built in one day, this app ranks fire-safety fixes by payback for an LA County home and shows what the policy would really pay after a total loss. The house-loss model reaches a cross-validated AUC of 0.80 on the 4,525 homes with every feature recorded, out of 22,071 CAL FIRE inspections from the January 2025 fires. AI only reads the insurance policy, quoting the line behind every value; every cost, probability and payback comes from code and public data.</p>
-          <p class="shows"><b>Shows:</b> a product decision about where AI belongs, shipped as a working app with tests.</p>
+          <p>Homeowners pushed onto California's FAIR Plan are told to harden their homes, but not which fix matters most. Built in one day by a team of three, this app ranks fire-safety fixes by payback and keeps AI to one job: reading the insurance policy. The house-loss model reaches a cross-validated AUC of 0.80 on the 4,525 homes with every feature recorded, out of 22,071 CAL FIRE inspections.</p>
+          <p class="shows"><b>Shows:</b> an ML model shipped inside a working product, with AI kept away from every number.</p>
           <div class="metrics">
             <span class="metric">AUC 0.80 (n=4,525)</span>
             <span class="metric">22,071 CAL FIRE inspections</span>
