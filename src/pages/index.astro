@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
 import { getCollection } from 'astro:content';
 import jsonLd from '../data/home-jsonld.json';
 import skills from '../data/skills.html?raw';
@@ -31,12 +32,16 @@ const genie = projects.find((p) => p.id === 'genie')!;
       <div class="kicker">Machine Learning Engineer / Data Scientist</div>
       <h1>Joaquin Ramirez</h1>
       <p class="subtitle">I've spent three years building GenAI products and predictive models that made it to production. Now an MSBA candidate at UCLA Anderson.</p>
-      <p class="meta-line">Los Angeles, CA · Seeking Summer 2027 internships in machine learning engineering, data science, and AI product management</p>
+      <ul class="hero-facts">
+        <li><Icon name="pin" /> Los Angeles, California</li>
+        <li><Icon name="school" /> UCLA Anderson MSBA, Dec 2027</li>
+      </ul>
+      <p class="meta-line">Seeking Summer 2027 internships in machine learning engineering, data science, and AI product management</p>
       <div class="links">
-        <a class="primary" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener">LinkedIn</a>
-        <a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}>Copy email</a>
-        <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a>
+        <a class="primary" href="/resume.pdf" target="_blank" rel="noopener"><Icon name="file" /> Resume</a>
+        <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="linkedin" /> LinkedIn</a>
+        <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="github" /> GitHub</a>
+        <a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}><Icon name="mail" /> Copy email</a>
       </div>
     </div>
     <img class="hero-photo" src="/me.jpg" alt="Joaquin Ramirez" width="400" height="400" fetchpriority="high">

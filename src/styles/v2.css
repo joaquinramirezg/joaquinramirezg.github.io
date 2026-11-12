@@ -120,3 +120,17 @@ header .proof { max-width: none; }
 .project.stacked .project-thumb > svg, .tile-visual.project-thumb > svg { width: 100%; height: 100%; padding: 16px 12%; }
 .project.stacked .project-thumb > img { object-position: center top; }
 .project-thumb > video { display: block; width: 100%; height: 100%; object-fit: cover; background: #10151c; }
+/* Icons, location and contact facts */
+.icon { flex-shrink: 0; vertical-align: -3px; }
+.links a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.links a .icon-linkedin { color: #0a66c2; }
+.links a.primary .icon { color: inherit; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .links a .icon-linkedin { color: #4ea1f3; } }
+:root[data-theme="dark"] .links a .icon-linkedin { color: #4ea1f3; }
+.hero-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 16px; font-size: 15px; font-weight: 500; color: var(--text); }
+.hero-facts li { display: inline-flex; align-items: center; gap: 7px; }
+.hero-facts .icon { color: var(--accent); }
+header .meta-line { margin-top: 10px; }
+.footer-links { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--text-soft); }
+.footer-links li { display: inline-flex; align-items: center; gap: 7px; }
+.footer-links a { display: inline-flex; align-items: center; gap: 7px; }
