@@ -10,6 +10,7 @@ pageTitle: "Contract allocation for a commodity exporter"
 minutes: 2
 angle: "Canvia · turning a two-week manual process into a 20-minute optimization"
 description: "A fishmeal exporter planned its contract allocation by hand, two weeks per cycle."
+tldr: {"problem": "A fishmeal exporter planned blends and contract allocation by hand: around five analysts in Excel, two weeks per cycle.", "role": "I built the branch-and-bound allocation, deployed it on the client's Azure Power Apps, and presented the results to about 15 stakeholders, including VPs.", "result": "Planning went from two weeks to under 20 minutes; the client's month of testing estimated gross margin +55% and operating costs −40%."}
 ---
 <h2>The problem, from zero</h2>
 <p>Fishmeal sells by quality band (super prime, prime, and lower grades), and a pile's band is determined by its measured composition: protein, fat, histamine, and other metrics. The interesting part is that piles can be blended, and blending produces a new pile with a new composition. The goal is not to maximize premium volume; it is to maximize revenue across all contracts. And blending has hard constraints: some piles can be blended up into a higher band, while others can never reach it no matter what you mix them with.</p>

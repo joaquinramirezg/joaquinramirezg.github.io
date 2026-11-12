@@ -154,3 +154,10 @@ header .meta-line { margin-top: 10px; }
 .skills-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .skills-cards > .skill-card:first-child { grid-column: span 2; }
 @media (max-width: 860px) { .skills-cards { grid-template-columns: 1fr; } .skills-cards > .skill-card:first-child { grid-column: auto; } }
+/* Case study summary: the 30 second version */
+.tldr { margin-top: 22px; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 10px; background: var(--bg-soft); padding: 6px 18px; }
+.tldr > div { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.tldr > div:first-child { border-top: 0; }
+.tldr dt { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); padding-top: 3px; }
+.tldr dd { font-size: 15.5px; color: var(--text); line-height: 1.55; }
+@media (max-width: 560px) { .tldr > div { grid-template-columns: 1fr; gap: 2px; } }

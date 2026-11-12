@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
+---
+<Base title="Privacy · Joaquin Ramirez" description="What this portfolio collects: no cookies, no accounts, cookieless aggregate analytics." path="/privacy/">
+<main id="content">
+<header class="page-head">
+  <div class="wrap">
+    <a class="crumb" href="/">← joaquinramirez.dev</a>
+    <div class="kicker">Privacy</div>
+    <h1>Privacy</h1>
+    <p class="lead">This is my personal portfolio. It has no accounts, no forms, no newsletter, and nothing to buy, so there is very little to say here. Everything below is the whole story.</p>
+  </div>
+</header>
+<section class="page-body">
+  <div class="wrap">
+    <article class="case">
+      <h2>Cookies and storage</h2>
+      <p>This site sets no cookies, so there is no consent banner to click. The only thing it ever stores on your device is your light or dark theme choice, and only if you press the theme button. It stays in your browser and is never sent anywhere.</p>
+      <h2>Analytics</h2>
+      <p>I use <a href="https://umami.is/" rel="noopener">Umami</a>, a privacy-friendly analytics tool, to see whether pages are being read and which parts hold attention. It is cookieless and collects no personal data. What I can see is aggregate and anonymous:</p>
+      <ul>
+        <li>Page views, and which sections were on screen long enough to be read</li>
+        <li>Where visits came from, such as a search engine, LinkedIn, or a direct link</li>
+        <li>Country and region, derived from your IP address and then discarded, never stored</li>
+        <li>Browser, operating system, and screen size</li>
+        <li>Clicks on my resume, GitHub, LinkedIn, email, case study and project links, copies of my email address, demo plays, and theme switches</li>
+      </ul>
+      <p>I cannot see who you are. There are no individual profiles, no cross-site tracking, no session recordings, no advertising, and nothing is sold or shared. If your browser sends a Do Not Track signal, this site records nothing at all.</p>
+      <h2>Files served from this site</h2>
+      <p>My resume is a static PDF hosted here. Opening it tells me a resume link was clicked, nothing more. Demo videos load only when you press play. There is also a small contact page I share in person, by tapping my phone, with a contact card you can save. It is not linked from anywhere on this site, it sets no cookies, and saving the card sends nothing back to me.</p>
+      <h2>Third parties</h2>
+      <p>Fonts are served from this site, not from a font provider. The site itself is hosted on GitHub Pages, and the analytics described above run on Umami Cloud. Both see the standard request information any web server receives.</p>
+      <h2>Questions</h2>
+      <p>Write to me at <a href={`mailto:${EMAIL}`}>{EMAIL}</a> and I will answer.</p>
+    </article>
+  </div>
+</section>
+</main>
+</Base>

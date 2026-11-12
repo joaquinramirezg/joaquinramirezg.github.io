@@ -31,6 +31,13 @@ const ld = [{
     <p class="lead" set:html={d.summary} />
     <div class="metrics">{d.metrics.map((m) => <span class="metric">{m}</span>)}</div>
     <p class="tags">{d.stack}</p>
+    {d.tldr && (
+      <dl class="tldr" aria-label="Summary">
+        <div><dt>Problem</dt><dd>{d.tldr.problem}</dd></div>
+        <div><dt>My role</dt><dd>{d.tldr.role}</dd></div>
+        <div><dt>Result</dt><dd>{d.tldr.result}</dd></div>
+      </dl>
+    )}
   </div>
 </header>
 <section class="page-body" id="case">

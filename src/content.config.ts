@@ -17,6 +17,7 @@ const work = defineCollection({
     angle: z.string().optional(),
     description: z.string().optional(),
     featured: z.object({ big: z.string(), label: z.string() }).optional(),
+    tldr: z.object({ problem: z.string(), role: z.string(), result: z.string() }).optional(),
   }),
 });
 

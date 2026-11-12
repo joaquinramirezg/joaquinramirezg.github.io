@@ -10,6 +10,7 @@ pageTitle: "The HR copilot and its agents"
 minutes: 3
 angle: "Crehana · how I think about agents, reliability, and product"
 description: "I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used across Latin America."
+tldr: {"problem": "Crehana's HR copilot ran on agents, and its data-extraction agent failed too often in production: schema-invalid outputs, timeouts, wrong extractions.", "role": "I led development of the copilot and its agents, redesigned the agent's routing and reliability safeguards, and presented tradeoffs to the executive committee.", "result": "Agent failures dropped 25% and copilot adoption, in weekly active prompts, grew 9x, across 1300+ organizations."}
 ---
 <h2>Who uses it and for what</h2>
 <p>HR admins, managers, and employees, each with different jobs to be done. An employee asks what their company's paternity leave policy allows, and the copilot answers from the documents their HR team uploaded. Another asks how they did against their quarterly goals, which triggers a data query and then course recommendations to close the gaps. A team leader asks who on the team is behind on which metrics and how to help them catch up. One interface, very different workflows underneath.</p>
