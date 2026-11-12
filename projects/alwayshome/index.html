@@ -9,10 +9,10 @@
 <link rel="icon" type="image/x-icon" sizes="48x48 32x32 16x16" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/site.css?v=1">
+<link rel="stylesheet" href="/site.css?v=2">
 <!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
-<script defer src="/site.js?v=1"></script>
+<script defer src="/site.js?v=2"></script>
 <title>AlwaysHome: which wildfire fixes pay back first · Joaquin Ramirez</title>
 <meta name="description" content="A web app that shows an LA County homeowner on the FAIR Plan which fire-safety fixes cut their wildfire risk most for the money. Built in one day, team of three.">
 <link rel="canonical" href="https://joaquinramirez.dev/projects/alwayshome/">
@@ -103,6 +103,7 @@
     <article class="case">
     <h2>The result</h2>
     <p>For a sample Altadena homeowner (a 1952 wood-roof house, FAIR Plan only, $10,000 budget), the model estimates that seven fixes costing from <strong>$5,600</strong> cut the chance of losing the house if fire reaches it from <strong>36% to 15%</strong>. That is an estimate from associations in two fires, not a measured effect of the fixes. The house-loss model behind that estimate reaches a cross-validated <strong>AUC of 0.80</strong> on the 4,525 homes with every feature recorded, out of <strong>22,071 CAL FIRE inspections</strong> from the January 2025 Eaton and Palisades fires.</p>
+    <p><strong>How well it holds up.</strong> In those 4,525 homes, 20.6% were destroyed, so 0.80 is measured against that base rate. The model also uses the neighborhood (fire and ZIP). With whole neighborhoods held out in cross-validation, the house features alone reach an AUC of 0.68: the honest number for an address the model has not seen.</p>
     <figure class="shot light-only">
       <img src="/projects/alwayshome/plan-altadena.webp" alt="Bar charts for the sample home: payback in years and the cut in chance of losing the house for each of nine fixes; seven are in the $10,000 plan" width="1984" height="910" loading="lazy" decoding="async">
       <figcaption>Each fix ranked by payback, and how much it cuts the chance of losing the house. Orange fixes fit the $10,000 budget.</figcaption>
@@ -172,7 +173,8 @@
 
     <h2>Limits and next steps</h2>
     <ul>
-      <li>Los Angeles County only, total loss only, no partial claims. Not insurance advice and not an inspection.</li>
+    <li>No user research: it was built in one day, without interviews with homeowners, brokers or insurers.</li>
+    <li>Los Angeles County only, total loss only, no partial claims. Not insurance advice and not an inspection.</li>
       <li>Fix costs and insurance discounts are labelled assumptions; there is no public price per fix or premium per home.</li>
       <li>The house-loss model shows associations from two fires, not causes. Where the data show no benefit, the app claims none.</li>
       <li>Next: real fix prices and insurer discounts, photo and aerial pre-fill of the home questions, statewide coverage, and a referral path to insurers writing in that ZIP.</li>

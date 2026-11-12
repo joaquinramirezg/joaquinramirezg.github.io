@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
-<script defer src="/site.js?v=1"></script>
+<script defer src="/site.js?v=2"></script>
 <link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
@@ -62,7 +62,7 @@
   "url": "https://joaquinramirez.dev/"
 }
 </script>
-<link rel="stylesheet" href="/site.css?v=1">
+<link rel="stylesheet" href="/site.css?v=2">
 </head>
 <body>
 
@@ -83,14 +83,19 @@
     <img class="hero-photo" src="/me.jpg" alt="Joaquin Ramirez" width="400" height="400" fetchpriority="high">
     <div class="kicker">Machine Learning Engineer / Data Scientist</div>
     <h1>Joaquin Ramirez</h1>
-    <p class="subtitle">I've spent three years building GenAI products and predictive models that made it to production: an AI copilot used by 1300+ organizations, fraud detection for a network of 35 banks, forecasting and optimization for exporters and retailers. Now an MSBA candidate at UCLA Anderson.</p>
-    <p class="meta-line">Los Angeles, CA · Seeking Summer 2027 internships in AI product management, data science, and ML engineering</p>
+    <p class="subtitle">I've spent three years building GenAI products and predictive models that made it to production. Now an MSBA candidate at UCLA Anderson.</p>
+    <p class="meta-line">Los Angeles, CA · Seeking Summer 2027 internships in machine learning engineering, data science, and AI product management</p>
     <div class="links">
       <a class="primary" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
       <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener">LinkedIn</a>
       <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">Email</a>
       <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a>
     </div>
+    <ul class="proof">
+      <li><b>1300+ organizations</b><span>use the AI copilot I led</span></li>
+      <li><b>35 banks</b><span>in the fraud detection network</span></li>
+      <li><b>2 weeks → &lt;20 min</b><span>contract allocation for an exporter</span></li>
+    </ul>
   </div>
 </header>
 
@@ -111,7 +116,8 @@
         <span class="metric">agent failures −25%</span>
         <span class="metric">adoption 9x</span>
       </div>
-      <p class="tags">LangChain · LangGraph · OpenAI · Python · AWS · <a href="/work/hr-copilot/">case study →</a></p>
+      <p class="tags">LangChain · LangGraph · OpenAI · Python · AWS</p>
+      <a class="case-link" href="/work/hr-copilot/">Read the case study <span>· 3 min</span></a>
     </div>
 
     <div class="card">
@@ -123,7 +129,8 @@
         <span class="metric">1.2M+ vectors</span>
       </div>
 
-      <p class="tags">RAG · Qdrant · OpenAI embeddings · Python · <a href="/work/retrieval-pipeline/">case study →</a></p>
+      <p class="tags">RAG · Qdrant · OpenAI embeddings · Python</p>
+      <a class="case-link" href="/work/retrieval-pipeline/">Read the case study <span>· 2 min</span></a>
     </div>
 
     <div class="card compact">
@@ -146,7 +153,8 @@
         <span class="metric">costs −40%</span>
         <span class="metric">2 weeks → &lt;20 min</span>
       </div>
-      <p class="tags">Python · scikit-learn · optimization · <a href="/work/contract-allocation/">case study →</a></p>
+      <p class="tags">Python · scikit-learn · optimization</p>
+      <a class="case-link" href="/work/contract-allocation/">Read the case study <span>· 2 min</span></a>
     </div>
 
     <div class="card">
@@ -158,7 +166,8 @@
         <span class="metric">~2% flagged, real time</span>
       </div>
 
-      <p class="tags">Isolation Forest · anomaly detection · Python · <a href="/work/fraud-detection/">case study →</a></p>
+      <p class="tags">Isolation Forest · anomaly detection · Python</p>
+      <a class="case-link" href="/work/fraud-detection/">Read the case study <span>· 1 min</span></a>
     </div>
 
     <div class="card compact">
@@ -184,7 +193,7 @@
       <li class="card project" id="project-alwayshome">
         <div class="project-thumb">
           <svg viewBox="0 0 250 150" role="img" aria-label="AlwaysHome sample Altadena home: the model estimates seven fixes from $5,600 cut the chance of losing the house if fire reaches it from 36% to 15%">
-            <text class="dg-t" x="125" y="18" text-anchor="middle">Chance of losing the house</text>
+            <text class="dg-t" x="125" y="18" text-anchor="middle">Est. chance of losing the house</text>
             <rect class="pt-before" x="50" y="49" width="40" height="71" rx="3"/>
             <rect class="pt-after" x="160" y="90" width="40" height="30" rx="3"/>
             <text class="dg-s" x="70" y="43" text-anchor="middle">36%</text>

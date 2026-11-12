@@ -278,3 +278,25 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   .page-head .lead { font-size: 16px; }
   .demo-play { font-size: 14px; padding: 10px 16px; }
 }
+
+/* ---------- Nov 12 polish: hero proof row, case-study links, card motion ---------- */
+.proof { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 26px; max-width: 712px; }
+.proof li { border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; background: var(--bg-soft); }
+.proof b { display: block; white-space: nowrap; font-size: 16.5px; font-weight: 800; letter-spacing: -0.01em; color: var(--metric); line-height: 1.25; }
+.proof span { display: block; font-size: 12.5px; color: var(--text-soft); margin-top: 2px; line-height: 1.35; }
+@media (max-width: 560px) { .proof { grid-template-columns: 1fr; gap: 8px; } .proof li { display: flex; align-items: baseline; gap: 10px; padding: 9px 13px; } .proof b { font-size: 16px; white-space: nowrap; } .proof span { margin-top: 0; } }
+.case-link {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
+  padding: 8px 14px; border: 1px solid var(--accent); border-radius: 8px;
+  font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none;
+  transition: background .15s, color .15s;
+}
+.case-link span { color: var(--text-soft); font-weight: 500; }
+.case-link::after { content: "→"; transition: transform .15s; }
+.case-link:hover { background: var(--accent); color: var(--on-accent); }
+.case-link:hover span { color: var(--on-accent); opacity: .85; }
+.case-link:hover::after { transform: translateX(3px); }
+.card { transition: border-color .15s, transform .15s, box-shadow .15s; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(15, 20, 27, .08); }
+@media (prefers-color-scheme: dark) { .card:hover { box-shadow: 0 6px 22px rgba(0, 0, 0, .35); } }
+@media (prefers-reduced-motion: reduce) { .card, .card:hover, .case-link::after { transition: none; transform: none; } }
