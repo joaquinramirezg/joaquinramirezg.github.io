@@ -4,6 +4,11 @@
 
 ## Links
 
-- [Portfolio](https://joaquinramirez.dev/): single-page site: production work, personal projects, and anchored case studies
+- [Portfolio](https://joaquinramirez.dev/): home page: production work, personal projects, skills, education
+- [Case study: HR copilot and agents](https://joaquinramirez.dev/work/hr-copilot/)
+- [Case study: retrieval pipeline](https://joaquinramirez.dev/work/retrieval-pipeline/)
+- [Case study: contract allocation](https://joaquinramirez.dev/work/contract-allocation/)
+- [Case study: fraud detection](https://joaquinramirez.dev/work/fraud-detection/)
+- [Project: AlwaysHome](https://joaquinramirez.dev/projects/alwayshome/): wildfire mitigation and insurance gap app, team of three, UCLA Anderson MSBA Vibathon 2026
 - [GitHub](https://github.com/joaquinramirezg): public code, including the GENIE thesis repo (Falcon-7B LoRA fine-tune)
 - [LinkedIn](https://www.linkedin.com/in/joaquinramirezg/)

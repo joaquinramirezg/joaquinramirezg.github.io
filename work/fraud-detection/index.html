@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f141b" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" sizes="48x48 32x32 16x16" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css?v=1">
+<!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
+<script defer src="/site.js?v=1"></script>
+<title>Fraud detection across 35 financial institutions · Case study · Joaquin Ramirez</title>
+<meta name="description" content="Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru&#x27;s leading financial institutions.">
+<link rel="canonical" href="https://joaquinramirez.dev/work/fraud-detection/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fraud detection across 35 financial institutions · Case study · Joaquin Ramirez">
+<meta property="og:description" content="Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru&#x27;s leading financial institutions.">
+<meta property="og:url" content="https://joaquinramirez.dev/work/fraud-detection/">
+<meta property="og:image" content="https://joaquinramirez.dev/og.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Joaquin Ramirez, machine learning engineer and data scientist">
+<meta property="og:site_name" content="Joaquin Ramirez">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://joaquinramirez.dev/og.png?v=2">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Fraud detection across 35 financial institutions",
+  "description": "Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru's leading financial institutions.",
+  "url": "https://joaquinramirez.dev/work/fraud-detection/",
+  "image": "https://joaquinramirez.dev/og.png?v=2",
+  "author": {
+    "@type": "Person",
+    "name": "Joaquin Ramirez",
+    "url": "https://joaquinramirez.dev/"
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#content">Skip to content</a>
+
+<nav class="site-nav" aria-label="Site">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Joaquin Ramirez, home"><span class="brand-full">Joaquin Ramirez</span><span class="brand-short">JR</span></a>
+    <a class="nav-link" href="/#work" aria-current="true">Work</a>
+    <a class="nav-link" href="/#projects">Projects</a>
+    <a class="nav-link" href="/#skills">Skills</a>
+    <a class="nav-link" href="/#about">About</a>
+  </div>
+</nav>
+
+<main id="content">
+<header class="page-head">
+  <div class="wrap">
+    <a class="crumb" href="/#work">← All work</a>
+    <div class="kicker">Case study · 1 min read</div>
+    <h1>Fraud detection across 35 financial institutions</h1>
+    <span class="where">Canvia · Data Scientist · Dec 2023 – Dec 2024</span>
+    <p class="lead">Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru's leading financial institutions. The system automatically flags the highest-risk ~2% for human review instead of asking analysts to watch everything.</p>
+    <div class="metrics">
+        <span class="metric">35 institutions</span>
+        <span class="metric">~2% flagged, real time</span>
+    </div>
+    <p class="tags">Isolation Forest · anomaly detection · Python</p>
+  </div>
+</header>
+
+<section class="page-body" id="case">
+  <div class="wrap">
+    <article class="case">
+    <p class="where">Canvia · unsupervised learning under real-world constraints</p>
+
+    <h2>What it watched</h2>
+    <p>Interbank transfers between 35 of Peru's leading financial institutions, in real time. The feature engineering encoded what fraud tends to look like: account age, deviation from a person's normal transfer amounts, transfers between someone's own accounts across different banks, activity at unusual hours, unusual bank-to-bank combinations. The model then decided what was anomalous in that feature space.</p>
+
+    <h2>Why Isolation Forest</h2>
+    <p>The client could not provide fraud labels, which rules out supervised learning and is exactly the setting unsupervised anomaly detection exists for. I inherited a first MVP that flagged around 9% of transactions, far more than review capacity. I redesigned the features and the model and brought flags in line with the client's ~2% operating threshold. With labels, I would revisit the choice: semi-supervised methods or a supervised model trained on confirmed cases could well beat it.</p>
+
+    <h2>What real time required</h2>
+    <p>A fast, concurrent API (FastAPI), hosted on-premise with no cloud services allowed, which meant working hand in hand with the infrastructure team on latency and concurrency budgets.</p>
+
+    <h2>Scope, honestly</h2>
+    <p>The 2% threshold was the client's operating requirement, sized to their review capacity. A deeper analysis of false positives against missed fraud sat outside the engagement's scope: our mandate was the model and the flagging API, and the client consumed the alerts downstream. If I owned the product end to end, that precision-recall analysis is the first thing I would add.</p>
+
+    </article>
+  </div>
+</section>
+
+<section class="more" id="more">
+  <div class="wrap">
+    <h2>More case studies</h2>
+    <ul>
+      <li><a href="/work/hr-copilot/">AI copilot and agents for HR teams</a> <span class="where">· Crehana (HR-tech SaaS)</span></li>
+      <li><a href="/work/retrieval-pipeline/">The retrieval pipeline behind the copilot</a> <span class="where">· Crehana</span></li>
+      <li><a href="/work/contract-allocation/">Contract allocation for a commodity exporter</a> <span class="where">· Canvia (IT consulting)</span></li>
+    </ul>
+    <a class="backlink" href="/">← joaquinramirez.dev</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Los Angeles, CA · <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">email</a> · <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a> · <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener">LinkedIn</a> · <a href="/resume.pdf" target="_blank" rel="noopener">resume</a> · <a href="/privacy.html">privacy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

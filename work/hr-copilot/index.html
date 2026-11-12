@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f141b" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" sizes="48x48 32x32 16x16" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css?v=1">
+<!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
+<script defer src="/site.js?v=1"></script>
+<title>The HR copilot and its agents · Case study · Joaquin Ramirez</title>
+<meta name="description" content="I led development of Crehana&#x27;s GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used across Latin America.">
+<link rel="canonical" href="https://joaquinramirez.dev/work/hr-copilot/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The HR copilot and its agents · Case study · Joaquin Ramirez">
+<meta property="og:description" content="I led development of Crehana&#x27;s GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used across Latin America.">
+<meta property="og:url" content="https://joaquinramirez.dev/work/hr-copilot/">
+<meta property="og:image" content="https://joaquinramirez.dev/og.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Joaquin Ramirez, machine learning engineer and data scientist">
+<meta property="og:site_name" content="Joaquin Ramirez">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://joaquinramirez.dev/og.png?v=2">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The HR copilot and its agents",
+  "description": "I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used across Latin America.",
+  "url": "https://joaquinramirez.dev/work/hr-copilot/",
+  "image": "https://joaquinramirez.dev/og.png?v=2",
+  "author": {
+    "@type": "Person",
+    "name": "Joaquin Ramirez",
+    "url": "https://joaquinramirez.dev/"
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#content">Skip to content</a>
+
+<nav class="site-nav" aria-label="Site">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Joaquin Ramirez, home"><span class="brand-full">Joaquin Ramirez</span><span class="brand-short">JR</span></a>
+    <a class="nav-link" href="/#work" aria-current="true">Work</a>
+    <a class="nav-link" href="/#projects">Projects</a>
+    <a class="nav-link" href="/#skills">Skills</a>
+    <a class="nav-link" href="/#about">About</a>
+  </div>
+</nav>
+
+<main id="content">
+<header class="page-head">
+  <div class="wrap">
+    <a class="crumb" href="/#work">← All work</a>
+    <div class="kicker">Case study · 3 min read</div>
+    <h1>The HR copilot and its agents</h1>
+    <span class="where">Crehana (HR-tech SaaS) · Senior Machine Learning Engineer · Feb 2025 – Sep 2026</span>
+    <p class="lead">I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used across Latin America. When our data-extraction agent kept failing in production, I redesigned its routing and added reliability safeguards: failures dropped 25%, and adoption of the whole copilot grew 9x. I also presented tradeoffs to our executive committee and coordinated the work of two other ML engineers.</p>
+    <div class="metrics">
+        <span class="metric">1300+ organizations</span>
+        <span class="metric">48K+ users</span>
+        <span class="metric">agent failures −25%</span>
+        <span class="metric">adoption 9x</span>
+    </div>
+    <p class="tags">LangChain · LangGraph · OpenAI · Python · AWS</p>
+  </div>
+</header>
+
+<section class="page-body" id="case">
+  <div class="wrap">
+    <article class="case">
+    <p class="where">Crehana · how I think about agents, reliability, and product</p>
+
+    <h2>Who uses it and for what</h2>
+    <p>HR admins, managers, and employees, each with different jobs to be done. An employee asks what their company's paternity leave policy allows, and the copilot answers from the documents their HR team uploaded. Another asks how they did against their quarterly goals, which triggers a data query and then course recommendations to close the gaps. A team leader asks who on the team is behind on which metrics and how to help them catch up. One interface, very different workflows underneath.</p>
+
+    <h2>Why agents instead of simpler automation</h2>
+    <p>The use cases that mattered were multi-step and stateful. Onboarding involves a chain of bureaucratic steps over private personal data: cleaning it, validating it, triggering downstream tasks, and, critically, surviving interruption, because managers stop mid-flow and come back later. Complex reporting needs retrieval across different components of the platform's data (we exposed them to the agents through MCP) and a back-confirmation pass before anything reaches the user. A form or a single prompt cannot hold that kind of state or recover from partial failure; an agent can.</p>
+
+    <h2>Where personal data sat, and where it did not</h2>
+    <p>Personal data reached the models through retrieval, and I did not add model-side redaction. An answer about someone's own onboarding or goals needs the underlying record to be worth reading, so stripping it would have defeated the feature. The control is not redaction, it is authorization: retrieval is filtered by the asking organization and then by what that specific user is entitled to see, so the model is only ever handed records the asker could already open themselves. Upstream, ingestion was owned by data engineering under their security guidelines, and I worked from the curated data they handed over rather than from raw records. The filter has a visible cost worth naming. The copilot regularly answers that there is no data on something when the company holds plenty of it, just not for that user, and the open product question is whether to say that out loud. Telling someone they lack access is clearer than telling them nothing exists, but it also confirms the record exists, which is its own leak.</p>
+
+    <h2>The reliability work behind the 25% failure reduction</h2>
+    <p>The data-extraction agent failed too often in production: schema-invalid outputs, timeouts, wrong extractions. I attacked it on several fronts: stricter schema enforcement on outputs, redesigned prompts, better validation, a fallback chain so that when a model fails the request retries on a lighter model or a different provider, and a self-critique step where the agent checks that its own answer makes sense before returning it. Failures dropped 25%, and copilot adoption, measured in weekly active prompts, grew 9x.</p>
+
+    <figure class="fig">
+<div class="fig-scroll">
+<svg viewBox="0 0 520 414" role="img" aria-label="The path of one data extraction request. A failed model call falls back to a lighter model and then a different provider. Whatever the call produces must clear two gates added in the redesign, schema enforcement and a self critique step; rejected output is retried instead of reaching the user.">
+  <defs>
+    <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" class="dg-a"/>
+    </marker>
+  </defs>
+
+  <rect class="dg-box" x="46" y="14" width="250" height="44" rx="10"/>
+  <text class="dg-t" x="171" y="41" text-anchor="middle">Extraction request</text>
+
+  <rect class="dg-box" x="46" y="96" width="250" height="48" rx="10"/>
+  <text class="dg-t" x="171" y="125" text-anchor="middle">Model call</text>
+
+  <rect class="dg-box" x="342" y="96" width="164" height="48" rx="10"/>
+  <text class="dg-s" x="424" y="115" text-anchor="middle">Lighter model, then</text>
+  <text class="dg-s" x="424" y="131" text-anchor="middle">a different provider</text>
+
+  <rect class="dg-group" x="34" y="184" width="278" height="140" rx="14"/>
+
+  <rect class="dg-key" x="50" y="198" width="246" height="42" rx="10"/>
+  <text class="dg-k" x="173" y="224" text-anchor="middle">Schema enforcement</text>
+
+  <rect class="dg-key" x="50" y="268" width="246" height="42" rx="10"/>
+  <text class="dg-k" x="173" y="294" text-anchor="middle">Self critique</text>
+
+  <rect class="dg-box" x="46" y="356" width="250" height="44" rx="10"/>
+  <text class="dg-t" x="171" y="383" text-anchor="middle">Returned to the user</text>
+
+  <line class="dg-l" x1="171" y1="58" x2="171" y2="90" marker-end="url(#ar1)"/>
+
+  <line class="dg-l" x1="171" y1="144" x2="171" y2="178" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="179" y="166">output</text>
+
+  <line class="dg-l" x1="173" y1="240" x2="173" y2="262" marker-end="url(#ar1)"/>
+
+  <line class="dg-l" x1="171" y1="324" x2="171" y2="350" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="179" y="344">clears both</text>
+
+  <line class="dg-l" x1="296" y1="120" x2="336" y2="120" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="316" y="88" text-anchor="middle">call fails</text>
+
+  <path class="dg-l" d="M 424 144 L 424 252 L 318 252" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="372" y="246" text-anchor="middle">retried output</text>
+
+  <path class="dg-l" d="M 34 252 L 18 252 L 18 120 L 40 120" marker-end="url(#ar1)"/>
+  <text class="dg-s" x="11" y="186" transform="rotate(-90 11 186)" text-anchor="middle">rejected, retry</text>
+</svg>
+</div>
+<figcaption>One extraction request. Everything the model produces, first call or fallback, has to clear both gates before anyone sees it: output that does not match the schema, and answers that do not survive the model's own critique, go back for another attempt. Those two gates are what the reliability work added.</figcaption>
+</figure>
+
+    <h2>Working with the business</h2>
+    <p>I presented tradeoffs to an executive committee of the CEO, CTO, and product lead: where the AI team should go next, which products the company needed, how to weigh bug fixes against new capabilities. Part of that job was advocating for what the engineering roadmap needed, not only what the business asked for.</p>
+
+    </article>
+  </div>
+</section>
+
+<section class="more" id="more">
+  <div class="wrap">
+    <h2>More case studies</h2>
+    <ul>
+      <li><a href="/work/retrieval-pipeline/">The retrieval pipeline behind the copilot</a> <span class="where">· Crehana</span></li>
+      <li><a href="/work/contract-allocation/">Contract allocation for a commodity exporter</a> <span class="where">· Canvia (IT consulting)</span></li>
+      <li><a href="/work/fraud-detection/">Fraud detection across 35 financial institutions</a> <span class="where">· Canvia</span></li>
+    </ul>
+    <a class="backlink" href="/">← joaquinramirez.dev</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Los Angeles, CA · <a href="mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu">email</a> · <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a> · <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener">LinkedIn</a> · <a href="/resume.pdf" target="_blank" rel="noopener">resume</a> · <a href="/privacy.html">privacy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

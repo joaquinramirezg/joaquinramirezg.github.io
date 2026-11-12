@@ -21,6 +21,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
+<script defer src="/site.js?v=1"></script>
 <link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
@@ -61,237 +62,7 @@
   "url": "https://joaquinramirez.dev/"
 }
 </script>
-<style>
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('/inter-var.woff2') format('woff2');
-  }
-  :root {
-    --bg: #ffffff;
-    --bg-soft: #f6f8fa;
-    --text: #1a2332;
-    --text-soft: #4b5768;
-    --line: #e3e8ee;
-    --accent: #0b5fa5;
-    --accent-soft: #eaf3fb;
-    --metric: #0b5fa5;
-    /* Label on a filled accent button. White clears AA on the light accent
-       (6.6:1) but only reaches 2.5:1 on the lighter dark-mode accent, so the
-       dark theme flips to a dark label instead of darkening --accent, which
-       is also the colour of body links. */
-    --on-accent: #ffffff;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f141b;
-      --bg-soft: #161d27;
-      --text: #e8edf3;
-      --text-soft: #9fadbd;
-      --line: #26303d;
-      --accent: #5aa9e6;
-      --accent-soft: #16283a;
-      --metric: #7cbcf0;
-      --on-accent: #0f141b;
-    }
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .site-nav a.nav-link { transition: none; } }
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    font-size: 16px;
-  }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
-
-  .fig { margin: 26px 0 0; }
-  .fig svg { display: block; width: 100%; max-width: 520px; height: auto; color: var(--text-soft); }
-  .fig-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  @media (max-width: 600px) { .fig svg { min-width: 470px; } }
-  .fig figcaption { font-size: 13.5px; color: var(--text-soft); margin-top: 10px; max-width: 520px; }
-  .dg-box { fill: none; stroke: currentColor; stroke-width: 1.25; opacity: 0.55; }
-  .dg-key { fill: none; stroke: var(--accent); stroke-width: 1.75; opacity: 1; }
-  .dg-group { fill: none; stroke: var(--accent); stroke-width: 1.25; stroke-dasharray: 5 5; opacity: 0.4; }
-  .dg-t { fill: var(--text); font-size: 12.5px; font-weight: 600; }
-  .dg-s { fill: var(--text-soft); font-size: 11px; }
-  .dg-k { fill: var(--accent); font-size: 12.5px; font-weight: 700; }
-  .dg-l { stroke: currentColor; stroke-width: 1.25; fill: none; opacity: 0.7; }
-  .dg-a { fill: currentColor; opacity: 0.7; }
-  .skip-link {
-    position: absolute; left: -9999px; top: 0; z-index: 100;
-    background: var(--accent); color: var(--on-accent); padding: 10px 16px;
-    font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 0 0 8px 0;
-  }
-  .skip-link:focus { left: 0; }
-  .site-nav {
-    position: sticky; top: 0; z-index: 50;
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
-    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  .site-nav .nav-inner {
-    max-width: 760px; margin: 0 auto; padding: 0 24px;
-    display: flex; align-items: center; gap: 20px; height: 52px;
-  }
-  .site-nav .brand { font-weight: 800; font-size: 14.5px; letter-spacing: -0.01em; color: var(--text); text-decoration: none; margin-right: auto; }
-  .site-nav a.nav-link {
-    font-size: 13.5px; font-weight: 600; color: var(--text-soft); text-decoration: none;
-    padding: 4px 2px; border-bottom: 2px solid transparent; transition: color .15s ease, border-color .15s ease;
-  }
-  .site-nav a.nav-link:hover { color: var(--text); }
-  .site-nav a.nav-link[aria-current="true"] { color: var(--accent); border-bottom-color: var(--accent); }
-  section[id], header[id] { scroll-margin-top: 64px; }
-  .site-nav .brand-short { display: none; }
-  @media (max-width: 560px) {
-    .site-nav .nav-inner { gap: 13px; padding: 0 16px; overflow-x: auto; }
-    .site-nav .brand { font-size: 14px; }
-    .site-nav .brand-full { display: none; }
-    .site-nav .brand-short { display: inline; }
-    .site-nav a.nav-link { font-size: 13px; white-space: nowrap; }
-  }
-
-  .about-row { display: flex; gap: 26px; align-items: flex-start; }
-  .about-photo { width: 132px; height: 132px; border-radius: 14px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--line); }
-  .about-text p { font-size: 15px; color: var(--text-soft); margin-top: 9px; }
-  .about-text p:first-child { margin-top: 0; }
-  @media (max-width: 560px) { .about-row { flex-direction: column; } .about-photo { width: 108px; height: 108px; } }
-
-  header { padding: 68px 0 44px; }
-  .hero-photo { display: block; width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); margin-bottom: 20px; }
-  .kicker {
-    font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 12px;
-  }
-  h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
-  .subtitle { font-size: 17.5px; color: var(--text-soft); margin-top: 16px; max-width: 640px; }
-  .meta-line { margin-top: 14px; font-size: 14.5px; color: var(--text-soft); }
-  .links { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
-  .links a {
-    display: inline-block; padding: 9px 18px; border-radius: 8px;
-    font-size: 14.5px; font-weight: 600; text-decoration: none;
-    border: 1px solid var(--line); color: var(--text);
-    transition: border-color .15s, background .15s;
-  }
-  .links a.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-  .links a:hover { border-color: var(--accent); }
-  .links a.primary:hover { opacity: .92; }
-
-  section { padding: 38px 0; border-top: 1px solid var(--line); }
-  h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 24px; }
-
-  .card {
-    border: 1px solid var(--line); border-radius: 12px;
-    padding: 24px 26px; margin-bottom: 18px; background: var(--bg);
-  }
-  .card h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
-  .card .where { display: block; font-size: 13.5px; color: var(--text-soft); font-weight: 500; margin-top: 3px; }
-  .card p { font-size: 15px; color: var(--text-soft); margin-top: 12px; }
-  .metrics { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
-  .metric {
-    background: var(--accent-soft); color: var(--metric);
-    font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 999px;
-    white-space: nowrap;
-  }
-  .tags { margin-top: 13px; font-size: 13px; color: var(--text-soft); }
-  .tags a { color: var(--accent); text-decoration: none; font-weight: 600; }
-  .tags a:hover { text-decoration: underline; }
-  .section-lead { font-size: 15px; color: var(--text-soft); margin: -14px 0 22px; }
-
-  /* Projects: one card per project, thumbnail beside the text, stacked on phones.
-     The homepage carries the card only; the full write-up lives in the repo README,
-     so the page does not grow with every project. Template: portfolio/PROJECT-TEMPLATE.md */
-  .projects { list-style: none; }
-  .project { display: grid; grid-template-columns: 220px 1fr; gap: 22px; align-items: start; scroll-margin-top: 76px; }
-  .project-thumb {
-    aspect-ratio: 5 / 3; border-radius: 8px; overflow: hidden;
-    border: 1px solid var(--line); background: var(--bg-soft);
-  }
-  .project-thumb svg { color: var(--text-soft); }
-  .project-thumb .dg-t, .project-thumb .dg-k { font-size: 14px; }
-  .project-thumb .dg-s { font-size: 12.5px; }
-  .project-thumb img, .project-thumb video, .project-thumb svg { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .project-body h3 { margin-top: -2px; }
-  .card .shows { color: var(--text); margin-top: 10px; }
-  .card .shows b { font-weight: 600; }
-  .pt-before { fill: currentColor; opacity: 0.3; }
-  .pt-after { fill: var(--accent); }
-  .pt-ok { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.75; }
-  .project-thumb picture { display: block; width: 100%; height: 100%; }
-  @media (max-width: 560px) {
-    .project { grid-template-columns: 1fr; gap: 16px; }
-  }
-
-  .skills-grid { display: grid; grid-template-columns: 160px 1fr; gap: 12px 20px; font-size: 15px; }
-  .skills-grid dt { font-weight: 600; color: var(--text); }
-  .skills-grid dd { color: var(--text-soft); }
-  @media (max-width: 560px) { .skills-grid { grid-template-columns: 1fr; gap: 2px 0; } .skills-grid dd { margin-bottom: 12px; } }
-
-  .case { border-top: 1px solid var(--line); padding-top: 30px; margin-top: 30px; }
-  .case:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
-  .case h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
-  .case .where { display: block; font-size: 13.5px; color: var(--text-soft); font-weight: 500; margin-top: 3px; }
-  .case h4 {
-    font-size: 12.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
-    color: var(--accent); margin-top: 20px;
-  }
-  .case p { font-size: 15px; color: var(--text-soft); margin-top: 9px; }
-  .case ul { margin: 9px 0 0 20px; font-size: 15px; color: var(--text-soft); }
-  .case ul li { margin-top: 5px; }
-  .card.compact { padding: 18px 26px; }
-  .card.compact h3 { font-size: 16.5px; }
-  .card.compact p { font-size: 14.5px; margin-top: 8px; }
-  .card.compact .metrics { margin-top: 11px; }
-
-  .case-body > summary {
-    display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
-    padding: 7px 14px; border: 1px solid var(--line); border-radius: 8px;
-    font-size: 14px; font-weight: 600; color: var(--accent); cursor: pointer;
-    list-style: none; transition: border-color .15s, background .15s;
-  }
-  .case-body > summary::-webkit-details-marker { display: none; }
-  .case-body > summary::after { content: "+"; font-size: 16px; line-height: 1; }
-  .case-body[open] > summary::after { content: "\2212"; }
-  .case-body > summary:hover { border-color: var(--accent); background: var(--accent-soft); }
-  .case-body > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .case-body .read-time { color: var(--text-soft); font-weight: 500; }
-  .case-body[open] > summary .read-time { display: none; }
-  .case-body[open] > summary { margin-bottom: 4px; }
-  .case { padding-top: 24px; margin-top: 24px; }
-  article.case[id] { scroll-margin-top: 64px; }
-
-  .card { transition: border-color .15s; }
-  .card.project:hover, .card:focus-within { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
-  @media (prefers-reduced-motion: reduce) { .card, .case-body > summary { transition: none; } }
-  @media print {
-    .site-nav, .skip-link, .case-body > summary { display: none; }
-    .card { break-inside: avoid; }
-  }
-  .backlink { display: inline-block; margin-top: 16px; font-size: 13.5px; font-weight: 600; color: var(--accent); text-decoration: none; }
-  .backlink:hover { text-decoration: underline; }
-
-  .edu { margin-bottom: 18px; }
-  .edu h3 { font-size: 16.5px; font-weight: 700; }
-  .edu .detail { font-size: 14.5px; color: var(--text-soft); }
-
-  footer { border-top: 1px solid var(--line); padding: 36px 0 60px; }
-  footer p { font-size: 15px; color: var(--text-soft); }
-  footer a { color: var(--accent); font-weight: 600; text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
-
-  @media (max-width: 560px) {
-    header { padding: 46px 0 34px; }
-    h1 { font-size: 30px; }
-    .subtitle { font-size: 16.5px; }
-    .card { padding: 20px; }
-    .links { gap: 10px; }
-    .links a { flex: 1 1 calc(50% - 5px); text-align: center; }
-  }
-</style>
+<link rel="stylesheet" href="/site.css?v=1">
 </head>
 <body>
 
@@ -302,7 +73,6 @@
     <a class="brand" href="#top" aria-label="Joaquin Ramirez, back to top"><span class="brand-full">Joaquin Ramirez</span><span class="brand-short">JR</span></a>
     <a class="nav-link" href="#work">Work</a>
     <a class="nav-link" href="#projects">Projects</a>
-    <a class="nav-link" href="#cases">Case studies</a>
     <a class="nav-link" href="#skills">Skills</a>
     <a class="nav-link" href="#about">About</a>
   </div>
@@ -329,10 +99,10 @@
 <section id="work">
   <div class="wrap">
     <h2>Work</h2>
-    <p class="section-lead">Production systems, most recent first.</p>
+    <p class="section-lead">Production systems, most recent first. The bigger ones have a case study: the tradeoffs, what failed, and how each result was measured.</p>
 
     <div class="card">
-      <h3>AI copilot and agents for HR teams</h3>
+      <h3><a href="/work/hr-copilot/">AI copilot and agents for HR teams</a></h3>
       <span class="where">Crehana (HR-tech SaaS) · Senior Machine Learning Engineer · Feb 2025 – Sep 2026</span>
       <p>I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used across Latin America. When our data-extraction agent kept failing in production, I redesigned its routing and added reliability safeguards: failures dropped 25%, and adoption of the whole copilot grew 9x. I also presented tradeoffs to our executive committee and coordinated the work of two other ML engineers.</p>
       <div class="metrics">
@@ -341,11 +111,11 @@
         <span class="metric">agent failures −25%</span>
         <span class="metric">adoption 9x</span>
       </div>
-      <p class="tags">LangChain · LangGraph · OpenAI · Python · AWS · <a href="#case-copilot">case study →</a></p>
+      <p class="tags">LangChain · LangGraph · OpenAI · Python · AWS · <a href="/work/hr-copilot/">case study →</a></p>
     </div>
 
     <div class="card">
-      <h3>The retrieval pipeline behind the copilot</h3>
+      <h3><a href="/work/retrieval-pipeline/">The retrieval pipeline behind the copilot</a></h3>
       <span class="where">Crehana · Senior Machine Learning Engineer · Feb 2025 – Sep 2026</span>
       <p>The copilot answers from each company's own documents, so the retrieval layer has to stay fresh and tenant-aware. I built and ran the ingestion pipeline: 10K+ documents a week, indexed on a schedule into a search corpus of 1.2M+ vectors on Qdrant with OpenAI embeddings.</p>
       <div class="metrics">
@@ -353,7 +123,7 @@
         <span class="metric">1.2M+ vectors</span>
       </div>
 
-      <p class="tags">RAG · Qdrant · OpenAI embeddings · Python · <a href="#case-rag">case study →</a></p>
+      <p class="tags">RAG · Qdrant · OpenAI embeddings · Python · <a href="/work/retrieval-pipeline/">case study →</a></p>
     </div>
 
     <div class="card compact">
@@ -368,7 +138,7 @@
     </div>
 
     <div class="card">
-      <h3>Contract allocation for a commodity exporter</h3>
+      <h3><a href="/work/contract-allocation/">Contract allocation for a commodity exporter</a></h3>
       <span class="where">Canvia (IT consulting) · Data Scientist · Dec 2023 – Dec 2024</span>
       <p>A fishmeal exporter planned its contract allocation by hand, two weeks per cycle. I built the product classification and allocation algorithm that now does it in under 20 minutes, raising estimated gross margin by ~55% and cutting operating costs by ~40%. I presented the results to about 15 client stakeholders, including VPs.</p>
       <div class="metrics">
@@ -376,11 +146,11 @@
         <span class="metric">costs −40%</span>
         <span class="metric">2 weeks → &lt;20 min</span>
       </div>
-      <p class="tags">Python · scikit-learn · optimization · <a href="#case-fishmeal">case study →</a></p>
+      <p class="tags">Python · scikit-learn · optimization · <a href="/work/contract-allocation/">case study →</a></p>
     </div>
 
     <div class="card">
-      <h3>Fraud detection across 35 financial institutions</h3>
+      <h3><a href="/work/fraud-detection/">Fraud detection across 35 financial institutions</a></h3>
       <span class="where">Canvia · Data Scientist · Dec 2023 – Dec 2024</span>
       <p>Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru's leading financial institutions. The system automatically flags the highest-risk ~2% for human review instead of asking analysts to watch everything.</p>
       <div class="metrics">
@@ -388,7 +158,7 @@
         <span class="metric">~2% flagged, real time</span>
       </div>
 
-      <p class="tags">Isolation Forest · anomaly detection · Python · <a href="#case-fraud">case study →</a></p>
+      <p class="tags">Isolation Forest · anomaly detection · Python · <a href="/work/fraud-detection/">case study →</a></p>
     </div>
 
     <div class="card compact">
@@ -409,13 +179,34 @@
 <section id="projects">
   <div class="wrap">
     <h2>Projects</h2>
-    <p class="section-lead">Built outside a job. Each one links to its code, and the full write-up lives in the repo.</p>
+    <p class="section-lead">Built outside a job. Each one links to its code; the biggest ones have their own page.</p>
     <ul class="projects">
-<!--
-  NEW PROJECT: copy one <li> below, newest first. Checklist and field rules: portfolio/PROJECT-TEMPLATE.md
-  id="project-<slug>" is the link for LinkedIn posts: https://joaquinramirez.dev/?utm_source=linkedin&utm_campaign=<slug>#project-<slug>
-  Thumbnail: /p/<slug>.webp, 1000x600 (5:3), under 150KB, with width, height, loading="lazy" and real alt text.
--->
+      <li class="card project" id="project-alwayshome">
+        <div class="project-thumb">
+          <svg viewBox="0 0 250 150" role="img" aria-label="AlwaysHome sample Altadena home: the model estimates seven fixes from $5,600 cut the chance of losing the house if fire reaches it from 36% to 15%">
+            <text class="dg-t" x="125" y="18" text-anchor="middle">Chance of losing the house</text>
+            <rect class="pt-before" x="50" y="49" width="40" height="71" rx="3"/>
+            <rect class="pt-after" x="160" y="90" width="40" height="30" rx="3"/>
+            <text class="dg-s" x="70" y="43" text-anchor="middle">36%</text>
+            <text class="dg-k" x="180" y="84" text-anchor="middle">15%</text>
+            <line class="dg-l" x1="25" y1="120.5" x2="225" y2="120.5"/>
+            <text class="dg-s" x="70" y="136" text-anchor="middle">today</text>
+            <text class="dg-s" x="180" y="136" text-anchor="middle">7 fixes, $5,600</text>
+          </svg>
+        </div>
+        <div class="project-body">
+          <h3><a href="/projects/alwayshome/">AlwaysHome: which wildfire fixes pay back first</a></h3>
+          <span class="where">UCLA Anderson MSBA Vibathon, team of three · Nov 2026</span>
+          <p>Homeowners pushed onto California's FAIR Plan are told to harden their homes but not which fix matters most for theirs. Built in one day, this app ranks fire-safety fixes by payback for an LA County home and shows what the policy would really pay after a total loss. The house-loss model reaches a cross-validated AUC of 0.80 on the 4,525 homes with every feature recorded, out of 22,071 CAL FIRE inspections from the January 2025 fires. AI only reads the insurance policy, quoting the line behind every value; every cost, probability and payback comes from code and public data.</p>
+          <p class="shows"><b>Shows:</b> a product decision about where AI belongs, shipped as a working app with tests.</p>
+          <div class="metrics">
+            <span class="metric">AUC 0.80 (n=4,525)</span>
+            <span class="metric">22,071 CAL FIRE inspections</span>
+            <span class="metric">522 tests in CI</span>
+          </div>
+          <p class="tags">Python · scikit-learn · FastAPI · Next.js · Claude API · <a href="/projects/alwayshome/">project page →</a> · <a href="https://alwayshome-mvp.vercel.app" target="_blank" rel="noopener">live app →</a> · <a href="https://github.com/joaquinramirezg/alwayshome" target="_blank" rel="noopener">code →</a></p>
+        </div>
+      </li>
       <li class="card project" id="project-genie">
         <div class="project-thumb">
           <svg viewBox="0 0 250 150" role="img" aria-label="GENIE fine-tuning results: evaluation loss from 2.92 to 0.46, perplexity from 18.5 to 1.6">
@@ -500,214 +291,6 @@
   </div>
 </section>
 
-<section id="cases">
-  <div class="wrap">
-    <h2>Case studies</h2>
-    <p class="section-lead">The thinking behind the work above: the tradeoffs, what failed, and how each result was measured.</p>
-
-    <article class="case" id="case-copilot">
-      <h3>The HR copilot and its agents</h3>
-      <span class="where">Crehana · how I think about agents, reliability, and product</span>
-      <details class="case-body">
-      <summary>Read the case study <span class="read-time">· 3 min</span></summary>
-
-      <h4>Who uses it and for what</h4>
-      <p>HR admins, managers, and employees, each with different jobs to be done. An employee asks what their company's paternity leave policy allows, and the copilot answers from the documents their HR team uploaded. Another asks how they did against their quarterly goals, which triggers a data query and then course recommendations to close the gaps. A team leader asks who on the team is behind on which metrics and how to help them catch up. One interface, very different workflows underneath.</p>
-
-      <h4>Why agents instead of simpler automation</h4>
-      <p>The use cases that mattered were multi-step and stateful. Onboarding involves a chain of bureaucratic steps over private personal data: cleaning it, validating it, triggering downstream tasks, and, critically, surviving interruption, because managers stop mid-flow and come back later. Complex reporting needs retrieval across different components of the platform's data (we exposed them to the agents through MCP) and a back-confirmation pass before anything reaches the user. A form or a single prompt cannot hold that kind of state or recover from partial failure; an agent can.</p>
-
-      <h4>Where personal data sat, and where it did not</h4>
-      <p>Personal data reached the models through retrieval, and I did not add model-side redaction. An answer about someone's own onboarding or goals needs the underlying record to be worth reading, so stripping it would have defeated the feature. The control is not redaction, it is authorization: retrieval is filtered by the asking organization and then by what that specific user is entitled to see, so the model is only ever handed records the asker could already open themselves. Upstream, ingestion was owned by data engineering under their security guidelines, and I worked from the curated data they handed over rather than from raw records. The filter has a visible cost worth naming. The copilot regularly answers that there is no data on something when the company holds plenty of it, just not for that user, and the open product question is whether to say that out loud. Telling someone they lack access is clearer than telling them nothing exists, but it also confirms the record exists, which is its own leak.</p>
-
-      <h4>The reliability work behind the 25% failure reduction</h4>
-      <p>The data-extraction agent failed too often in production: schema-invalid outputs, timeouts, wrong extractions. I attacked it on several fronts: stricter schema enforcement on outputs, redesigned prompts, better validation, a fallback chain so that when a model fails the request retries on a lighter model or a different provider, and a self-critique step where the agent checks that its own answer makes sense before returning it. Failures dropped 25%, and copilot adoption, measured in weekly active prompts, grew 9x.</p>
-
-      <figure class="fig">
-<div class="fig-scroll">
-<svg viewBox="0 0 520 414" role="img" aria-label="The path of one data extraction request. A failed model call falls back to a lighter model and then a different provider. Whatever the call produces must clear two gates added in the redesign, schema enforcement and a self critique step; rejected output is retried instead of reaching the user.">
-  <defs>
-    <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" class="dg-a"/>
-    </marker>
-  </defs>
-
-  <rect class="dg-box" x="46" y="14" width="250" height="44" rx="10"/>
-  <text class="dg-t" x="171" y="41" text-anchor="middle">Extraction request</text>
-
-  <rect class="dg-box" x="46" y="96" width="250" height="48" rx="10"/>
-  <text class="dg-t" x="171" y="125" text-anchor="middle">Model call</text>
-
-  <rect class="dg-box" x="342" y="96" width="164" height="48" rx="10"/>
-  <text class="dg-s" x="424" y="115" text-anchor="middle">Lighter model, then</text>
-  <text class="dg-s" x="424" y="131" text-anchor="middle">a different provider</text>
-
-  <rect class="dg-group" x="34" y="184" width="278" height="140" rx="14"/>
-
-  <rect class="dg-key" x="50" y="198" width="246" height="42" rx="10"/>
-  <text class="dg-k" x="173" y="224" text-anchor="middle">Schema enforcement</text>
-
-  <rect class="dg-key" x="50" y="268" width="246" height="42" rx="10"/>
-  <text class="dg-k" x="173" y="294" text-anchor="middle">Self critique</text>
-
-  <rect class="dg-box" x="46" y="356" width="250" height="44" rx="10"/>
-  <text class="dg-t" x="171" y="383" text-anchor="middle">Returned to the user</text>
-
-  <line class="dg-l" x1="171" y1="58" x2="171" y2="90" marker-end="url(#ar1)"/>
-
-  <line class="dg-l" x1="171" y1="144" x2="171" y2="178" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="179" y="166">output</text>
-
-  <line class="dg-l" x1="173" y1="240" x2="173" y2="262" marker-end="url(#ar1)"/>
-
-  <line class="dg-l" x1="171" y1="324" x2="171" y2="350" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="179" y="344">clears both</text>
-
-  <line class="dg-l" x1="296" y1="120" x2="336" y2="120" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="316" y="88" text-anchor="middle">call fails</text>
-
-  <path class="dg-l" d="M 424 144 L 424 252 L 318 252" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="372" y="246" text-anchor="middle">retried output</text>
-
-  <path class="dg-l" d="M 34 252 L 18 252 L 18 120 L 40 120" marker-end="url(#ar1)"/>
-  <text class="dg-s" x="11" y="186" transform="rotate(-90 11 186)" text-anchor="middle">rejected, retry</text>
-</svg>
-</div>
-<figcaption>One extraction request. Everything the model produces, first call or fallback, has to clear both gates before anyone sees it: output that does not match the schema, and answers that do not survive the model's own critique, go back for another attempt. Those two gates are what the reliability work added.</figcaption>
-</figure>
-
-      <h4>Working with the business</h4>
-      <p>I presented tradeoffs to an executive committee of the CEO, CTO, and product lead: where the AI team should go next, which products the company needed, how to weigh bug fixes against new capabilities. Part of that job was advocating for what the engineering roadmap needed, not only what the business asked for.</p>
-
-      <a class="backlink" href="#top">Back to top ↑</a>
-      </details>
-    </article>
-
-    <article class="case" id="case-rag">
-      <h3>The retrieval pipeline behind the copilot</h3>
-      <span class="where">Crehana · multi-tenancy, messy inputs, and honest evaluation</span>
-      <details class="case-body">
-      <summary>Read the case study <span class="read-time">· 2 min</span></summary>
-
-      <h4>What actually flows in</h4>
-      <p>It is not a static document pile. Information flowed continuously from the platform's HR modules into the master database as companies edited, uploaded, and generated records, more than 10K documents a week. Every weekend the pipeline reindexed that into a search corpus of 1.2M+ vectors on Qdrant, using OpenAI embeddings over overlapping chunks.</p>
-
-      <h4>Multi-tenancy: the constraint that shapes everything</h4>
-      <p>1300+ organizations share the platform, and no company may ever see another company's data. Retrieval enforces metadata filtering per organization on the vector side, on top of tenant schemas in the relational database. I also evaluated moving to separate collections per tenant, which buys stronger isolation and much simpler offboarding when a customer leaves, at the cost of operational overhead across that many organizations. Filtered search won for now; I still think the isolation argument gets stronger as the platform grows.</p>
-
-      <figure class="fig">
-<div class="fig-scroll">
-<svg viewBox="0 0 520 556" role="img" aria-label="The retrieval pipeline: platform records and uploaded files of every format are preprocessed, chunked with overlap and embedded into a vector store that is reindexed every weekend; at question time retrieval is filtered to the asking organization before an answer is grounded.">
-  <defs>
-    <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" class="dg-a"/>
-    </marker>
-  </defs>
-
-  <text class="dg-s" x="10" y="14">Every weekend</text>
-
-  <rect class="dg-box" x="10" y="26" width="240" height="46" rx="10"/>
-  <text class="dg-t" x="130" y="47" text-anchor="middle">HR platform records</text>
-  <text class="dg-s" x="130" y="63" text-anchor="middle">edited and created continuously</text>
-
-  <rect class="dg-box" x="270" y="26" width="240" height="46" rx="10"/>
-  <text class="dg-t" x="390" y="47" text-anchor="middle">Files companies upload</text>
-  <text class="dg-s" x="390" y="63" text-anchor="middle">docs, slides, sheets, PDFs, audio</text>
-
-  <rect class="dg-box" x="130" y="118" width="260" height="42" rx="10"/>
-  <text class="dg-t" x="260" y="144" text-anchor="middle">Preprocessing per format</text>
-
-  <rect class="dg-box" x="130" y="196" width="260" height="42" rx="10"/>
-  <text class="dg-t" x="260" y="222" text-anchor="middle">Chunking with overlap, embedding</text>
-
-  <rect class="dg-box" x="130" y="274" width="260" height="46" rx="10"/>
-  <text class="dg-t" x="260" y="295" text-anchor="middle">Vector store</text>
-  <text class="dg-s" x="260" y="311" text-anchor="middle">1.2M+ vectors, reindexed weekly</text>
-
-  <line class="dg-l" x1="130" y1="72" x2="200" y2="112" marker-end="url(#ar2)"/>
-  <line class="dg-l" x1="390" y1="72" x2="320" y2="112" marker-end="url(#ar2)"/>
-  <text class="dg-s" x="260" y="98" text-anchor="middle">10K+ documents a week</text>
-
-  <line class="dg-l" x1="260" y1="160" x2="260" y2="190" marker-end="url(#ar2)"/>
-  <line class="dg-l" x1="260" y1="238" x2="260" y2="268" marker-end="url(#ar2)"/>
-
-  <text class="dg-s" x="10" y="364">At question time</text>
-
-  <rect class="dg-box" x="130" y="376" width="260" height="42" rx="10"/>
-  <text class="dg-t" x="260" y="402" text-anchor="middle">Question, from one company</text>
-
-  <rect class="dg-key" x="130" y="452" width="260" height="42" rx="10"/>
-  <text class="dg-k" x="260" y="478" text-anchor="middle">Retrieval filtered to that company</text>
-
-  <path class="dg-l" d="M 390 297 L 462 297 L 462 473 L 396 473" marker-end="url(#ar2)"/>
-  <text class="dg-s" x="426" y="290" text-anchor="middle">searched</text>
-  <line class="dg-l" x1="260" y1="418" x2="260" y2="446" marker-end="url(#ar2)"/>
-  <line class="dg-l" x1="260" y1="494" x2="260" y2="524" marker-end="url(#ar2)"/>
-
-  <text class="dg-t" x="260" y="544" text-anchor="middle">Answer grounded in that company's own text</text>
-</svg>
-</div>
-<figcaption>The pipeline, and the line that matters. Retrieval is filtered to the asking organization, so one company's question can only ever be answered from that company's own material. Everything above that gate is shared plumbing; the gate is what makes it safe to share.</figcaption>
-</figure>
-
-      <h4>The pivot that taught me the most</h4>
-      <p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers. Fair expectation, wrong assumption in our design. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Answer quality improved notably without giving up speed.</p>
-
-      <h4>How I evaluated it, honestly</h4>
-      <p>We maintained a golden set of 200 questions and scored every change against it on answer accuracy. That is a real but limited signal: a fuller evaluation would add retrieval-level metrics like hit rate and MRR, which is where I would invest next. On infrastructure: Qdrant was chosen before I arrived, and it held up at our scale, so replacing it was never the priority.</p>
-
-      <a class="backlink" href="#top">Back to top ↑</a>
-      </details>
-    </article>
-
-    <article class="case" id="case-fishmeal">
-      <h3>Contract allocation for a commodity exporter</h3>
-      <span class="where">Canvia · turning a two-week manual process into a 20-minute optimization</span>
-      <details class="case-body">
-      <summary>Read the case study <span class="read-time">· 2 min</span></summary>
-
-      <h4>The problem, from zero</h4>
-      <p>Fishmeal sells by quality band (super prime, prime, and lower grades), and a pile's band is determined by its measured composition: protein, fat, histamine, and other metrics. The interesting part is that piles can be blended, and blending produces a new pile with a new composition. The goal is not to maximize premium volume; it is to maximize revenue across all contracts. And blending has hard constraints: some piles can be blended up into a higher band, while others can never reach it no matter what you mix them with.</p>
-      <p>Allocation adds a second layer. Clients contract tonnage per quality band, and partial fulfillment is not free: if a contract takes most of a quality's stock, the leftover tons must still meet that band's composition to be sellable later. Piles come in fractional weights and live in physical bags, and splitting a bag is expensive and slow, so the plan has to hit contract tonnage as closely as possible while splitting as few bags as possible and keeping every composition constraint intact.</p>
-
-      <h4>What existed before</h4>
-      <p>Around five analysts working across Excel sheets, hand-picking piles by trial and error, hoping to maximize revenue. Two weeks of planning even for small contracts.</p>
-
-      <h4>What I built</h4>
-      <p>A branch-and-bound search over blend and allocation combinations: I enumerated the combinations as a tree and pruned aggressively, cutting a whole branch as soon as partial results proved it could not contain a better solution. Planning went from two weeks to under 20 minutes. The client asked for delivery through Azure Power Apps, so that is how it was deployed, and I presented results to about 15 client stakeholders, including VPs. Building on their stack instead of the one I would have picked, then standing in their room to defend the numbers, is the forward deployed shape of this work, and it is the part I want more of.</p>
-
-      <h4>Where the numbers come from</h4>
-      <p>The estimated 55% gross margin improvement and 40% lower operating cost come from a month of testing on the client's real data, comparing the algorithm's plans against the plans their own team produced, with the client providing the feedback and the baseline. That is why I say estimated: it is their measurement of our output against their old process, not a projection I invented.</p>
-
-      <a class="backlink" href="#top">Back to top ↑</a>
-      </details>
-    </article>
-
-    <article class="case" id="case-fraud">
-      <h3>Fraud detection across 35 financial institutions</h3>
-      <span class="where">Canvia · unsupervised learning under real-world constraints</span>
-      <details class="case-body">
-      <summary>Read the case study <span class="read-time">· 1 min</span></summary>
-
-      <h4>What it watched</h4>
-      <p>Interbank transfers between 35 of Peru's leading financial institutions, in real time. The feature engineering encoded what fraud tends to look like: account age, deviation from a person's normal transfer amounts, transfers between someone's own accounts across different banks, activity at unusual hours, unusual bank-to-bank combinations. The model then decided what was anomalous in that feature space.</p>
-
-      <h4>Why Isolation Forest</h4>
-      <p>The client could not provide fraud labels, which rules out supervised learning and is exactly the setting unsupervised anomaly detection exists for. I inherited a first MVP that flagged around 9% of transactions, far more than review capacity. I redesigned the features and the model and brought flags in line with the client's ~2% operating threshold. With labels, I would revisit the choice: semi-supervised methods or a supervised model trained on confirmed cases could well beat it.</p>
-
-      <h4>What real time required</h4>
-      <p>A fast, concurrent API (FastAPI), hosted on-premise with no cloud services allowed, which meant working hand in hand with the infrastructure team on latency and concurrency budgets.</p>
-
-      <h4>Scope, honestly</h4>
-      <p>The 2% threshold was the client's operating requirement, sized to their review capacity. A deeper analysis of false positives against missed fraud sat outside the engagement's scope: our mandate was the model and the flagging API, and the client consumed the alerts downstream. If I owned the product end to end, that precision-recall analysis is the first thing I would add.</p>
-
-      <a class="backlink" href="#top">Back to top ↑</a>
-      </details>
-    </article>
-
-  </div>
-</section>
-
 <section id="skills">
   <div class="wrap">
     <h2>Skills</h2>
@@ -757,28 +340,11 @@
 </footer>
 
 <script>
+// Old links to collapsed case studies (#case-...) now go to their own pages.
 (function () {
-  // Case studies are collapsed by default; any link or hash that points at one opens it first.
-  function openCase(id) {
-    var el = id && document.getElementById(id);
-    if (!el || !el.matches('article.case')) return;
-    var d = el.querySelector('details.case-body');
-    if (d && !d.open) d.open = true;
-  }
-  document.addEventListener('click', function (e) {
-    var a = e.target && e.target.closest ? e.target.closest('a[href^="#case-"]') : null;
-    if (a) openCase(a.getAttribute('href').slice(1));
-  });
-  window.addEventListener('hashchange', function () { openCase(location.hash.slice(1)); });
-  if (location.hash) {
-    openCase(location.hash.slice(1));
-    var el = document.getElementById(location.hash.slice(1));
-    if (el) el.scrollIntoView();
-  }
-  // Printing should include every case study, not just the open ones.
-  window.addEventListener('beforeprint', function () {
-    document.querySelectorAll('details.case-body').forEach(function (d) { d.open = true; });
-  });
+  var map = { 'case-copilot': 'hr-copilot', 'case-rag': 'retrieval-pipeline', 'case-fishmeal': 'contract-allocation', 'case-fraud': 'fraud-detection' };
+  var k = location.hash.slice(1);
+  if (map[k]) location.replace('/work/' + map[k] + '/' + location.search);
 })();
 </script>
 <script>
@@ -795,140 +361,10 @@
       }
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
-  ['work', 'projects', 'cases', 'skills', 'about'].forEach(function (id) {
+  ['work', 'projects', 'skills', 'about'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) observer.observe(el);
   });
-})();
-</script>
-<script>
-(function () {
-  // ---- transport: queue events until the (deferred) analytics script is ready ----
-  var queue = [], ready = false, tries = 0;
-  function flush() {
-    if (!window.umami || !window.umami.track) return false;
-    ready = true;
-    while (queue.length) {
-      var q = queue.shift();
-      try { window.umami.track(q[0], q[1]); } catch (e) {}
-    }
-    return true;
-  }
-  function track(name, data) {
-    if (ready || flush()) {
-      try { window.umami.track(name, data || {}); } catch (e) {}
-      return;
-    }
-    if (queue.length < 40) queue.push([name, data || {}]);
-  }
-  var poll = setInterval(function () {
-    if (flush() || ++tries > 40) clearInterval(poll);
-  }, 250);
-
-  // ---- clicks: what was clicked, and where on the page it was clicked from ----
-  function locationOf(a) {
-    if (a.closest('footer')) return 'footer';
-    if (a.closest('header')) return 'hero';
-    if (a.closest('.site-nav')) return 'nav';
-    if (a.closest('article.case')) return 'case-study';
-    if (a.closest('.project')) return 'project';
-    if (a.closest('.card')) return 'card';
-    if (a.closest('#about')) return 'about';
-    return 'body';
-  }
-  document.addEventListener('click', function (e) {
-    var a = e.target && e.target.closest ? e.target.closest('a') : null;
-    if (!a) return;
-    var href = a.getAttribute('href') || '';
-    var from = locationOf(a);
-    if (href.indexOf('/resume.pdf') === 0) {
-      track('resume', { from: from });
-    } else if (href.indexOf('mailto:') === 0) {
-      track('email', { from: from });
-    } else if (href.indexOf('linkedin.com') > -1) {
-      track('linkedin', { from: from });
-    } else if (href.indexOf('github.com/joaquinramirezg/') > -1) {
-      track('github-repo', { repo: href.split('/joaquinramirezg/')[1].replace(/\/$/, ''), from: from });
-    } else if (href.indexOf('github.com') > -1) {
-      track('github-profile', { from: from });
-    } else if (href.indexOf('#case-') === 0) {
-      track('case-study-open', { study: href.slice(6), from: from });
-    }
-  }, true);
-
-  // ---- case study expanded by the reader ----
-  document.querySelectorAll('details.case-body').forEach(function (d) {
-    d.addEventListener('toggle', function () {
-      if (d.open) track('case-study-expand', { study: d.closest('article.case').id.replace('case-', '') });
-    });
-  });
-
-  // ---- section-read: on screen long enough to have been read, not just scrolled past ----
-  var seen = {}, timers = {};
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
-      entries.forEach(function (en) {
-        var id = en.target.id;
-        if (seen[id]) return;
-        // a section taller than the viewport can never hit a high ratio, so also
-        // accept "it fills at least half the screen"
-        var fillsScreen = en.intersectionRect && en.intersectionRect.height >= vh * 0.5;
-        var visible = en.isIntersecting && (en.intersectionRatio >= 0.35 || fillsScreen);
-        if (visible && !timers[id]) {
-          timers[id] = setTimeout(function () {
-            timers[id] = null;
-            seen[id] = true;
-            track('section-read', { section: id });
-          }, 3000);
-        } else if (!visible && timers[id]) {
-          clearTimeout(timers[id]);
-          timers[id] = null;
-        }
-      });
-    }, { threshold: [0, 0.15, 0.25, 0.35, 0.5, 0.75] });
-    document.querySelectorAll('section[id]:not(#cases), article.case[id]').forEach(function (t) {
-      io.observe(t);
-    });
-  }
-
-  // ---- scroll depth ----
-  var hit = {}, hitCount = 0;
-  function onScroll() {
-    if (hitCount >= 4) { window.removeEventListener('scroll', onScroll); return; }
-    var h = document.documentElement;
-    var total = h.scrollHeight - window.innerHeight;
-    var pct = total > 0 ? ((h.scrollTop || window.pageYOffset || 0) / total) * 100 : 100;
-    [25, 50, 75, 100].forEach(function (m) {
-      if (pct >= (m === 100 ? 98 : m) && !hit[m]) {
-        hit[m] = true;
-        hitCount++;
-        track('scroll', { depth: m + '%' });
-      }
-    });
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // ---- engaged time: counts only while the tab is actually visible ----
-  var visibleSince = document.visibilityState === 'visible' ? Date.now() : 0;
-  var accrued = 0, timeSent = false;
-  function stopClock() {
-    if (visibleSince) { accrued += Date.now() - visibleSince; visibleSince = 0; }
-  }
-  function sendTime() {
-    if (timeSent) return;
-    timeSent = true;
-    stopClock();
-    var s = Math.round(accrued / 1000);
-    var bucket = s < 10 ? '0-10s' : s < 30 ? '10-30s' : s < 60 ? '30-60s' : s < 180 ? '1-3min' : '3min+';
-    track('time-on-page', { bucket: bucket });
-  }
-  document.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'hidden') { stopClock(); sendTime(); }
-    else if (!visibleSince) { visibleSince = Date.now(); }
-  });
-  window.addEventListener('pagehide', sendTime);
 })();
 </script>
 </body>
