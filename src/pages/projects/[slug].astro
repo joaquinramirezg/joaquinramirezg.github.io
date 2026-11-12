@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const all = await getCollection('projects');
+  return all.filter((p) => p.body && p.body.trim()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const path = `/projects/${entry.id}/`;
+const ogImage = `/projects/${entry.id}/og.png`;
+const name = d.title.split(':')[0];
+const ld = [{
+  '@context': 'https://schema.org', '@type': 'SoftwareApplication', name, applicationCategory: 'WebApplication',
+  url: d.demo, description: d.description, image: 'https://joaquinramirez.dev' + ogImage, codeRepository: d.code,
+  author: { '@type': 'Person', name: 'Joaquin Ramirez', url: 'https://joaquinramirez.dev/' },
+}];
+---
+<Base title={`${d.title} · Joaquin Ramirez`} description={d.description!} path={path} ogImage={ogImage}
+  ogAlt={d.ogAlt} jsonLd={ld} nav="projects">
+<main id="content">
+<header class="page-head">
+  <div class="wrap">
+    <a class="crumb" href="/#projects">← All projects</a>
+    <div class="kicker">{d.kicker}</div>
+    <h1>{d.title}</h1>
+    <span class="where">{d.byline}</span>
+    <p class="lead">{d.lead}</p>
+    <div class="metrics">{(d.pageMetrics ?? d.metrics).map((m) => <span class="metric">{m}</span>)}</div>
+    <div class="links">
+      {d.demo && <a class="primary" href={d.demo} target="_blank" rel="noopener">Try the live app</a>}
+      {d.code && <a href={d.code} target="_blank" rel="noopener">Code and README</a>}
+    </div>
+    {d.note && <p class="note">{d.note}</p>}
+  </div>
+</header>
+<section class="page-body" id="demo">
+  <div class="wrap">
+    <article class="case">
+      <Content />
+    </article>
+  </div>
+</section>
+<section class="more" id="more">
+  <div class="wrap">
+    <h2>More</h2>
+    <ul>
+      {d.code && <li><a href={d.code} target="_blank" rel="noopener">The full README</a> <span class="where">· data sources, how to run it, tests</span></li>}
+      <li><a href="/#projects">Other projects</a></li>
+      <li><a href="/#work">Production work and case studies</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+</Base>

@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  const withPage = all.filter((w) => w.body && w.body.trim());
+  return withPage.map((entry) => ({ params: { slug: entry.id }, props: { entry, others: withPage.filter((o) => o.id !== entry.id) } }));
+}
+const { entry, others } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const path = `/work/${entry.id}/`;
+const ogImage = `/work/${entry.id}/og.png`;
+const ld = [{
+  '@context': 'https://schema.org', '@type': 'Article', headline: d.pageTitle, description: d.description,
+  url: 'https://joaquinramirez.dev' + path, image: 'https://joaquinramirez.dev' + ogImage,
+  author: { '@type': 'Person', name: 'Joaquin Ramirez', url: 'https://joaquinramirez.dev/' },
+}];
+---
+<Base title={`${d.pageTitle} · Case study · Joaquin Ramirez`} ogTitle={`${d.pageTitle} · Case study · Joaquin Ramirez`}
+  description={d.description!} path={path} ogImage={ogImage}
+  ogAlt={`${d.pageTitle}: case study by Joaquin Ramirez. ${d.metrics.slice(0, 3).join(', ')}`} jsonLd={ld} nav="work">
+<main id="content">
+<header class="page-head">
+  <div class="wrap">
+    <a class="crumb" href="/#work">← All work</a>
+    <div class="kicker">Case study · {d.minutes} min read</div>
+    <h1>{d.pageTitle}</h1>
+    <span class="where">{d.where}</span>
+    <p class="lead" set:html={d.summary} />
+    <div class="metrics">{d.metrics.map((m) => <span class="metric">{m}</span>)}</div>
+    <p class="tags">{d.stack}</p>
+  </div>
+</header>
+<section class="page-body" id="case">
+  <div class="wrap">
+    <article class="case">
+      <p class="where">{d.angle}</p>
+      <Content />
+    </article>
+  </div>
+</section>
+<section class="more" id="more">
+  <div class="wrap">
+    <h2>More case studies</h2>
+    <ul>
+      {others.map((o) => <li><a href={`/work/${o.id}/`}>{o.data.pageTitle}</a> <span class="where">· {o.data.where.split(' · ')[0]}</span></li>)}
+    </ul>
+    <a class="backlink" href="/">← joaquinramirez.dev</a>
+  </div>
+</section>
+</main>
+</Base>

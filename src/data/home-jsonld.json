@@ -1,0 +1,34 @@
+[{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Joaquin Ramirez",
+  "image": "https://joaquinramirez.dev/me.jpg",
+  "email": "mailto:joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu",
+  "knowsLanguage": ["Spanish", "English", "German"],
+  "jobTitle": ["Machine Learning Engineer", "Data Scientist"],
+  "url": "https://joaquinramirez.dev/",
+  "address": { "@type": "PostalAddress", "addressLocality": "Los Angeles", "addressRegion": "CA", "addressCountry": "US" },
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "UCLA Anderson School of Management",
+    "sameAs": "https://www.anderson.ucla.edu/"
+  },
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Universidad de Ingenieria y Tecnologia (UTEC)",
+      "sameAs": "https://utec.edu.pe/"
+    }
+  ],
+  "knowsAbout": ["Machine Learning", "Generative AI", "LLM Agents", "Retrieval-Augmented Generation", "Data Science", "Mathematical Optimization", "Anomaly Detection", "Forecasting", "Algorithms", "A/B Testing", "Forward Deployed Engineering"],
+  "sameAs": [
+    "https://www.linkedin.com/in/joaquinramirezg/",
+    "https://github.com/joaquinramirezg"
+  ]
+},{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Joaquin Ramirez",
+  "alternateName": "joaquinramirez.dev",
+  "url": "https://joaquinramirez.dev/"
+}]

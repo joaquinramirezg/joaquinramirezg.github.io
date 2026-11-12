@@ -21,7 +21,7 @@
   --on-accent: #ffffff;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0f141b;
     --bg-soft: #161d27;
     --text: #e8edf3;
@@ -31,7 +31,20 @@
     --accent-soft: #16283a;
     --metric: #7cbcf0;
     --on-accent: #0f141b;
+    color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141b;
+  --bg-soft: #161d27;
+  --text: #e8edf3;
+  --text-soft: #9fadbd;
+  --line: #26303d;
+  --accent: #5aa9e6;
+  --accent-soft: #16283a;
+  --metric: #7cbcf0;
+  --on-accent: #0f141b;
+  color-scheme: dark;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -298,7 +311,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .case-link:hover::after { transform: translateX(3px); }
 .card { transition: border-color .15s, transform .15s, box-shadow .15s; }
 .card:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(15, 20, 27, .08); }
-@media (prefers-color-scheme: dark) { .card:hover { box-shadow: 0 6px 22px rgba(0, 0, 0, .35); } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .card:hover { box-shadow: 0 6px 22px rgba(0, 0, 0, .35); } }
+:root[data-theme="dark"] .card:hover { box-shadow: 0 6px 22px rgba(0, 0, 0, .35); }
 @media (prefers-reduced-motion: reduce) { .card, .card:hover, .case-link::after { transition: none; transform: none; } }
 
 /* ---------- Nov 12 bold pass: hero ---------- */
