@@ -325,3 +325,7 @@ h1, h2, h3, h4, .tile-small, .prow-kind, .tile-kind { text-wrap: balance; }
   .page-body .fig .fig-scroll { display: block; }
 }
 .job-scope { font-size: var(--fs-body); line-height: 1.6; color: var(--text); border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; }
+.avail a { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.avail a:hover { text-decoration: underline; }
+.book-call { display: inline-flex; align-items: center; gap: 7px; font-size: var(--fs-meta); font-weight: 600; color: var(--accent); text-decoration: none; padding: 8px 12px; border: 1px solid var(--accent); border-radius: 8px; }
+.book-call:hover { background: var(--accent); color: var(--on-accent); }
