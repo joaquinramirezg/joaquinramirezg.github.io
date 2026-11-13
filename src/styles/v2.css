@@ -260,3 +260,47 @@ header { padding-bottom: 30px; }
   .prow-body > :not(.prow-kind):not(h3) { order: 1; }
 }
 @media (max-width: 600px) { .frame-media:has(video.is-m) { aspect-ratio: 640 / 208; } }
+
+/* ==========================================================================
+   Type scale (Nov 13). One set of sizes for every page; this block is last on purpose.
+   label 12 · small 13 · meta 14 · body 16 · long-form 17 · lead 18 · item title 19 · case h2 22 · section h2 26
+   ========================================================================== */
+:root { --fs-label: 12px; --fs-small: 13px; --fs-meta: 14px; --fs-body: 16px; --fs-long: 17px; --fs-lead: 18px; --fs-item: 19px; --fs-h2-case: 22px; --fs-h2: 26px; }
+
+/* Section and page headings */
+h2, .footer-title { font-size: var(--fs-h2); font-weight: 750; letter-spacing: -0.02em; }
+.page-body .case h2 { font-size: var(--fs-h2-case); }
+.more h2 { font-size: var(--fs-item); }
+.page-head h1 { font-size: 36px; }
+
+/* Item titles: tiles, experience, principles, projects, education, earlier work */
+.tile h3, .job-head h3, .system h4, .principle h3, .prow-body h3, .edu-rows h3, .card h3 { font-size: var(--fs-item); font-weight: 700; letter-spacing: -0.012em; line-height: 1.3; }
+
+/* Body text */
+.system > p, .principle p, .prow-body > p, .tile p, .card p, .about-card .about-text p, .footer-lead, .edu-rows .edu-degree, .stack-rows dd, .earlier li, .section-lead { font-size: var(--fs-body); line-height: 1.6; }
+.edu-rows .edu-degree { color: var(--text); }
+.case p, .case ul, .case ol, .page-body li { font-size: var(--fs-long); line-height: 1.7; }
+.page-head .lead, .subtitle { font-size: var(--fs-lead); }
+.tldr dd { font-size: var(--fs-body); }
+
+/* Meta: dates, where lines, titles under names, stack lines, links and buttons */
+.job-title, .job-meta, .where, .card .where, .case .where, .page-head .where, .more .where, .tags, .edu-rows .edu-details, .earlier-where, .avail, .hero-facts, .footer-links, .principle-from, .case-link, .text-link, .crumb, .email-open, .copy-email, .links a { font-size: var(--fs-meta); }
+.job-title { font-weight: 600; }
+.stack-rows dt { font-size: var(--fs-meta); font-weight: 700; }
+
+/* Small: chips, captions, notes */
+.metric, .chip, .frame figcaption, .fig figcaption, figcaption, .note, .tile-small { font-size: var(--fs-small); }
+
+/* Labels: uppercase eyebrows */
+.kicker, .tile-kind, .prow-kind, .earlier-title, .tldr dt, .principle-n { font-size: var(--fs-label); letter-spacing: .08em; }
+
+@media (max-width: 560px) {
+  :root { --fs-h2: 23px; --fs-item: 18px; --fs-long: 16.5px; --fs-lead: 17px; }
+  .page-head h1 { font-size: 30px; }
+}
+.prow-body > p.tags, .system > p.tags, .card p.tags, .page-head p.tags { font-size: var(--fs-meta); line-height: 1.5; }
+header .subtitle { font-size: var(--fs-lead); }
+.email-addr, .backlink, .page-body td, .page-body .ai { font-size: var(--fs-meta); }
+.page-body th { font-size: var(--fs-label); }
+.page-body figcaption, .case figcaption { font-size: var(--fs-small); }
+.more li a, .more a:not(.crumb) { font-size: var(--fs-body); }
