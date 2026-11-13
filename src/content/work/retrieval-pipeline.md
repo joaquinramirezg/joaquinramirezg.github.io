@@ -8,7 +8,7 @@ order: 2
 compact: false
 pageTitle: "The retrieval pipeline behind the copilot"
 minutes: 2
-angle: "Crehana · multi-tenancy, messy inputs, and honest evaluation"
+angle: "Crehana · multi-tenancy, messy inputs, and evaluation"
 description: "The copilot answers from each company's own documents, so the retrieval layer has to stay fresh and tenant-aware."
 tldr: {"problem": "The copilot answers from each company's own documents: 10K+ new documents a week, 1300+ organizations, and no company may ever see another's data.", "role": "I built and ran the ingestion pipeline, enforced per-organization filtering, and rebuilt preprocessing per format when companies started uploading every kind of file.", "result": "A search corpus of 1.2M+ vectors on Qdrant, reindexed every weekend, with every change scored against a 200-question golden set."}
 ---
