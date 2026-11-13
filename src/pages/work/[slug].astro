@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
-import { firstCommit, lastCommit } from '../../lib/gitdate';
 
 export async function getStaticPaths() {
   const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
@@ -13,11 +12,9 @@ const { Content } = await render(entry);
 const d = entry.data;
 const path = `/work/${entry.id}/`;
 const ogImage = `/work/${entry.id}/og.png`;
-const src = [`src/content/work/${entry.id}.md`];
 const ld = [{
   '@context': 'https://schema.org', '@type': 'Article', headline: d.pageTitle, description: d.description,
   url: 'https://joaquinramirez.dev' + path, image: 'https://joaquinramirez.dev' + ogImage,
-  datePublished: firstCommit(src), dateModified: lastCommit(src),
   author: { '@type': 'Person', '@id': 'https://joaquinramirez.dev/#person', name: 'Joaquin Ramirez', url: 'https://joaquinramirez.dev/' },
 }];
 ---
