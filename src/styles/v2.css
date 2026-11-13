@@ -309,3 +309,18 @@ header .subtitle { font-size: var(--fs-lead); }
 .footer-lead, .system > p, .subtitle, header .subtitle, .fig figcaption, .prow-body > p, .project.feature .project-body > p { max-width: none; }
 p, li, dd, figcaption, .section-lead { text-wrap: pretty; }
 h1, h2, h3, h4, .tile-small, .prow-kind, .tile-kind { text-wrap: balance; }
+
+/* Visuals break out of the 720 px reading column on sub-pages (Nov 13): text stays 720, media goes to 960. */
+.page-body .demo, .page-body .shot, .page-body .fig {
+  width: min(960px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%);
+  margin-top: 28px; margin-bottom: 8px;
+}
+.page-body .fig { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; padding: 28px 24px 18px; }
+.page-body .fig .fig-scroll { display: flex; justify-content: center; }
+.page-body .fig svg { max-width: 640px; }
+.page-body .fig figcaption, .page-body .demo figcaption, .page-body .shot figcaption { max-width: 720px; margin-left: auto; margin-right: auto; text-align: left; }
+@media (max-width: 760px) {
+  .page-body .demo, .page-body .shot, .page-body .fig { width: 100%; left: 0; transform: none; }
+  .page-body .fig { padding: 18px 12px 12px; }
+  .page-body .fig .fig-scroll { display: block; }
+}
