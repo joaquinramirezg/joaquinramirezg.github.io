@@ -6,6 +6,8 @@ import jsonLd from '../data/home-jsonld.json';
 import skills from '../data/skills.json';
 import education from '../data/education.json';
 import about from '../data/about.html?raw';
+import experience from '../data/experience.json';
+import principles from '../data/principles.json';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
@@ -14,7 +16,10 @@ const hasPage = (e: { body?: string }) => !!(e.body && e.body.trim());
 const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
 const copilot = work.find((w) => w.id === 'hr-copilot')!;
 const alwayshome = projects.find((p) => p.id === 'alwayshome')!;
-const genie = projects.find((p) => p.id === 'genie')!;
+const fraud = work.find((w) => w.id === 'fraud-detection')!;
+const byId = Object.fromEntries(work.map((w) => [w.id, w]));
+const mainProjects = projects.filter((p) => !p.data.earlier);
+const earlierProjects = projects.filter((p) => p.data.earlier);
 ---
 <Base
   title="Joaquin Ramirez · ML Engineer / Data Scientist · UCLA Anderson MSBA"
@@ -28,21 +33,20 @@ const genie = projects.find((p) => p.id === 'genie')!;
 <header id="top">
   <div class="wrap wide hero-grid">
     <div class="hero-text">
-      <p class="status"><span class="dot" aria-hidden="true"></span>Open to Summer 2027 internships</p>
-      <div class="kicker">Machine Learning Engineer / Data Scientist</div>
+      <div class="kicker">Senior Machine Learning Engineer · Data Scientist</div>
       <h1>Joaquin Ramirez</h1>
-      <p class="subtitle">I've spent three years building GenAI products and predictive models that made it to production. Now an MSBA candidate at UCLA Anderson.</p>
+      <p class="subtitle">I led the end-to-end development of Crehana's GenAI copilot and its agents, from reliability work in production to tradeoffs in front of the executive committee. Over three years shipping ML in HR tech, consulting and consumer goods. Now an MSBA candidate at UCLA Anderson.</p>
       <ul class="hero-facts">
         <li><Icon name="pin" /> Los Angeles, California</li>
         <li><Icon name="school" /> UCLA Anderson MSBA, Dec 2027</li>
       </ul>
-      <p class="meta-line">Seeking Summer 2027 internships in machine learning engineering, data science, and AI product management</p>
       <div class="links">
         <a class="primary" href="/resume.pdf" target="_blank" rel="noopener"><Icon name="file" /> Resume</a>
         <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="linkedin" /> LinkedIn</a>
         <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="github" /> GitHub</a>
         <a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}><Icon name="mail" /> Copy email</a>
       </div>
+      <p class="avail"><span class="dot" aria-hidden="true"></span>Open to Summer 2027 internships in ML engineering, data science and AI product management</p>
     </div>
     <img class="hero-photo" src="/me.jpg" alt="Joaquin Ramirez" width="400" height="400" fetchpriority="high">
   </div>
@@ -72,6 +76,17 @@ const genie = projects.find((p) => p.id === 'genie')!;
           <p>Agents, reliability, and where personal data sat.</p>
         </div>
       </a>
+      <a class="tile" href="/work/fraud-detection/">
+        <div class="tile-visual tile-number">
+          <span class="tile-big">35</span>
+          <span class="tile-small">financial institutions · real time · no fraud labels</span>
+        </div>
+        <div class="tile-body">
+          <span class="tile-kind">Case study · Canvia · {fraud.data.minutes} min</span>
+          <h3>{fraud.data.pageTitle}</h3>
+          <p>No fraud labels, so unsupervised. An MVP that flagged about 9% brought to the client's ~2%.</p>
+        </div>
+      </a>
       <a class="tile" href="/projects/alwayshome/">
         <div class="tile-visual"><img src="/p/alwayshome.webp" alt="" width="800" height="480" loading="lazy" decoding="async"></div>
         <div class="tile-body">
@@ -80,36 +95,56 @@ const genie = projects.find((p) => p.id === 'genie')!;
           <p>Which wildfire fixes pay back first. AI reads the policy, never sets a number.</p>
         </div>
       </a>
-      <a class="tile" href={genie.data.code} target="_blank" rel="noopener">
-        <div class="tile-visual project-thumb" set:html={genie.data.thumb} />
-        <div class="tile-body">
-          <span class="tile-kind">Thesis · UTEC · 2023</span>
-          <h3>G.E.N.I.E.</h3>
-          <p>LoRA fine-tuning Falcon-7B: eval loss down 84%.</p>
-        </div>
-      </a>
     </div>
   </div>
 </section>
 
 <section id="work">
   <div class="wrap wide">
-    <h2>Work</h2>
+    <h2>Experience</h2>
     <p class="section-lead">Production systems, most recent first. The bigger ones have a case study: the tradeoffs, what failed, and how each result was measured.</p>
-    <div class="grid-2">
-      {work.map((w) => (
-        <article class:list={['card', { compact: w.data.compact }]}>
-          <h3>{hasPage(w) ? <a href={`/work/${w.id}/`}>{w.data.title}</a> : w.data.title}</h3>
-          <span class="where">{w.data.where}</span>
-          <p set:html={w.data.summary} />
-          {w.data.metrics.length > 0 && (
-            <div class="metrics">{w.data.metrics.map((m) => <span class="metric">{m}</span>)}</div>
-          )}
-          <p class="tags">{w.data.stack}</p>
-          {hasPage(w) && (
-            <a class="case-link" href={`/work/${w.id}/`}>Read the case study <span>· {w.data.minutes} min</span></a>
-          )}
-        </article>
+    <ol class="timeline">
+      {experience.map((job) => (
+        <li class="job">
+          <div class="job-head">
+            <h3>{job.company}</h3>
+            <p class="job-title">{job.title}</p>
+            <p class="job-meta">{job.dates}<br>{job.about}</p>
+          </div>
+          <div class="job-body">
+            {job.systems.map((id) => byId[id]).map((w) => (
+              <article class="system">
+                <h4>{hasPage(w) ? <a href={`/work/${w.id}/`}>{w.data.title}</a> : w.data.title}</h4>
+                <p set:html={w.data.summary} />
+                {w.data.metrics.length > 0 && (
+                  <div class="metrics">{w.data.metrics.map((m) => <span class="metric">{m}</span>)}</div>
+                )}
+                <p class="tags">{w.data.stack}</p>
+                {hasPage(w) && (
+                  <a class="case-link" href={`/work/${w.id}/`}>Read the case study <span>· {w.data.minutes} min</span></a>
+                )}
+              </article>
+            ))}
+            {job.scope && <p class="job-scope">{job.scope}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="wrap wide">
+    <h2>How I work</h2>
+    <p class="section-lead">Four habits I bring to every system, each taken from a case study on this site.</p>
+    <div class="principles">
+      {principles.map((p, i) => (
+        <a class="principle" href={p.href}>
+          <span class="principle-n">0{i + 1}</span>
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+          <span class="principle-from">{p.from} →</span>
+        </a>
       ))}
     </div>
   </div>
@@ -118,16 +153,15 @@ const genie = projects.find((p) => p.id === 'genie')!;
 <section id="projects">
   <div class="wrap wide">
     <h2>Projects</h2>
-    <p class="section-lead">Built outside a job. Each one links to its code; the biggest ones have their own page.</p>
+    <p class="section-lead">Built outside a job, each with its code.</p>
     <ul class="projects grid-2">
-      {projects.map((p) => (
+      {mainProjects.map((p) => (
         <li class="card project stacked" id={`project-${p.id}`}>
           <div class="project-thumb" set:html={p.data.thumb} />
           <div class="project-body">
             <h3>{hasPage(p) ? <a href={`/projects/${p.id}/`}>{p.data.title}</a> : p.data.title}</h3>
             <span class="where">{p.data.where}</span>
             <p set:html={p.data.summary} />
-            <p class="shows"><b>Shows:</b> {p.data.shows}</p>
             {p.data.metrics.length > 0 && (
               <div class="metrics">{p.data.metrics.map((m) => <span class="metric">{m}</span>)}</div>
             )}
@@ -141,35 +175,40 @@ const genie = projects.find((p) => p.id === 'genie')!;
         </li>
       ))}
     </ul>
+    <h3 class="earlier-title">Earlier work</h3>
+    <ul class="earlier">
+      {earlierProjects.map((p) => (
+        <li id={`project-${p.id}`}>
+          <a href={p.data.code} target="_blank" rel="noopener">{p.data.short ?? p.data.title} ↗</a>
+          <span>{p.data.oneLine}</span>
+          <span class="earlier-where">{p.data.where}</span>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
-<section id="skills">
-  <div class="wrap wide">
-    <h2>Skills</h2>
-    <div class="skills-cards">
-      {skills.map((s) => (
-        <div class="card skill-card">
-          <h3>{s.area}</h3>
-          <div class="chips">{s.items.map((i) => <span class="chip">{i}</span>)}</div>
-        </div>
-      ))}
+<section id="background">
+  <div class="wrap wide background-grid">
+    <div id="education">
+      <h2>Education</h2>
+      <ul class="edu-rows">
+        {education.map((e) => (
+          <li>
+            <h3>{e.school}</h3>
+            <p class="edu-degree">{e.degree}</p>
+            <p class="edu-details">{e.details.join(' · ')}</p>
+          </li>
+        ))}
+      </ul>
     </div>
-  </div>
-</section>
-
-<section id="education">
-  <div class="wrap wide">
-    <h2>Education</h2>
-    <div class="grid-2">
-      {education.map((e) => (
-        <article class="card edu-card">
-          <span class="edu-icon"><Icon name="school" size={22} /></span>
-          <h3>{e.school}</h3>
-          <p class="edu-degree">{e.degree}</p>
-          <ul class="edu-list">{e.details.map((d) => <li>{d}</li>)}</ul>
-        </article>
-      ))}
+    <div id="skills">
+      <h2>Stack</h2>
+      <dl class="stack-rows">
+        {skills.map((s) => (
+          <div><dt>{s.area}</dt><dd>{s.items.join(', ')}</dd></div>
+        ))}
+      </dl>
     </div>
   </div>
 </section>

@@ -59,5 +59,5 @@ tldr: {"problem": "The copilot answers from each company's own documents: 10K+ n
 </figure>
 <h2>The pivot that taught me the most</h2>
 <p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers. Fair expectation, wrong assumption in our design. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Answer quality improved notably without giving up speed.</p>
-<h2>How I evaluated it, honestly</h2>
+<h2>How I evaluated it</h2>
 <p>We maintained a golden set of 200 questions and scored every change against it on answer accuracy. That is a real but limited signal: a fuller evaluation would add retrieval-level metrics like hit rate and MRR, which is where I would invest next. On infrastructure: Qdrant was chosen before I arrived, and it held up at our scale, so replacing it was never the priority.</p>

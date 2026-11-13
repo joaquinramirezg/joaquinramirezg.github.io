@@ -161,3 +161,57 @@ header .meta-line { margin-top: 10px; }
 .tldr dt { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); padding-top: 3px; }
 .tldr dd { font-size: 15.5px; color: var(--text); line-height: 1.55; }
 @media (max-width: 560px) { .tldr > div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* ---------- Senior pass (Nov 13): availability line, experience timeline, how I work, earlier work, background ---------- */
+.avail { display: flex; align-items: flex-start; gap: 9px; margin-top: 18px; font-size: 14px; color: var(--text-soft); }
+.avail .dot { flex: 0 0 8px; margin-top: 7px; width: 8px; height: 8px; border-radius: 50%; background: #1f9d55; }
+
+.timeline { list-style: none; }
+.job { display: grid; grid-template-columns: 220px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid var(--line); }
+.job:first-child { border-top: 0; padding-top: 4px; }
+.job-head { position: sticky; top: 76px; align-self: start; }
+.job-head h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.015em; }
+.job-title { margin-top: 4px; font-size: 15px; font-weight: 600; color: var(--text); }
+.job-meta { margin-top: 6px; font-size: 13.5px; line-height: 1.5; color: var(--text-soft); }
+.job-body { display: grid; gap: 22px; }
+.system h4 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+.system h4 a { color: var(--text); text-decoration: none; }
+.system h4 a:hover { color: var(--accent); }
+.system > p { margin-top: 6px; font-size: 16px; line-height: 1.65; color: var(--text-soft); max-width: 720px; }
+.system .case-link { margin-top: 12px; }
+.job-scope { font-size: 14.5px; color: var(--text); border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; }
+@media (max-width: 760px) {
+  .job { grid-template-columns: 1fr; gap: 14px; }
+  .job-head { position: static; }
+}
+
+.principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.principle { display: flex; flex-direction: column; padding: 22px 24px; border: 1px solid var(--line); border-radius: 14px; text-decoration: none; color: inherit; background: var(--bg); transition: border-color .15s; }
+.principle:hover { border-color: var(--accent); }
+.principle-n { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--accent); }
+.principle h3 { margin-top: 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.principle p { margin-top: 8px; font-size: 15.5px; line-height: 1.6; color: var(--text-soft); }
+.principle-from { margin-top: auto; padding-top: 12px; font-size: 13.5px; font-weight: 600; color: var(--accent); }
+@media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
+
+.earlier-title { margin-top: 30px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-soft); }
+.earlier { list-style: none; margin-top: 10px; }
+.earlier li { display: grid; grid-template-columns: 210px 1fr auto; gap: 16px; align-items: baseline; padding: 11px 0; border-top: 1px solid var(--line); font-size: 15px; }
+.earlier a { font-weight: 600; color: var(--text); text-decoration: none; }
+.earlier a:hover { color: var(--accent); }
+.earlier span { color: var(--text-soft); }
+.earlier-where { font-size: 13.5px; white-space: nowrap; }
+@media (max-width: 760px) { .earlier li { grid-template-columns: 1fr; gap: 2px; } .earlier-where { white-space: normal; } }
+
+.background-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
+@media (max-width: 860px) { .background-grid { grid-template-columns: 1fr; gap: 34px; } }
+.edu-rows { list-style: none; }
+.edu-rows li { padding: 14px 0; border-top: 1px solid var(--line); }
+.edu-rows li:first-child { border-top: 0; padding-top: 0; }
+.edu-rows h3 { font-size: 16.5px; font-weight: 700; }
+.edu-rows .edu-degree { margin-top: 3px; font-size: 15px; color: var(--text); }
+.edu-rows .edu-details { margin-top: 4px; font-size: 14px; color: var(--text-soft); }
+.stack-rows > div { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 10px 0; border-top: 1px solid var(--line); }
+.stack-rows > div:first-child { border-top: 0; padding-top: 0; }
+.stack-rows dt { font-size: 13px; font-weight: 700; color: var(--text); padding-top: 2px; }
+.stack-rows dd { font-size: 14.5px; line-height: 1.55; color: var(--text-soft); }

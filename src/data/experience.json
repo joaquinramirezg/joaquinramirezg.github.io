@@ -1,0 +1,40 @@
+[
+ {
+  "company": "Crehana",
+  "about": "HR-tech SaaS, Latin America",
+  "title": "Senior Machine Learning Engineer",
+  "dates": "Feb 2025 – Sep 2026",
+  "systems": [
+   "hr-copilot",
+   "retrieval-pipeline"
+  ]
+ },
+ {
+  "company": "APTIM",
+  "about": "US engineering firm",
+  "title": "Machine Learning Engineer",
+  "dates": "Dec 2024 – Feb 2025",
+  "systems": [
+   "cv-intake"
+  ]
+ },
+ {
+  "company": "Canvia",
+  "about": "IT consulting",
+  "title": "Data Scientist",
+  "dates": "Dec 2023 – Dec 2024",
+  "systems": [
+   "contract-allocation",
+   "fraud-detection"
+  ]
+ },
+ {
+  "company": "Belcorp",
+  "about": "Consumer goods",
+  "title": "Data Science Intern",
+  "dates": "Jan 2022 – Aug 2022",
+  "systems": [
+   "sales-forecasting"
+  ]
+ }
+]

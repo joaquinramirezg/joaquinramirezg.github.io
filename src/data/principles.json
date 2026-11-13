@@ -1,0 +1,26 @@
+[
+ {
+  "title": "Plan for the model failing",
+  "text": "A failed call falls back to a lighter model, then a different provider, and nothing reaches the user until it clears schema enforcement and a self-critique step. That is how agent failures at Crehana dropped 25%.",
+  "href": "/work/hr-copilot/",
+  "from": "The HR copilot"
+ },
+ {
+  "title": "Authorization, not redaction",
+  "text": "An answer about someone's own records needs those records. So the control is what the model is handed: retrieval filtered by organization, then by what that user may already open.",
+  "href": "/work/hr-copilot/",
+  "from": "The HR copilot"
+ },
+ {
+  "title": "Score every change against a fixed set",
+  "text": "Every change to retrieval was scored for answer accuracy on a 200-question golden set. Next I would add retrieval-level metrics such as hit rate and MRR.",
+  "href": "/work/retrieval-pipeline/",
+  "from": "The retrieval pipeline"
+ },
+ {
+  "title": "Say what a number is, and what it is not",
+  "text": "The fraud model's ~2% is the client's review capacity, not a measured precision. AlwaysHome reports an AUC of 0.68 on held-out neighborhoods next to its headline 0.80.",
+  "href": "/work/fraud-detection/",
+  "from": "Fraud detection"
+ }
+]

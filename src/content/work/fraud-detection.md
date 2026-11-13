@@ -57,5 +57,5 @@ tldr: {"problem": "Spot fraud in real-time transfers between 35 Peruvian financi
 </figure>
 <h2>What real time required</h2>
 <p>A fast, concurrent API (FastAPI), hosted on-premise with no cloud services allowed, which meant working hand in hand with the infrastructure team on latency and concurrency budgets.</p>
-<h2>Scope, honestly</h2>
+<h2>Scope</h2>
 <p>The 2% threshold was the client's operating requirement, sized to their review capacity. A deeper analysis of false positives against missed fraud sat outside the engagement's scope: our mandate was the model and the flagging API, and the client consumed the alerts downstream. If I owned the product end to end, that precision-recall analysis is the first thing I would add.</p>
