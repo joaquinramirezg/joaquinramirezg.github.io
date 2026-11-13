@@ -2,9 +2,10 @@
 
     python3 tools/make_home_og.py
 
-Same visual system as make_og.py (case studies): label, headline, metric chips, photo.
-Every line comes from the hero; numbers must match the resume. After changing it,
-bump the ?v= on ogImage in src/layouts/Base.astro so LinkedIn refetches it.
+Built to survive LinkedIn's phone preview (about 0.3x): few words, large type, two chips.
+The card is seen alone, away from the page, so it carries one scale number as proof.
+Numbers must match the resume byte for byte. After changing it, bump the ?v= on
+ogImage in src/layouts/Base.astro so LinkedIn refetches it.
 """
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
@@ -17,20 +18,18 @@ reg = lambda n: ImageFont.truetype(F + "Arial.ttf", n)
 W, H = 1200, 630
 c = Image.new("RGB", (W, H), "#0f141b"); g = ImageDraw.Draw(c)
 g.rectangle((0, 0, 10, H), fill="#5aa9e6")
-g.text((64, 64), "MACHINE LEARNING ENGINEER · DATA SCIENTIST", font=bold(24), fill="#5aa9e6")
-g.text((64, 112), "Joaquin Ramirez", font=bold(76), fill="#e8edf3")
-g.text((64, 214), "GenAI, agents and ML across four industries", font=reg(34), fill="#c9d3de")
-y, x = 290, 64
-for m in ["Senior ML Engineer · tech lead", "SaaS · consulting · CPG", "fraud · CV · forecasting"]:
-    f = bold(26); tw = g.textlength(m, font=f)
-    if x + tw + 40 > 840: x = 64; y += 64  # wrap before the photo column
-    g.rounded_rectangle((x, y, x + tw + 40, y + 50), radius=25, fill="#16283a")
-    g.text((x + 20, y + 11), m, font=f, fill="#7cbcf0"); x += tw + 52
-g.text((64, H - 132), "UCLA Anderson MSBA '27 · Class President", font=reg(28), fill="#9fadbd")
-g.text((64, H - 84), "joaquinramirez.dev", font=bold(28), fill="#5aa9e6")
-S = 240
+g.text((64, 70), "Joaquin Ramirez", font=bold(84), fill="#e8edf3")
+g.text((64, 186), "GenAI copilot used by", font=reg(46), fill="#c9d3de")
+g.text((64, 242), "1300+ organizations", font=bold(46), fill="#e8edf3")
+y = 336
+for m in ["Senior ML Engineer · tech lead", "3+ years · 4 industries"]:
+    f = bold(32); tw = g.textlength(m, font=f)
+    g.rounded_rectangle((64, y, 64 + tw + 48, y + 60), radius=30, fill="#16283a")
+    g.text((88, y + 13), m, font=f, fill="#7cbcf0"); y += 76
+g.text((64, H - 92), "UCLA Anderson MSBA '27 · Class President", font=reg(32), fill="#9fadbd")
+S = 260
 me = Image.open(ROOT / "public/me.jpg").convert("RGB").resize((S, S))
 mask = Image.new("L", (S, S), 0); ImageDraw.Draw(mask).ellipse((0, 0, S - 1, S - 1), fill=255)
-c.paste(me, (W - S - 64, H - S - 64), mask)
+c.paste(me, (W - S - 64, (H - S) // 2 - 20), mask)
 out = ROOT / "public/og.png"
 c.save(out, optimize=True); print("wrote", out)
