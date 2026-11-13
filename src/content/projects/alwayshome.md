@@ -53,7 +53,7 @@ ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the 
 <h2>Decisions</h2>
 <ul>
 <li><strong>The AI never produces a number.</strong> We gave up a faster build (let a model estimate costs and savings) for figures we can trace to a source. Real contractor quotes and insurer discount filings are what would change the numbers.</li>
-<li><strong>A logistic model, with a known leak removed.</strong> Inspectors mark "Unknown" far more often on destroyed homes, so "Unknown" gets its own term in training and is never used to predict; a homeowner's "I don't know" is scored as the average of known answers. A more complex model would only add value with more fires to train on.</li>
+<li><strong>A logistic model, with a known leak removed.</strong> Inspectors mark "Unknown" far more often on destroyed homes, so "Unknown" gets its own term in training and is never used to predict; a homeowner's "I don't know" is scored as the average of known answers. Logistic on purpose: two fires is a small training base.</li>
 <li><strong>Every network or AI step has a fallback.</strong> Three cached addresses and seven sample policies run with no network, so a live demo cannot dead-end.</li>
 </ul>
 <h2>My role</h2>
@@ -73,7 +73,7 @@ ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the 
 </tbody>
 </table>
 </div>
-<p>The revenue model is a proposal; none of it was tested.</p>
+<p>The revenue model is a proposal.</p>
 <h2>How it works</h2>
 <p>A five-step wizard, about two minutes end to end:</p>
 <ol>
@@ -84,7 +84,7 @@ ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the 
 <li><strong>Your plan.</strong> Fixes ranked by payback, a budget slider that rebuilds the plan live, risk before and after, and a report to take to a broker.</li>
 </ol>
 <h2>What the judges said, and what I changed</h2>
-<p>The judges called the idea truly impactful on society, and asked two questions we had not answered on screen: who exactly is the user and who pays, and where AI sits in the product. Both now lead this page and the README, as the "who pays" and "where AI is" sections above.</p>
+<p>The judges called the idea truly impactful on society, and pressed on two questions: who exactly is the user and who pays, and where AI sits in the product. Both now lead this page and the README, as the "who pays" and "where AI is" sections above.</p>
 <h2>Scope and next steps</h2>
 <ul>
 <li>No user research: it was built in one day, without interviews with homeowners, brokers or insurers.</li>

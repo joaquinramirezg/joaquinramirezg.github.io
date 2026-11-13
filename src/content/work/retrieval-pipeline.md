@@ -57,7 +57,7 @@ tldr: {"problem": "The copilot answers from each company's own documents: 10K+ n
 </div>
 <figcaption>The pipeline, and the line that matters. Retrieval is filtered to the asking organization, so one company's question can only ever be answered from that company's own material. Everything above that gate is shared plumbing; the gate is what makes it safe to share.</figcaption>
 </figure>
-<h2>When customers outgrew the design</h2>
-<p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers from all of it. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Answer quality improved notably without giving up speed.</p>
+<h2>When companies started uploading every format</h2>
+<p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers from all of it. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Each change had to hold up on the 200-question golden set, with no loss in speed.</p>
 <h2>How I evaluated it</h2>
-<p>Every change was scored for answer accuracy against a golden set of 200 questions before it counted as an improvement. Next on the roadmap: retrieval-level metrics such as hit rate and MRR, to see whether a miss comes from search or from generation. Qdrant held up at 1.2M+ vectors, so the effort went into retrieval quality, not the database.</p>
+<p>Every change was scored for answer accuracy against a golden set of 200 questions before it counted as an improvement. The next step would be retrieval-level metrics such as hit rate and MRR, to tell search misses from generation misses. Qdrant held up at 1.2M+ vectors, so the effort went into retrieval quality, not the database.</p>

@@ -73,7 +73,7 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
         <div class="tile-body">
           <span class="tile-kind">Case study · Crehana · {copilot.data.minutes} min</span>
           <h3>{copilot.data.pageTitle}</h3>
-          <p>Agents, reliability, and where personal data sat.</p>
+          <p>Agents, reliability, and whether to tell a user the data exists but is not theirs.</p>
         </div>
       </a>
       <a class="tile" href="/work/fraud-detection/">
@@ -82,9 +82,9 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
           <span class="tile-small">financial institutions · real time · no fraud labels</span>
         </div>
         <div class="tile-body">
-          <span class="tile-kind">Case study · Canvia · {fraud.data.minutes} min</span>
+          <span class="tile-kind">Case study · Canvia</span>
           <h3>{fraud.data.pageTitle}</h3>
-          <p>No fraud labels, so unsupervised. An MVP that flagged about 9% brought to the client's ~2%.</p>
+          <p>No fraud labels, so unsupervised. Took over an MVP flagging ~9%; redesigned features and model to the client's ~2% threshold.</p>
         </div>
       </a>
       <a class="tile" href="/projects/alwayshome/">
@@ -105,7 +105,7 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
 <section id="work">
   <div class="wrap wide">
     <h2>Experience</h2>
-    <p class="section-lead">Production systems, most recent first. The bigger ones have a case study: the tradeoffs, what failed, and how each result was measured.</p>
+    <p class="section-lead">Systems built at work, most recent first. Four have a full case study: the tradeoffs, what failed, and how each result was measured.</p>
     <ol class="timeline">
       {experience.map((job) => (
         <li class="job">
@@ -124,7 +124,7 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
                 <p set:html={w.data.summary} />
                 <p class="tags">{w.data.stack}</p>
                 {hasPage(w) && (
-                  <a class="case-link" href={`/work/${w.id}/`}>Read the case study <span>· {w.data.minutes} min</span></a>
+                  <a class="case-link" href={`/work/${w.id}/`}>Read the case study{(w.data.minutes ?? 0) >= 2 && <span> · {w.data.minutes} min</span>}</a>
                 )}
               </article>
             ))}

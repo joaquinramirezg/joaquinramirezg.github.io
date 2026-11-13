@@ -1,7 +1,7 @@
 ---
 title: "Contract allocation for a commodity exporter"
 where: "Canvia (IT consulting) · Data Scientist · Dec 2023 – Dec 2024"
-summary: "A fishmeal exporter planned its contract allocation by hand, two weeks per cycle. I built the product classification and allocation algorithm that now does it in under 20 minutes, raising estimated gross margin by ~55% and cutting operating costs by ~40%. I presented the results to about 15 client stakeholders, including VPs."
+summary: "A fishmeal exporter planned its contract allocation by hand, two weeks per cycle. I built the product classification and allocation algorithm that cut it to under 20 minutes, raising estimated gross margin by ~55% and cutting operating costs by ~40%. I presented the results to about 15 client stakeholders, including VPs."
 metrics: ["est. gross margin +55%", "costs −40%", "2 weeks → <20 min"]
 stack: "Python · scikit-learn · optimization"
 order: 4
@@ -18,7 +18,7 @@ tldr: {"problem": "A fishmeal exporter planned blends and contract allocation by
 <h2>What existed before</h2>
 <p>Around five analysts working across Excel sheets, hand-picking piles by trial and error. Two weeks of planning, even for small contracts.</p>
 <h2>What I built</h2>
-<p>A branch-and-bound search over blend and allocation combinations: I enumerated the combinations as a tree and pruned aggressively, cutting a whole branch as soon as partial results proved it could not contain a better solution. Planning went from two weeks to under 20 minutes. The client asked for delivery through Azure Power Apps, so that is how it was deployed, and I presented results to about 15 client stakeholders, including VPs. Building on their stack instead of the one I would have picked, then standing in their room to defend the numbers, is the forward deployed shape of this work, and it is the part I want more of.</p>
+<p>A branch-and-bound search over blend and allocation combinations: I enumerated the combinations as a tree and pruned aggressively, cutting a whole branch as soon as partial results proved it could not contain a better solution. Planning went from two weeks to under 20 minutes. The client asked for delivery through Azure Power Apps, so that is how it was deployed, and I presented results to about 15 client stakeholders, including VPs. Delivering on the client's own stack, then standing in their room to defend the numbers, is forward deployed work, and it is the part I want more of.</p>
 <figure class="fig">
 <div class="fig-scroll">
 <svg viewBox="0 0 520 300" role="img" aria-label="Branch-and-bound over blend and allocation choices. Each level of the tree fixes one more decision; a branch is cut as soon as its best possible revenue cannot beat the best complete plan found so far. Constraints checked along the way: band composition, contract tonnage, and as few bag splits as possible.">

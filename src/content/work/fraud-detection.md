@@ -58,4 +58,4 @@ tldr: {"problem": "Spot fraud in real-time transfers between 35 Peruvian financi
 <h2>What real time required</h2>
 <p>A fast, concurrent API (FastAPI), hosted on-premise with no cloud services allowed, which meant working hand in hand with the infrastructure team on latency and concurrency budgets.</p>
 <h2>What comes next</h2>
-<p>Our mandate was the model and the real-time flagging API; the client's analysts worked the alerts downstream. The next layer is a precision-recall view built from their confirmed cases, so the threshold can move from review capacity to the cost of a missed fraud.</p>
+<p>The client's analysts worked the alerts downstream. The next layer is a precision-recall view built from their confirmed cases, so the threshold can move from review capacity to the cost of a missed fraud.</p>
