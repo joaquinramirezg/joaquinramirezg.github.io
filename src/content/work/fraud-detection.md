@@ -10,7 +10,7 @@ pageTitle: "Fraud detection across 35 financial institutions"
 minutes: 1
 angle: "Canvia · unsupervised learning under real-world constraints"
 description: "Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru's leading financial institutions."
-tldr: {"problem": "Spot fraud in real-time transfers between 35 Peruvian financial institutions, with no fraud labels to learn from.", "role": "I inherited an MVP that flagged about 9% of transactions, redesigned the features and the Isolation Forest model, and served it through an on-premise FastAPI service.", "result": "Flags brought in line with the client's ~2% review threshold, in real time."}
+tldr: {"problem": "Spot fraud in real-time transfers between 35 Peruvian financial institutions, with no fraud labels to learn from.", "role": "I took over an MVP that flagged about 9% of transactions, redesigned the features and the Isolation Forest model, and served it through an on-premise FastAPI service.", "result": "Flags brought in line with the client's ~2% review threshold, in real time."}
 ---
 <h2>What it watched</h2>
 <p>Interbank transfers between 35 of Peru's leading financial institutions, in real time. The feature engineering encoded what fraud tends to look like: account age, deviation from a person's normal transfer amounts, transfers between someone's own accounts across different banks, activity at unusual hours, unusual bank-to-bank combinations. The model then decided what was anomalous in that feature space.</p>

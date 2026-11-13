@@ -53,7 +53,7 @@ ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the 
 <h2>Decisions</h2>
 <ul>
 <li><strong>The AI never produces a number.</strong> We gave up a faster build (let a model estimate costs and savings) for figures we can trace to a source. Real contractor quotes and insurer discount filings are what would change the numbers.</li>
-<li><strong>A simple model, with a known leak removed.</strong> Inspectors mark "Unknown" far more often on destroyed homes, so "Unknown" gets its own term in training and is never used to predict; a homeowner's "I don't know" is scored as the average of known answers. A more complex model would only add value with more fires to train on.</li>
+<li><strong>A logistic model, with a known leak removed.</strong> Inspectors mark "Unknown" far more often on destroyed homes, so "Unknown" gets its own term in training and is never used to predict; a homeowner's "I don't know" is scored as the average of known answers. A more complex model would only add value with more fires to train on.</li>
 <li><strong>Every network or AI step has a fallback.</strong> Three cached addresses and seven sample policies run with no network, so a live demo cannot dead-end.</li>
 </ul>
 <h2>My role</h2>

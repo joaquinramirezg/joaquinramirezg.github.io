@@ -1,6 +1,6 @@
 ---
 title: "Safe docs: a document opens only for the right face"
-where: "College project, UTEC · 2020"
+where: "UTEC · 2020"
 summary: "Passwords protect the account, not the person. This web platform matches a live webcam capture against the recipient's enrolled face before a shared document opens. There is no anti-spoofing, so a photo could fool it, which is the first thing a production version would need. The 28 second demo runs the original 2020 code; a photo stands in for the webcam, which is exactly the spoofing gap."
 shows: "a computer vision model wired into a working product, end to end."
 metrics: []
