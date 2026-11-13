@@ -109,10 +109,10 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
           <div class="job-head">
             <h3>{job.company}</h3>
             <p class="job-title">{job.title}</p>
+            {job.lead && <p class="job-lead">{job.lead}</p>}
             <p class="job-meta">{job.dates}<br>{job.about}</p>
           </div>
           <div class="job-body">
-            {job.scope && <p class="job-scope">{job.scope}</p>}
             {job.systems.map((id) => byId[id]).map((w) => (
               <article class="system">
                 <h4>{hasPage(w) ? <a href={`/work/${w.id}/`}>{w.data.title}</a> : w.data.title}</h4>
