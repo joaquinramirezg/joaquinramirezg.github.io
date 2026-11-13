@@ -179,7 +179,7 @@ header .meta-line { margin-top: 10px; }
 .system h4 a:hover { color: var(--accent); }
 .system > p { margin-top: 6px; font-size: 16px; line-height: 1.65; color: var(--text-soft); max-width: 720px; }
 .system .case-link { margin-top: 12px; }
-.job-scope { font-size: 14.5px; color: var(--text); border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; }
+.job-scope { font-size: 14.5px; color: var(--text); }
 @media (max-width: 760px) {
   .job { grid-template-columns: 1fr; gap: 14px; }
   .job-head { position: static; }
@@ -316,7 +316,7 @@ h1, h2, h3, h4, .tile-small, .prow-kind, .tile-kind { text-wrap: balance; }
   .page-body .fig { padding: 18px 12px 12px; }
   .page-body .fig .fig-scroll { display: block; }
 }
-.job-scope { font-size: var(--fs-body); line-height: 1.6; color: var(--text); border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; }
+.job-scope { font-size: var(--fs-body); line-height: 1.6; color: var(--text); }
 .avail a { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
 .avail a:hover { text-decoration: underline; }
 .book-call { display: inline-flex; align-items: center; gap: 7px; font-size: var(--fs-meta); font-weight: 600; color: var(--accent); text-decoration: none; padding: 8px 12px; border: 1px solid var(--accent); border-radius: 8px; }
