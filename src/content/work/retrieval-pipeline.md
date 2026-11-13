@@ -2,7 +2,7 @@
 title: "The retrieval pipeline behind the copilot"
 where: "Crehana · Senior Machine Learning Engineer · Feb 2025 – Sep 2026"
 summary: "The copilot answers from each company's own documents, so the retrieval layer has to stay fresh and tenant-aware. I built and ran the ingestion pipeline: 10K+ documents a week, indexed on a schedule into a search corpus of 1.2M+ vectors on Qdrant with OpenAI embeddings."
-metrics: ["10K+ docs/week", "1.2M+ vectors"]
+metrics: ["10K+ docs/week", "1.2M+ vectors", "200-question golden set"]
 stack: "RAG · Qdrant · OpenAI embeddings · Python"
 order: 2
 compact: false

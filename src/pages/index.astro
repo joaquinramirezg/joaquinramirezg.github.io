@@ -8,7 +8,6 @@ import skills from '../data/skills.json';
 import education from '../data/education.json';
 import about from '../data/about.html?raw';
 import experience from '../data/experience.json';
-import principles from '../data/principles.json';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
@@ -131,23 +130,6 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
         </li>
       ))}
     </ol>
-  </div>
-</section>
-
-<section id="principles">
-  <div class="wrap wide">
-    <h2>How I work</h2>
-    <p class="section-lead">Four habits I bring to every system, each taken from a case study on this site.</p>
-    <div class="principles">
-      {principles.map((p, i) => (
-        <a class="principle" href={p.href}>
-          <span class="principle-n">0{i + 1}</span>
-          <h3>{p.title}</h3>
-          <p>{p.text}</p>
-          <span class="principle-from">{p.from} →</span>
-        </a>
-      ))}
-    </div>
   </div>
 </section>
 

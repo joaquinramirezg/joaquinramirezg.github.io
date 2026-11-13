@@ -185,14 +185,6 @@ header .meta-line { margin-top: 10px; }
   .job-head { position: static; }
 }
 
-.principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-.principle { display: flex; flex-direction: column; padding: 22px 24px; border: 1px solid var(--line); border-radius: 14px; text-decoration: none; color: inherit; background: var(--bg); transition: border-color .15s; }
-.principle:hover { border-color: var(--accent); }
-.principle-n { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--accent); }
-.principle h3 { margin-top: 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
-.principle p { margin-top: 8px; font-size: 15.5px; line-height: 1.6; color: var(--text-soft); }
-.principle-from { margin-top: auto; padding-top: 12px; font-size: 13.5px; font-weight: 600; color: var(--accent); }
-@media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
 
 .earlier-title { margin-top: 30px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-soft); }
 .earlier { list-style: none; margin-top: 10px; }
@@ -273,18 +265,18 @@ h2, .footer-title { font-size: var(--fs-h2); font-weight: 750; letter-spacing: -
 .more h2 { font-size: var(--fs-item); }
 .page-head h1 { font-size: 36px; }
 
-/* Item titles: tiles, experience, principles, projects, education, earlier work */
-.tile h3, .job-head h3, .system h4, .principle h3, .prow-body h3, .edu-rows h3, .card h3 { font-size: var(--fs-item); font-weight: 700; letter-spacing: -0.012em; line-height: 1.3; }
+/* Item titles: tiles, experience, projects, education, earlier work */
+.tile h3, .job-head h3, .system h4, .prow-body h3, .edu-rows h3, .card h3 { font-size: var(--fs-item); font-weight: 700; letter-spacing: -0.012em; line-height: 1.3; }
 
 /* Body text */
-.system > p, .principle p, .prow-body > p, .tile p, .card p, .about-card .about-text p, .footer-lead, .edu-rows .edu-degree, .stack-rows dd, .earlier li, .section-lead { font-size: var(--fs-body); line-height: 1.6; }
+.system > p, .prow-body > p, .tile p, .card p, .about-card .about-text p, .footer-lead, .edu-rows .edu-degree, .stack-rows dd, .earlier li, .section-lead { font-size: var(--fs-body); line-height: 1.6; }
 .edu-rows .edu-degree { color: var(--text); }
 .case p, .case ul, .case ol, .page-body li { font-size: var(--fs-long); line-height: 1.7; }
 .page-head .lead, .subtitle { font-size: var(--fs-lead); }
 .tldr dd { font-size: var(--fs-body); }
 
 /* Meta: dates, where lines, titles under names, stack lines, links and buttons */
-.job-title, .job-meta, .where, .card .where, .case .where, .page-head .where, .more .where, .tags, .edu-rows .edu-details, .earlier-where, .avail, .hero-facts, .footer-links, .principle-from, .case-link, .text-link, .crumb, .email-open, .copy-email, .links a { font-size: var(--fs-meta); }
+.job-title, .job-meta, .where, .card .where, .case .where, .page-head .where, .more .where, .tags, .edu-rows .edu-details, .earlier-where, .avail, .hero-facts, .footer-links, .case-link, .text-link, .crumb, .email-open, .copy-email, .links a { font-size: var(--fs-meta); }
 .job-title { font-weight: 600; }
 .stack-rows dt { font-size: var(--fs-meta); font-weight: 700; }
 
@@ -292,7 +284,7 @@ h2, .footer-title { font-size: var(--fs-h2); font-weight: 750; letter-spacing: -
 .metric, .chip, .frame figcaption, .fig figcaption, figcaption, .note, .tile-small { font-size: var(--fs-small); }
 
 /* Labels: uppercase eyebrows */
-.kicker, .tile-kind, .prow-kind, .earlier-title, .tldr dt, .principle-n { font-size: var(--fs-label); letter-spacing: .08em; }
+.kicker, .tile-kind, .prow-kind, .earlier-title, .tldr dt { font-size: var(--fs-label); letter-spacing: .08em; }
 
 @media (max-width: 560px) {
   :root { --fs-h2: 23px; --fs-item: 18px; --fs-long: 16.5px; --fs-lead: 17px; }
