@@ -19,9 +19,9 @@ c = Image.new("RGB", (W, H), "#0f141b"); g = ImageDraw.Draw(c)
 g.rectangle((0, 0, 10, H), fill="#5aa9e6")
 g.text((64, 64), "MACHINE LEARNING ENGINEER · DATA SCIENTIST", font=bold(24), fill="#5aa9e6")
 g.text((64, 112), "Joaquin Ramirez", font=bold(76), fill="#e8edf3")
-g.text((64, 214), "Led Crehana's GenAI copilot and its agents", font=reg(34), fill="#c9d3de")
+g.text((64, 214), "Led a GenAI copilot used by 1300+ organizations", font=reg(34), fill="#c9d3de")
 y, x = 290, 64
-for m in ["1300+ organizations", "48K+ users", "adoption 9x"]:
+for m in ["48K+ users", "adoption 9x", "fraud detection · 35 banks"]:
     f = bold(26); tw = g.textlength(m, font=f)
     g.rounded_rectangle((x, y, x + tw + 40, y + 50), radius=25, fill="#16283a")
     g.text((x + 20, y + 11), m, font=f, fill="#7cbcf0"); x += tw + 52

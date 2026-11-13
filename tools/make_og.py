@@ -41,7 +41,10 @@ mets = (d.get("pageMetrics") or d.get("metrics") or [])[:3]
 W, H = 1200, 630
 c = Image.new("RGB", (W, H), "#0f141b"); g = ImageDraw.Draw(c)
 textw = 520 if shot else 1050
-label = ("CASE STUDY · " + d["where"].split(" · ")[0]) if kind == "work" else "PROJECT"
+# Label by sector, not employer name: US readers do not know the companies (ruling Nov 13).
+SECTOR = {"Crehana": "B2B HR-tech SaaS", "Canvia": "IT consulting", "APTIM": "US engineering firm", "Belcorp": "Consumer goods"}
+emp = d["where"].split(" · ")[0].split(" (")[0]
+label = ("CASE STUDY · " + SECTOR.get(emp, emp)) if kind == "work" else "PROJECT"
 g.text((64, 64), label.upper(), font=bold(24), fill="#5aa9e6")
 y = 118
 for ln in wrap(g, title, bold(52 if shot else 58), textw): g.text((64, y), ln, font=bold(52 if shot else 58), fill="#e8edf3"); y += 64

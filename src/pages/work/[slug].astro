@@ -11,7 +11,7 @@ const { entry, others } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const path = `/work/${entry.id}/`;
-const ogImage = `/work/${entry.id}/og.png`;
+const ogImage = `/work/${entry.id}/og.png?v=2`;
 const ld = [{
   '@context': 'https://schema.org', '@type': 'Article', headline: d.pageTitle, description: d.description,
   url: 'https://joaquinramirez.dev' + path, image: 'https://joaquinramirez.dev' + ogImage,
