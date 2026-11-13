@@ -33,9 +33,9 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
 <header id="top">
   <div class="wrap wide hero-grid">
     <div class="hero-text">
-      <div class="kicker">Senior Machine Learning Engineer · Data Scientist</div>
+      <div class="kicker">Machine Learning Engineer · Data Scientist</div>
       <h1>Joaquin Ramirez</h1>
-      <p class="subtitle">I led the end-to-end development of Crehana's GenAI copilot and its agents, from reliability work in production to tradeoffs in front of the executive committee. Over three years shipping ML in HR tech, consulting and consumer goods. Now an MSBA candidate at UCLA Anderson.</p>
+      <p class="subtitle">I led Crehana's GenAI copilot and its agents, used by 1300+ organizations and 48K+ users. Over three years of ML in production; now an MSBA candidate at UCLA Anderson.</p>
       <ul class="hero-facts">
         <li><Icon name="pin" /> Los Angeles, California</li>
         <li><Icon name="school" /> UCLA Anderson MSBA, Dec 2027</li>
@@ -52,7 +52,7 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
   </div>
   <div class="wrap wide">
     <ul class="proof">
-      <li><b>1300+ organizations</b><span>use the AI copilot I led</span></li>
+      <li><b>1300+ orgs · 48K+ users</b><span>on the AI copilot I led</span></li>
       <li><b>35 banks</b><span>in the fraud detection network</span></li>
       <li><b>2 weeks → &lt;20 min</b><span>contract allocation for an exporter</span></li>
     </ul>
@@ -88,7 +88,10 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
         </div>
       </a>
       <a class="tile" href="/projects/alwayshome/">
-        <div class="tile-visual"><img src="/p/alwayshome.webp" alt="" width="800" height="480" loading="lazy" decoding="async"></div>
+        <div class="tile-visual tile-number">
+          <span class="tile-big">0.80</span>
+          <span class="tile-small">AUC · 0.68 on unseen neighborhoods · 22,071 CAL FIRE inspections</span>
+        </div>
         <div class="tile-body">
           <span class="tile-kind">Project · live app · Nov 2026</span>
           <h3>AlwaysHome</h3>
@@ -109,16 +112,17 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
           <div class="job-head">
             <h3>{job.company}</h3>
             <p class="job-title">{job.title}</p>
+            {job.promo && <p class="job-promo">{job.promo}</p>}
             <p class="job-meta">{job.dates}<br>{job.about}</p>
           </div>
           <div class="job-body">
             {job.systems.map((id) => byId[id]).map((w) => (
               <article class="system">
                 <h4>{hasPage(w) ? <a href={`/work/${w.id}/`}>{w.data.title}</a> : w.data.title}</h4>
-                <p set:html={w.data.summary} />
                 {w.data.metrics.length > 0 && (
                   <div class="metrics">{w.data.metrics.map((m) => <span class="metric">{m}</span>)}</div>
                 )}
+                <p set:html={w.data.summary} />
                 <p class="tags">{w.data.stack}</p>
                 {hasPage(w) && (
                   <a class="case-link" href={`/work/${w.id}/`}>Read the case study <span>· {w.data.minutes} min</span></a>
