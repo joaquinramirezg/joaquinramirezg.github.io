@@ -9,7 +9,7 @@ compact: false
 pageTitle: "Fraud detection across 35 financial institutions"
 minutes: 1
 angle: "Canvia · unsupervised learning under real-world constraints"
-description: "Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru's leading financial institutions."
+description: "I built real-time anomaly detection (Isolation Forest) on transactions across 35 of Peru's leading financial institutions, flagging the riskiest ~2% for review."
 tldr: {"problem": "Spot fraud in real-time transfers between 35 Peruvian financial institutions, with no fraud labels to learn from.", "role": "I took over an MVP that flagged about 9% of transactions, redesigned the features and the Isolation Forest model, and served it through an on-premise FastAPI service.", "result": "Flags brought in line with the client's ~2% review threshold, in real time."}
 ---
 <h2>What it watched</h2>

@@ -9,7 +9,7 @@ compact: false
 pageTitle: "The HR copilot and its agents"
 minutes: 3
 angle: "Crehana · how I think about agents, reliability, and product"
-description: "I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used across Latin America."
+description: "I led Crehana's GenAI copilot and its agents (LangChain, LangGraph): 1300+ organizations, 48K+ users, agent failures down 25%, adoption up 9x."
 tldr: {"problem": "Crehana's HR copilot ran on agents, and its data-extraction agent failed too often in production: schema-invalid outputs, timeouts, wrong extractions.", "role": "I led development of the copilot and its agents, redesigned the agent's routing and reliability safeguards, and presented tradeoffs to the executive committee.", "result": "Agent failures dropped 25%. Copilot adoption, in weekly active prompts, grew 9x across 1300+ organizations."}
 ---
 <h2>Who uses it and for what</h2>

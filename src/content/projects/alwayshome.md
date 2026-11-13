@@ -14,7 +14,7 @@ byline: "UCLA Anderson MSBA Vibathon · Nov 6 2026 · theme \"Uninsurable\" · I
 lead: "A web app that shows a Los Angeles County homeowner on the California FAIR Plan which fire-safety fixes cut their wildfire risk the most for the money, and what their insurance would really pay if the house burned down."
 pageMetrics: ["est. loss chance 36% → 15% if fire reaches the home (sample home)", "AUC 0.80 (n=4,525)", "22,071 CAL FIRE inspections"]
 note: "The API runs on a free host that sleeps when idle, so the first request can take up to a minute. Pick an address under Examples to see a full run without typing."
-description: "A web app that shows an LA County homeowner on the FAIR Plan which fire-safety fixes cut their wildfire risk most for the money. Built in one day, team of three."
+description: "One-day UCLA Anderson MSBA Vibathon app; I led product and AI. Ranks wildfire fixes by payback for LA FAIR Plan homeowners; house-loss model CV AUC 0.80."
 ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the app's ranked plan"
 ---
 <figure class="demo">

@@ -9,7 +9,7 @@ compact: false
 pageTitle: "Contract allocation for a commodity exporter"
 minutes: 2
 angle: "Canvia · turning a two-week manual process into a 20-minute optimization"
-description: "A fishmeal exporter planned its contract allocation by hand, two weeks per cycle."
+description: "I built the allocation algorithm that cut a fishmeal exporter's contract planning from two weeks to under 20 minutes, raising estimated gross margin ~55%."
 tldr: {"problem": "A fishmeal exporter planned blends and contract allocation by hand: around five analysts in Excel, two weeks per cycle.", "role": "I built the branch-and-bound allocation, deployed it on the client's Azure Power Apps, and presented the results to about 15 stakeholders, including VPs.", "result": "Planning went from two weeks to under 20 minutes; the client's month of testing estimated gross margin +55% and operating costs −40%."}
 ---
 <h2>The problem, from zero</h2>

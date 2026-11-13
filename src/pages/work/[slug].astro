@@ -15,7 +15,7 @@ const ogImage = `/work/${entry.id}/og.png`;
 const ld = [{
   '@context': 'https://schema.org', '@type': 'Article', headline: d.pageTitle, description: d.description,
   url: 'https://joaquinramirez.dev' + path, image: 'https://joaquinramirez.dev' + ogImage,
-  author: { '@type': 'Person', name: 'Joaquin Ramirez', url: 'https://joaquinramirez.dev/' },
+  author: { '@type': 'Person', '@id': 'https://joaquinramirez.dev/#person', name: 'Joaquin Ramirez', url: 'https://joaquinramirez.dev/' },
 }];
 ---
 <Base title={`${d.pageTitle} · Case study · Joaquin Ramirez`} ogTitle={`${d.pageTitle} · Case study · Joaquin Ramirez`}

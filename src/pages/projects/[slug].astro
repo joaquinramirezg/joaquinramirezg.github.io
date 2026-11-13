@@ -15,7 +15,7 @@ const name = d.title.split(':')[0];
 const ld = [{
   '@context': 'https://schema.org', '@type': 'SoftwareApplication', name, applicationCategory: 'WebApplication',
   url: d.demo, description: d.description, image: 'https://joaquinramirez.dev' + ogImage, codeRepository: d.code,
-  author: { '@type': 'Person', name: 'Joaquin Ramirez', url: 'https://joaquinramirez.dev/' },
+  author: { '@type': 'Person', '@id': 'https://joaquinramirez.dev/#person', name: 'Joaquin Ramirez', url: 'https://joaquinramirez.dev/' },
 }];
 ---
 <Base title={`${d.title} · Joaquin Ramirez`} description={d.description!} path={path} ogImage={ogImage}
