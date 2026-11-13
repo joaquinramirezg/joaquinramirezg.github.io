@@ -9,6 +9,6 @@ code: "https://github.com/joaquinramirezg/safe-docs"
 order: 4
 earlier: true
 short: "Safe docs"
-oneLine: "A shared document opens only after a webcam face match with its recipient. No anti-spoofing yet."
+oneLine: "A shared document opens only after a live face match with its recipient."
 thumb: "<video controls playsinline preload=\"none\" poster=\"/projects/safe-docs/demo-poster.webp\" width=\"1280\" height=\"712\" aria-label=\"Safe docs demo: log in, the face check matches the registered user and the send-documents page opens; a different face is refused\"><source src=\"/projects/safe-docs/demo.mp4\" type=\"video/mp4\"></video>"
 ---

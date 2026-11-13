@@ -1,6 +1,6 @@
 ---
 title: "The retrieval pipeline behind the copilot"
-where: "Crehana · Machine Learning Engineer, Senior from Jul 2026 · Feb 2025 – Sep 2026"
+where: "Crehana · Senior Machine Learning Engineer · Feb 2025 – Sep 2026"
 summary: "The copilot answers from each company's own documents, so the retrieval layer has to stay fresh and tenant-aware. I built and ran the ingestion pipeline: 10K+ documents a week, indexed on a schedule into a search corpus of 1.2M+ vectors on Qdrant with OpenAI embeddings."
 metrics: ["10K+ docs/week", "1.2M+ vectors"]
 stack: "RAG · Qdrant · OpenAI embeddings · Python"
@@ -15,7 +15,7 @@ tldr: {"problem": "The copilot answers from each company's own documents: 10K+ n
 <h2>What actually flows in</h2>
 <p>It is not a static document pile. Information flowed continuously from the platform's HR modules into the master database as companies edited, uploaded, and generated records, more than 10K documents a week. Every weekend the pipeline reindexed that into a search corpus of 1.2M+ vectors on Qdrant, using OpenAI embeddings over overlapping chunks.</p>
 <h2>Multi-tenancy: the constraint that shapes everything</h2>
-<p>1300+ organizations share the platform, and no company may ever see another company's data. Retrieval enforces metadata filtering per organization on the vector side, on top of tenant schemas in the relational database. I also evaluated moving to separate collections per tenant, which buys stronger isolation and much simpler offboarding when a customer leaves, at the cost of operational overhead across that many organizations. Filtered search won for now; I still think the isolation argument gets stronger as the platform grows.</p>
+<p>1300+ organizations share the platform, and no company may ever see another company's data. Retrieval enforces metadata filtering per organization on the vector side, on top of tenant schemas in the relational database. I also evaluated moving to separate collections per tenant, which buys stronger isolation and much simpler offboarding when a customer leaves, at the cost of operational overhead across that many organizations. Filtered search won at our scale; separate collections become the better call once isolation matters more than operating cost.</p>
 <figure class="fig">
 <div class="fig-scroll">
 <svg viewBox="0 0 520 556" role="img" aria-label="The retrieval pipeline: platform records and uploaded files of every format are preprocessed, chunked with overlap and embedded into a vector store that is reindexed every weekend; at question time retrieval is filtered to the asking organization before an answer is grounded.">
@@ -57,7 +57,7 @@ tldr: {"problem": "The copilot answers from each company's own documents: 10K+ n
 </div>
 <figcaption>The pipeline, and the line that matters. Retrieval is filtered to the asking organization, so one company's question can only ever be answered from that company's own material. Everything above that gate is shared plumbing; the gate is what makes it safe to share.</figcaption>
 </figure>
-<h2>The pivot that taught me the most</h2>
-<p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers. Fair expectation, wrong assumption in our design. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Answer quality improved notably without giving up speed.</p>
+<h2>When customers outgrew the design</h2>
+<p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers from all of it. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Answer quality improved notably without giving up speed.</p>
 <h2>How I evaluated it</h2>
-<p>We maintained a golden set of 200 questions and scored every change against it on answer accuracy. That is a real but limited signal: a fuller evaluation would add retrieval-level metrics like hit rate and MRR, which is where I would invest next. On infrastructure: Qdrant was chosen before I arrived, and it held up at our scale, so replacing it was never the priority.</p>
+<p>Every change was scored for answer accuracy against a golden set of 200 questions before it counted as an improvement. Next on the roadmap: retrieval-level metrics such as hit rate and MRR, to see whether a miss comes from search or from generation. Qdrant held up at 1.2M+ vectors, so the effort went into retrieval quality, not the database.</p>

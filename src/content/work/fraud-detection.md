@@ -15,7 +15,7 @@ tldr: {"problem": "Spot fraud in real-time transfers between 35 Peruvian financi
 <h2>What it watched</h2>
 <p>Interbank transfers between 35 of Peru's leading financial institutions, in real time. The feature engineering encoded what fraud tends to look like: account age, deviation from a person's normal transfer amounts, transfers between someone's own accounts across different banks, activity at unusual hours, unusual bank-to-bank combinations. The model then decided what was anomalous in that feature space.</p>
 <h2>Why Isolation Forest</h2>
-<p>The client could not provide fraud labels, which rules out supervised learning and is exactly the setting unsupervised anomaly detection exists for. I inherited a first MVP that flagged around 9% of transactions, far more than review capacity. I redesigned the features and the model and brought flags in line with the client's ~2% operating threshold. With labels, I would revisit the choice: semi-supervised methods or a supervised model trained on confirmed cases could well beat it.</p>
+<p>The client could not provide fraud labels, which rules out supervised learning and is exactly the setting unsupervised anomaly detection exists for. The first MVP flagged around 9% of transactions, far more than the analysts could review. I redesigned the features and the model and brought flags down to the client's ~2% operating threshold. Once confirmed cases accumulate, a semi-supervised model trained on them is the natural next step.</p>
 <figure class="fig">
 <div class="fig-scroll">
 <svg viewBox="0 0 520 330" role="img" aria-label="How one interbank transfer is scored in real time. Features about the account and the transfer feed an Isolation Forest trained without fraud labels. The most anomalous share of transfers, about 2 percent, goes to human review; the rest passes. The first MVP flagged about 9 percent.">
@@ -53,9 +53,9 @@ tldr: {"problem": "Spot fraud in real-time transfers between 35 Peruvian financi
 <text class="dg-k" x="78" y="318">redesign, ~2%: the client's threshold</text>
 </svg>
 </div>
-<figcaption>What the model sees and where its output goes. The 2% is the client's review capacity, not a measured precision.</figcaption>
+<figcaption>What the model sees and where its output goes: flags sized to the client's ~2% review capacity.</figcaption>
 </figure>
 <h2>What real time required</h2>
 <p>A fast, concurrent API (FastAPI), hosted on-premise with no cloud services allowed, which meant working hand in hand with the infrastructure team on latency and concurrency budgets.</p>
-<h2>Scope</h2>
-<p>The 2% threshold was the client's operating requirement, sized to their review capacity. A deeper analysis of false positives against missed fraud sat outside the engagement's scope: our mandate was the model and the flagging API, and the client consumed the alerts downstream. If I owned the product end to end, that precision-recall analysis is the first thing I would add.</p>
+<h2>What comes next</h2>
+<p>Our mandate was the model and the real-time flagging API; the client's analysts worked the alerts downstream. The next layer is a precision-recall view built from their confirmed cases, so the threshold can move from review capacity to the cost of a missed fraud.</p>

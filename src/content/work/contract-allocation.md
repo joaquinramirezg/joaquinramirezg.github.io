@@ -16,7 +16,7 @@ tldr: {"problem": "A fishmeal exporter planned blends and contract allocation by
 <p>Fishmeal sells by quality band (super prime, prime, and lower grades), and a pile's band is determined by its measured composition: protein, fat, histamine, and other metrics. The interesting part is that piles can be blended, and blending produces a new pile with a new composition. The goal is not to maximize premium volume; it is to maximize revenue across all contracts. And blending has hard constraints: some piles can be blended up into a higher band, while others can never reach it no matter what you mix them with.</p>
 <p>Allocation adds a second layer. Clients contract tonnage per quality band, and partial fulfillment is not free: if a contract takes most of a quality's stock, the leftover tons must still meet that band's composition to be sellable later. Piles come in fractional weights and live in physical bags, and splitting a bag is expensive and slow, so the plan has to hit contract tonnage as closely as possible while splitting as few bags as possible and keeping every composition constraint intact.</p>
 <h2>What existed before</h2>
-<p>Around five analysts working across Excel sheets, hand-picking piles by trial and error, hoping to maximize revenue. Two weeks of planning even for small contracts.</p>
+<p>Around five analysts working across Excel sheets, hand-picking piles by trial and error. Two weeks of planning, even for small contracts.</p>
 <h2>What I built</h2>
 <p>A branch-and-bound search over blend and allocation combinations: I enumerated the combinations as a tree and pruned aggressively, cutting a whole branch as soon as partial results proved it could not contain a better solution. Planning went from two weeks to under 20 minutes. The client asked for delivery through Azure Power Apps, so that is how it was deployed, and I presented results to about 15 client stakeholders, including VPs. Building on their stack instead of the one I would have picked, then standing in their room to defend the numbers, is the forward deployed shape of this work, and it is the part I want more of.</p>
 <figure class="fig">
@@ -63,5 +63,5 @@ tldr: {"problem": "A fishmeal exporter planned blends and contract allocation by
 </div>
 <figcaption>The search behind the plan, and the rules every plan has to respect.</figcaption>
 </figure>
-<h2>Where the numbers come from</h2>
-<p>The estimated 55% gross margin improvement and 40% lower operating cost come from a month of testing on the client's real data, comparing the algorithm's plans against the plans their own team produced, with the client providing the feedback and the baseline. That is why I say estimated: it is their measurement of our output against their old process, not a projection I invented.</p>
+<h2>How the client measured it</h2>
+<p>The client ran a month of testing on their own data: the algorithm's plans against the plans their team produced, with the client setting the baseline. Their estimate: gross margin up 55% and operating costs down 40%.</p>

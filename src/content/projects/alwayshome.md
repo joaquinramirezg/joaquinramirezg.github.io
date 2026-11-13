@@ -25,7 +25,7 @@ ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the 
 </figure>
 <h2>The result</h2>
 <p>For a sample Altadena homeowner (a 1952 wood-roof house, FAIR Plan only, $10,000 budget), the model estimates that seven fixes cut the chance of losing the house if fire reaches it from <strong>36% to 15%</strong>. That is an estimate from associations in two fires, not a measured effect of the fixes. Fix costs, discounts and the dollar figures in the demo are placeholders, not real quotes. The house-loss model behind that estimate reaches a cross-validated <strong>AUC of 0.80</strong> on the 4,525 homes with every feature recorded, out of <strong>22,071 CAL FIRE inspections</strong> from the January 2025 Eaton and Palisades fires.</p>
-<p><strong>How well it holds up.</strong> In those 4,525 homes, 20.6% were destroyed, so 0.80 is measured against that base rate. The model also uses the neighborhood (fire and ZIP). With whole neighborhoods held out in cross-validation, the house features alone reach an AUC of 0.68: the honest number for an address the model has not seen.</p>
+<p><strong>How well it holds up.</strong> In those 4,525 homes, 20.6% were destroyed, so 0.80 is measured against that base rate. The model also uses the neighborhood (fire and ZIP). With whole neighborhoods held out in cross-validation, the house features alone reach an AUC of 0.68: the number that holds for an address the model has not seen.</p>
 <figure class="shot light-only">
 <img src="/projects/alwayshome/plan-altadena.webp" alt="Bar charts for the sample home: payback in years and the cut in chance of losing the house for each of nine fixes; seven are in the $10,000 plan" width="1984" height="910" loading="lazy" decoding="async">
 <figcaption>Each fix ranked by payback, and how much it cuts the chance of losing the house. Orange fixes fit the $10,000 budget at placeholder costs.</figcaption>
@@ -84,8 +84,8 @@ ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the 
 <li><strong>Your plan.</strong> Fixes ranked by payback, a budget slider that rebuilds the plan live, risk before and after, and a report to take to a broker.</li>
 </ol>
 <h2>What the judges said, and what I changed</h2>
-<p>We did not place in the top three. The judges called the idea truly impactful on society, and asked two questions we had not answered on screen: who exactly is the user and who pays, and where AI sits in the product. Both now lead this page and the README, as the "who pays" and "where AI is" sections above.</p>
-<h2>Limits and next steps</h2>
+<p>The judges called the idea truly impactful on society, and asked two questions we had not answered on screen: who exactly is the user and who pays, and where AI sits in the product. Both now lead this page and the README, as the "who pays" and "where AI is" sections above.</p>
+<h2>Scope and next steps</h2>
 <ul>
 <li>No user research: it was built in one day, without interviews with homeowners, brokers or insurers.</li>
 <li>Los Angeles County only, total loss only, no partial claims. Not insurance advice and not an inspection.</li>
