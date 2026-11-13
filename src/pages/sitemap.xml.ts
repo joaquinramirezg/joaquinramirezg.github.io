@@ -1,15 +1,8 @@
 import { getCollection } from 'astro:content';
-import { execFileSync } from 'node:child_process';
+import { lastCommit } from '../lib/gitdate';
 
 // lastmod is the last commit that touched the page's own content, not the build time.
 // A lastmod that changes on every build teaches crawlers to ignore it.
-function lastCommit(paths: string[]): string {
-  try {
-    const out = execFileSync('git', ['log', '-1', '--format=%cI', '--', ...paths], { encoding: 'utf8' }).trim();
-    if (out) return out;
-  } catch {}
-  return new Date().toISOString();
-}
 
 export async function GET() {
   const site = 'https://joaquinramirez.dev';

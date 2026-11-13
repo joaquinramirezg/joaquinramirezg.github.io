@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { getCollection } from 'astro:content';
-import jsonLd from '../data/home-jsonld.json';
+import homeLd from '../data/home-jsonld.json';
+import { lastCommit } from '../lib/gitdate';
 import skills from '../data/skills.json';
 import education from '../data/education.json';
 import about from '../data/about.html?raw';
@@ -20,6 +21,9 @@ const fraud = work.find((w) => w.id === 'fraud-detection')!;
 const byId = Object.fromEntries(work.map((w) => [w.id, w]));
 const mainProjects = projects.filter((p) => !p.data.earlier);
 const earlierProjects = projects.filter((p) => p.data.earlier);
+// ProfilePage dates: first commit of this site (Aug 27 2026) and the last commit touching home content.
+const jsonLd = structuredClone(homeLd);
+Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00', dateModified: lastCommit(['src/pages/index.astro', 'src/data']) });
 ---
 <Base
   title="Joaquin Ramirez · ML Engineer / Data Scientist · UCLA Anderson MSBA"
