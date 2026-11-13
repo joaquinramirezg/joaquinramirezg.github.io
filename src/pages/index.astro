@@ -35,10 +35,10 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
     <div class="hero-text">
       <div class="kicker">Machine Learning Engineer · Data Scientist</div>
       <h1>Joaquin Ramirez</h1>
-      <p class="subtitle">I led Crehana's GenAI copilot and its agents, used by 1300+ organizations and 48K+ users. Over three years of ML in production; now an MSBA candidate at UCLA Anderson.</p>
+      <p class="subtitle">I led Crehana's GenAI copilot and its agents, used by 1300+ organizations and 48K+ users. Over three years building GenAI products and predictive models; now earning a master's in business analytics at UCLA Anderson.</p>
       <ul class="hero-facts">
         <li><Icon name="pin" /> Los Angeles, California</li>
-        <li><Icon name="school" /> UCLA Anderson MSBA, Dec 2027</li>
+        <li><Icon name="school" /> M.S. Business Analytics, UCLA Anderson · Dec 2027</li>
       </ul>
       <div class="links">
         <a class="primary" href="/resume.pdf" target="_blank" rel="noopener"><Icon name="file" /> Resume</a>
@@ -108,6 +108,7 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
             <p class="job-meta">{job.dates}<br>{job.about}</p>
           </div>
           <div class="job-body">
+            {job.scope && <p class="job-scope">{job.scope}</p>}
             {job.systems.map((id) => byId[id]).map((w) => (
               <article class="system">
                 <h4>{hasPage(w) ? <a href={`/work/${w.id}/`}>{w.data.title}</a> : w.data.title}</h4>
@@ -121,7 +122,6 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
                 )}
               </article>
             ))}
-            {job.scope && <p class="job-scope">{job.scope}</p>}
           </div>
         </li>
       ))}

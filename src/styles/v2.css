@@ -324,3 +324,4 @@ h1, h2, h3, h4, .tile-small, .prow-kind, .tile-kind { text-wrap: balance; }
   .page-body .fig { padding: 18px 12px 12px; }
   .page-body .fig .fig-scroll { display: block; }
 }
+.job-scope { font-size: var(--fs-body); line-height: 1.6; color: var(--text); border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; }
