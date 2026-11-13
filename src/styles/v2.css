@@ -230,3 +230,4 @@ header { padding-bottom: 30px; }
 .project.feature .project-body { padding: 22px 26px 24px; display: flex; flex-direction: column; }
 .project.feature .project-body > p { max-width: 760px; }
 .project.feature .project-body h3 { margin-top: 0; }
+@media (max-width: 600px) { .feature-media video { aspect-ratio: 640 / 208; } }

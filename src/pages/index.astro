@@ -155,6 +155,8 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
         <li class="card project feature" id={`project-${p.id}`}>
           <figure class="feature-media">
             <video class="auto-loop" muted loop playsinline preload="none" poster="/projects/alwayshome/loop-poster.webp" width="1280" height="352" aria-label="AlwaysHome plan screen: as the budget slider moves, the ranked fire-safety fixes and the estimated chance of losing the house update">
+              <source src="/projects/alwayshome/loop-m.webm" type="video/webm" media="(max-width: 600px)">
+              <source src="/projects/alwayshome/loop-m.mp4" type="video/mp4" media="(max-width: 600px)">
               <source src="/projects/alwayshome/loop.webm" type="video/webm">
               <source src="/projects/alwayshome/loop.mp4" type="video/mp4">
             </video>
@@ -256,6 +258,7 @@ const earlierProjects = projects.filter((p) => p.data.earlier);
 // Muted demo loop: plays only on screen, never under reduced motion or Save-Data.
 (function () {
   var v = document.querySelector('video.auto-loop'); if (!v) return;
+  if (window.matchMedia && matchMedia('(max-width: 600px)').matches) v.poster = '/projects/alwayshome/loop-m-poster.webp';
   var btn = v.parentNode.querySelector('.loop-toggle'); btn.hidden = false;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var save = navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || ''));
