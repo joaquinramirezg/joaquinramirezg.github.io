@@ -304,3 +304,8 @@ header .subtitle { font-size: var(--fs-lead); }
 .page-body th { font-size: var(--fs-label); }
 .page-body figcaption, .case figcaption { font-size: var(--fs-small); }
 .more li a, .more a:not(.crumb) { font-size: var(--fs-body); }
+
+/* No arbitrary line breaks (Nov 13): text fills its column; browsers avoid orphans and balance headings. */
+.footer-lead, .system > p, .subtitle, header .subtitle, .fig figcaption, .prow-body > p, .project.feature .project-body > p { max-width: none; }
+p, li, dd, figcaption, .section-lead { text-wrap: pretty; }
+h1, h2, h3, h4, .tile-small, .prow-kind, .tile-kind { text-wrap: balance; }
