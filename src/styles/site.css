@@ -207,9 +207,11 @@ main > section > .grid:first-child::before { content: ""; grid-column: 1 / -1; b
 .earlier-where { font: 400 var(--fs-small)/1.5 var(--mono); }
 
 /* Education and skills */
-.background-grid > div { grid-column: span 6; }
-.background-grid > div:first-child { grid-column: 1 / 7; }
-.background-grid > div:last-child { grid-column: 7 / 13; }
+#education { grid-column: 1 / 7; }
+#leadership { grid-column: 7 / 13; }
+#skills { grid-column: 1 / 13; margin-top: 56px; }
+#skills .stack-rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--col-gap); }
+#skills .stack-rows > div:nth-child(odd):last-child { grid-column: 1 / 3; }
 .background-grid h2 { font-size: var(--fs-label); font-family: var(--mono); font-weight: 400; letter-spacing: 0.01em; color: var(--text-soft); margin-bottom: 12px; }
 .edu-rows { list-style: none; border-top: 1px solid var(--line-strong); }
 .edu-rows li { padding: 16px 0; border-bottom: 1px solid var(--line); }
@@ -346,8 +348,9 @@ footer .wrap.wide { max-width: 1312px; }
   .job-body { grid-column: 1 / 13; margin-top: 20px; }
   .prow .frame, .prow-body { grid-column: 1 / 13; }
   .prow-body { margin-top: 20px; }
-  .background-grid > div:first-child, .background-grid > div:last-child { grid-column: 1 / 13; }
-  .background-grid > div:last-child { margin-top: 48px; }
+  #education, #leadership, #skills { grid-column: 1 / 13; }
+  #leadership, #skills { margin-top: 48px; }
+  #skills .stack-rows { grid-template-columns: 1fr; }
   .about-photo { grid-column: 1 / 6; }
   .about-copy { grid-column: 1 / 13; margin-top: 28px; }
 }
