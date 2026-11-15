@@ -66,7 +66,7 @@ Case studies work the same way in `src/content/work/`; the schema is in
     src/content/work/          one Markdown file per role or case study
     src/content/projects/      one Markdown file per project
     src/layouts/Base.astro     head, nav, footer, theme and email scripts
-    src/styles/                site.css (base) and v2.css (layout)
+    src/styles/                site.css (the one stylesheet; type scale at the top)
     public/                    images, video, resume, fonts, static pages
     tools/make_og.py           preview image generator
     .github/workflows/         build and deploy to GitHub Pages
