@@ -2,6 +2,7 @@
 title: "G.E.N.I.E., my undergraduate thesis"
 where: "UTEC · 2023"
 summary: "A generative chatbot specialized in our university's regulations, fine-tuned end to end. We scraped and structured the documents, generated a fine-tuning dataset, and LoRA fine-tuned Falcon-7B through 20 hyperparameter trials, taking evaluation loss down 84% (2.92 to 0.46) and perplexity from 18.5 to 1.6, then validated the answers with user testing."
+bullets: ["Cut evaluation loss 84% (2.92 to 0.46) and perplexity from 18.5 to 1.6 by LoRA fine-tuning Falcon-7B over 20 hyperparameter trials.", "Scraped and structured the university's regulations, then generated the fine-tuning dataset.", "Validated the answers with user testing."]
 shows: "the whole fine-tuning loop, from raw documents to an evaluated model."
 metrics: ["eval loss −84%", "perplexity 18.5 → 1.6"]
 stack: "Falcon-7B · LoRA · Hugging Face"

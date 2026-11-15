@@ -2,6 +2,7 @@
 title: "Contract allocation for a commodity exporter"
 where: "Canvia (IT consulting) · Data Scientist · Dec 2023 – Dec 2024"
 summary: "A fishmeal exporter planned its contract allocation by hand, two weeks per cycle. I built the product classification and allocation algorithm that cut it to under 20 minutes, raising estimated gross margin by ~55% and cutting operating costs by ~40%. I presented the results to about 15 client stakeholders, including VPs."
+bullets: ["Cut contract-allocation planning from two weeks to under 20 minutes.", "Raised estimated gross margin ~55% and cut operating costs ~40% with a product classification and allocation algorithm.", "Presented the results to about 15 client stakeholders, including VPs."]
 metrics: ["est. gross margin +55%", "costs −40%", "2 weeks → <20 min"]
 stack: "Python · scikit-learn · optimization"
 order: 4

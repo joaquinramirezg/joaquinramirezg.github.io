@@ -2,6 +2,7 @@
 title: "AI copilot and agents for HR teams"
 where: "Crehana (B2B HR-tech SaaS) · Senior Machine Learning Engineer · Feb 2025 – Sep 2026"
 summary: "I led development of Crehana's GenAI copilot and the agentic systems behind it (LangChain, LangGraph), used across Latin America. When our data-extraction agent kept failing in production, I redesigned its routing and added reliability safeguards, and failures dropped 25%. Adoption of the whole copilot grew 9x."
+bullets: ["Copilot adoption grew 9x across 1300+ organizations and 48K+ users in Latin America.", "Cut data-extraction agent failures 25% by redesigning its routing and adding reliability safeguards.", "Led development of the GenAI copilot and its agents (LangChain, LangGraph) as technical lead of the AI team."]
 metrics: ["1300+ organizations", "48K+ users", "agent failures −25%", "adoption 9x"]
 stack: "LangChain · LangGraph · OpenAI · Python · AWS"
 order: 1

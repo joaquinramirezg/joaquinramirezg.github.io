@@ -2,6 +2,7 @@
 title: "AlwaysHome: which wildfire fixes pay back first"
 where: "UCLA Anderson MSBA Vibathon, team of three · Nov 2026"
 summary: "Homeowners pushed onto California's FAIR Plan are told to harden their homes, but not which fix matters most. Built in one day by a team of three, this app ranks fire-safety fixes by payback and keeps AI to one job: reading the insurance policy. The house-loss model reaches a cross-validated AUC of 0.80 on the 4,525 homes with every feature recorded, out of 22,071 CAL FIRE inspections."
+bullets: ["House-loss model reaches a cross-validated AUC of 0.80 on the 4,525 homes with every feature recorded, out of 22,071 CAL FIRE inspections.", "Ranks fire-safety fixes by payback for California FAIR Plan homeowners; AI has one job, reading the insurance policy.", "Built in one day by a team of three, with 522 tests in CI; I led product and AI."]
 shows: "an ML model shipped inside a working product, with AI kept away from every number."
 metrics: ["AUC 0.80 (n=4,525)", "22,071 CAL FIRE inspections", "522 tests in CI"]
 stack: "Python · scikit-learn · FastAPI · Next.js · Claude API"

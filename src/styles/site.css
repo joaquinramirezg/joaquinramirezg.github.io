@@ -182,6 +182,10 @@ main > section > .grid:first-child::before { content: ""; grid-column: 1 / -1; b
 .system h4 a:hover { text-decoration-color: currentColor; }
 .system > p { margin-top: 10px; font-size: var(--fs-body); line-height: 1.6; color: var(--text-soft); }
 .system .case-link { margin-top: 8px; }
+/* Results first: two or three short lines per system or project, each opening with what changed */
+.wins { list-style: none; margin-top: 10px; display: grid; gap: 6px; }
+.wins li { position: relative; padding-left: 18px; font-size: var(--fs-body); line-height: 1.55; color: var(--text); }
+.wins li::before { content: ""; position: absolute; left: 0; top: calc(.775em - 1px); width: 8px; height: 2px; background: var(--signal); }
 .metrics { display: flex; flex-wrap: wrap; gap: 4px 0; margin-top: 10px; }
 .metric { font: 400 var(--fs-small)/1.5 var(--mono); color: var(--text); white-space: nowrap; font-variant-numeric: tabular-nums; padding-right: 12px; margin-right: 12px; border-right: 1px solid var(--line); }
 .metric:last-child { border-right: 0; margin-right: 0; padding-right: 0; }

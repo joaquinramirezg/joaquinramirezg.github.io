@@ -2,6 +2,7 @@
 title: "Fraud detection across 35 financial institutions"
 where: "Canvia · Data Scientist · Dec 2023 – Dec 2024"
 summary: "Real-time anomaly detection (Isolation Forest) on transactions moving between 35 of Peru's leading financial institutions. The system automatically flags the highest-risk ~2% for human review instead of asking analysts to watch everything."
+bullets: ["Brought flagged transfers from ~9% to the client's ~2% review threshold by redesigning the features and model.", "Scores transfers between 35 of Peru's leading financial institutions in real time, with no fraud labels (Isolation Forest)."]
 metrics: ["35 institutions", "~2% flagged, real time"]
 stack: "Isolation Forest · anomaly detection · Python"
 order: 5
