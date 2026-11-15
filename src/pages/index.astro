@@ -268,7 +268,7 @@ var pc = (function () {
     else tick();
   }
   // Keyboard users: tabbing into a story scrolls to the point where it is open.
-  steps.forEach(function (s, n) { s.addEventListener('focusin', function () { if (live && k !== n) scrollTo(0, root.offsetTop + (root.offsetHeight - innerHeight) * (n + 0.5) / steps.length); }); });
+  steps.forEach(function (s, n) { s.addEventListener('focusin', function () { if (live && k !== n) { scrollTo({ top: root.offsetTop + (root.offsetHeight - innerHeight) * (n + 0.5) / steps.length, behavior: 'instant' }); tick(); } }); });
   addEventListener('scroll', tick, { passive: true });
   addEventListener('resize', sync);
   sync();

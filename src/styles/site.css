@@ -1,6 +1,6 @@
 /* joaquinramirez.dev: one stylesheet (Nov 15 2026 rewrite; replaces the site.css + v2.css layers).
    Voice: an engineer's research notes. Serif display for names, headings and figures; Inter for everything you read or click.
-   Type scale: label 12 · small 13 · meta 14 · body 16 · long-form 17 · lead 18 · item 19 · case h2 / role 22 · name h3 26 · section h2 30 · page h1 40 · figure 56 · display 60 */
+   Type scale: label 12 · small 13 · meta 14 · body 16 · long-form 17 · lead 18 · item 19 · case h2 / role 22 · name h3 26 · section h2 30 · page h1 and figures 40 · display 60 */
 
 @font-face {
   font-family: 'Inter';
@@ -38,7 +38,7 @@
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --fs-label: 12px; --fs-small: 13px; --fs-meta: 14px; --fs-body: 16px; --fs-long: 17px; --fs-lead: 18px;
-  --fs-item: 19px; --fs-h2-case: 22px; --fs-h3: 26px; --fs-h2: 30px; --fs-h1: 40px; --fs-figure: 56px; --fs-display: 60px;
+  --fs-item: 19px; --fs-h2-case: 22px; --fs-h3: 26px; --fs-h2: 30px; --fs-h1: 40px; --fs-display: 60px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -59,8 +59,8 @@
 
 /* ---------- Base ---------- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; accent-color: var(--accent); scrollbar-color: color-mix(in srgb, var(--text-soft) 45%, transparent) transparent; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0s !important; } }
+html { -webkit-text-size-adjust: 100%; accent-color: var(--accent); scrollbar-color: color-mix(in srgb, var(--text-soft) 45%, transparent) transparent; }
+@media (prefers-reduced-motion: reduce) { *::before, *::after { transition-duration: 0s !important; } }
 body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; font-size: var(--fs-body); caret-color: var(--accent); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
 body > main { flex: 1 0 auto; }
 ::selection { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--text); }
@@ -157,7 +157,7 @@ main > section > .wrap > h2, .pc-text > h2 { font-size: var(--fs-h2); margin-bot
 .pc-step > :not(.pc-visual) { grid-column: 1; }
 .pc-step > .pc-visual { grid-column: 2; grid-row: 1 / span 3; align-self: start; }
 .pc-fig { display: flex; flex-direction: column; gap: 8px; }
-.pc-big { font-family: var(--serif); font-size: var(--fs-figure); line-height: 1; color: var(--metric); font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: lining-nums tabular-nums; }
+.pc-big { font-family: var(--serif); font-size: var(--fs-h1); line-height: 1; color: var(--metric); font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: lining-nums tabular-nums; }
 .pc-label { font-size: var(--fs-small); font-weight: 500; color: var(--text-soft); line-height: 1.45; }
 .pc-step h3 { margin-top: 18px; font-family: var(--serif); font-size: var(--fs-h3); font-weight: 560; letter-spacing: -0.015em; line-height: 1.15; }
 .pc-step h3 a { color: var(--text); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: color .15s, background-size .3s cubic-bezier(.2, .8, .2, 1); }
@@ -174,12 +174,14 @@ main > section > .wrap > h2, .pc-text > h2 { font-size: var(--fs-h2); margin-bot
 
 .pc.is-live { height: 300svh; padding: 0; }
 .pc.is-live .pc-grid { position: sticky; top: 56px; height: calc(100svh - 56px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; align-items: center; }
-.pc.is-live .pc-step { display: block; padding: 22px 0 24px; transition: opacity .35s; }
-.pc.is-live .pc-step:not(.is-on) { opacity: .5; }
-.pc.is-live .pc-step:not(.is-on):hover { opacity: .8; }
+.pc.is-live .pc-step { display: block; padding: 22px 0 24px; }
+/* Closed stories step back in colour, not opacity, so every line keeps AA contrast */
+.pc.is-live .pc-step:not(.is-on) .pc-big, .pc.is-live .pc-step:not(.is-on) h3 a { color: var(--text-soft); }
+.pc.is-live .pc-step:not(.is-on) h3 a:hover { color: var(--accent); }
+.pc-big, .pc-step h3 a { transition: color .3s, font-size .35s cubic-bezier(.2, .8, .2, 1); }
 .pc.is-live .pc-fig { flex-direction: row; align-items: baseline; gap: 14px; }
-.pc.is-live .pc-big { font-size: var(--fs-h1); transition: font-size .35s cubic-bezier(.2, .8, .2, 1); }
-.pc.is-live .pc-step.is-on .pc-big { font-size: var(--fs-figure); }
+.pc.is-live .pc-big { font-size: var(--fs-h2); }
+.pc.is-live .pc-step.is-on .pc-big { font-size: var(--fs-h1); }
 .pc.is-live .pc-step h3 { margin-top: 10px; font-size: var(--fs-h2-case); }
 .pc.is-live .pc-more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.2, .8, .2, 1); }
 .pc.is-live .pc-more > div { overflow: hidden; visibility: hidden; transition: visibility 0s .45s; }
@@ -384,7 +386,7 @@ footer ::selection { color: var(--ink-text); }
   .pc-panel figcaption { margin: 12px -12px 0; }
 }
 @media (max-width: 560px) {
-  :root { --fs-h2: 25px; --fs-h1: 32px; --fs-display: 42px; --fs-figure: 46px; --fs-item: 18px; --fs-h3: 23px; --fs-lead: 17px; }
+  :root { --fs-h2: 25px; --fs-h1: 32px; --fs-display: 42px; --fs-item: 18px; --fs-h3: 23px; --fs-lead: 17px; }
   .wrap { padding: 0 20px; }
   .site-nav .nav-inner { gap: 14px; padding: 0 16px; overflow-x: auto; }
   .site-nav .brand-full { display: none; }
