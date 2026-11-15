@@ -80,11 +80,11 @@ const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
 
 <slot />
 
-<footer id="contact">
+<footer id="contact" class="closing">
   <div class="wrap wide footer-grid">
     <div>
-      <h2 class="footer-title">Let's talk</h2>
-      <p class="footer-lead">Hiring for Summer 2027 in ML engineering, data science or AI product? Email me or book a 30-minute call.</p>
+      <h2 class="footer-title" data-wh>Hiring for Summer 2027 in ML engineering, data science or AI product?</h2>
+      <p class="footer-lead">Email me or book a 30-minute call.</p>
       <div class="email-row">
         <code class="email-addr">{EMAIL}</code>
         <button class="copy-email" type="button" data-email={EMAIL}>Copy</button>
@@ -133,6 +133,30 @@ const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
       try { if (window.umami) window.umami.track('email-copy', { from: b.closest('header') ? 'hero' : 'footer' }); } catch (e) {}
     });
   });
+})();
+</script>
+<script is:inline>
+// Closing statement: words turn to full ink as the line rises through the screen (Taste Skill word-highlight).
+(function () {
+  var h = document.querySelector('[data-wh]'); if (!h) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var text = h.textContent.trim();
+  h.setAttribute('aria-label', text);
+  h.innerHTML = text.split(/\s+/).map(function (w) { return '<span class="wh" aria-hidden="true">' + w + '</span>'; }).join(' ');
+  h.classList.add('wh-live');
+  var spans = h.querySelectorAll('.wh'), raf = 0;
+  function tick() {
+    raf = 0;
+    var top = h.getBoundingClientRect().top, vh = innerHeight;
+    // Fully lit when the line reaches 45% of the screen, or when the page cannot scroll that far.
+    var maxScroll = document.documentElement.scrollHeight - vh;
+    var end = Math.max(vh * 0.45, top + scrollY - maxScroll - 1), start = end + vh * 0.45;
+    var p = (start - top) / (start - end);
+    var n = Math.round(Math.max(0, Math.min(1, p)) * spans.length);
+    for (var i = 0; i < spans.length; i++) spans[i].classList.toggle('on', i < n);
+  }
+  addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
+  addEventListener('resize', tick); addEventListener('load', tick); tick();
 })();
 </script>
 <slot name="scripts" />
