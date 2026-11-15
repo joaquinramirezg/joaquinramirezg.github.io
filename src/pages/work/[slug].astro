@@ -25,10 +25,8 @@ const ld = [{
 <header class="page-head">
   <div class="wrap">
     <a class="crumb" href="/#work">← All work</a>
-    <div class="kicker">Case study · {d.minutes} min read</div>
     <h1>{d.pageTitle}</h1>
-    <span class="where">{d.where}</span>
-    <p class="lead" set:html={d.summary} />
+    <p class="where">{d.where}<span class="nw"> · {d.minutes} min read</span></p>
     <div class="metrics">{d.metrics.map((m) => <span class="metric">{m}</span>)}</div>
     <p class="tags">{d.stack}</p>
     {d.tldr && (
@@ -43,7 +41,6 @@ const ld = [{
 <section class="page-body" id="case">
   <div class="wrap">
     <article class="case">
-      <p class="where">{d.angle}</p>
       <Content />
     </article>
   </div>

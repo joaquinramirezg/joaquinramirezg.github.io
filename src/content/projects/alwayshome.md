@@ -90,6 +90,6 @@ ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the 
 <li>No user research: it was built in one day, without interviews with homeowners, brokers or insurers.</li>
 <li>Los Angeles County only, total loss only, no partial claims. Not insurance advice and not an inspection.</li>
 <li>Fix costs and insurance discounts are labelled assumptions; there is no public price per fix or premium per home.</li>
-<li>The house-loss model shows associations from two fires, not causes. Where the data show no benefit, the app claims none.</li>
+<li>Where the data show no benefit, the app claims none.</li>
 <li>Next: real fix prices and insurer discounts, photo and aerial pre-fill of the home questions, statewide coverage, and a referral path to insurers writing in that ZIP.</li>
 </ul>

@@ -24,9 +24,8 @@ const ld = [{
 <header class="page-head">
   <div class="wrap">
     <a class="crumb" href="/#projects">← All projects</a>
-    <div class="kicker">{d.kicker}</div>
     <h1>{d.title}</h1>
-    <span class="where">{d.byline}</span>
+    <p class="where">{d.kicker}<br>{d.byline}</p>
     <p class="lead">{d.lead}</p>
     <div class="metrics">{(d.pageMetrics ?? d.metrics).map((m) => <span class="metric">{m}</span>)}</div>
     <div class="links">

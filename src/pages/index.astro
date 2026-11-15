@@ -36,19 +36,23 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
 <header id="top">
   <div class="wrap wide hero-grid">
     <div class="hero-text">
-      <div class="kicker"><span class="nw">Machine Learning Engineer ·</span> <span class="nw">Data Scientist</span></div>
       <h1>Joaquin Ramirez</h1>
+      <p class="role"><span class="nw">Machine Learning Engineer ·</span> <span class="nw">Data Scientist</span></p>
       <p class="subtitle">Machine learning engineer and data scientist who builds GenAI agents, computer vision, fraud detection, optimization and forecasting models. Over three years across B2B SaaS, IT consulting, engineering and consumer goods, most recently as Senior ML Engineer and technical lead of an AI team, taking product tradeoffs to the CEO and CTO.</p>
       <ul class="hero-facts">
         <li><Icon name="pin" /> Los Angeles, California</li>
         <li><Icon name="school" /> M.S. Business Analytics, UCLA Anderson · Class President · Dec 2027</li>
       </ul>
-      <div class="links">
-        <a class="primary" href="/resume.pdf" target="_blank" rel="noopener"><Icon name="file" /> Resume</a>
-        <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="linkedin" /> LinkedIn</a>
-        <a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="github" /> GitHub</a>
-        <a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}><Icon name="mail" /> Copy email</a>
-        <a href="https://calendly.com/joaquinramirezg/30min" target="_blank" rel="noopener"><Icon name="calendar" /> Book a call</a>
+      <div class="hero-actions">
+        <div class="links">
+          <a class="primary" href="/resume.pdf" target="_blank" rel="noopener"><Icon name="file" /> Resume</a>
+          <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="linkedin" /> LinkedIn</a>
+        </div>
+        <ul class="quiet-links">
+          <li><a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="github" /> GitHub</a></li>
+          <li><a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}><Icon name="mail" /> Copy email</a></li>
+          <li><a href="https://calendly.com/joaquinramirezg/30min" target="_blank" rel="noopener"><Icon name="calendar" /> Book a call</a></li>
+        </ul>
       </div>
       <p class="avail"><span class="dot" aria-hidden="true"></span>Open to Summer 2027 internships in ML engineering, data science and AI product management</p>
     </div>
@@ -63,36 +67,36 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
     <h2>Start here</h2>
     <div class="featured">
       <a class="tile" href="/work/hr-copilot/">
-        <div class="tile-visual tile-number">
+        <div class="tile-figure">
           <span class="tile-big">9x</span>
           <span class="tile-small"><span class="nw">copilot adoption ·</span> <span class="nw">1300+ organizations ·</span> <span class="nw">48K+ users</span></span>
         </div>
         <div class="tile-body">
-          <span class="tile-kind">Case study · <span class="nw">B2B HR-tech SaaS</span> · {copilot.data.minutes} min</span>
           <h3>{copilot.data.pageTitle}</h3>
           <p>Agents, reliability, and whether to tell a user the data exists but is not theirs.</p>
+          <span class="tile-kind">Case study · <span class="nw">B2B HR-tech SaaS</span> · {copilot.data.minutes} min</span>
         </div>
       </a>
       <a class="tile" href="/work/fraud-detection/">
-        <div class="tile-visual tile-number">
+        <div class="tile-figure">
           <span class="tile-big">35</span>
           <span class="tile-small"><span class="nw">financial institutions ·</span> <span class="nw">real time ·</span> <span class="nw">no fraud labels</span></span>
         </div>
         <div class="tile-body">
-          <span class="tile-kind">Case study · IT consulting</span>
           <h3>{fraud.data.pageTitle}</h3>
           <p>No fraud labels, so unsupervised. Took over an MVP flagging ~9%; redesigned features and model to the client's ~2% threshold.</p>
+          <span class="tile-kind">Case study · IT consulting</span>
         </div>
       </a>
       <a class="tile" href="/projects/alwayshome/">
-        <div class="tile-visual tile-number">
+        <div class="tile-figure">
           <span class="tile-big">0.80</span>
           <span class="tile-small"><span class="nw">AUC ·</span> <span class="nw">0.68 on unseen neighborhoods ·</span> <span class="nw">22,071 CAL FIRE inspections</span></span>
         </div>
         <div class="tile-body">
-          <span class="tile-kind">Project · live app · Nov 2026</span>
           <h3>AlwaysHome</h3>
           <p>Which wildfire fixes pay back first. AI reads the policy, never sets a number.</p>
+          <span class="tile-kind">Project · live app · Nov 2026</span>
         </div>
       </a>
     </div>
@@ -158,8 +162,8 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
             <figcaption>{p.id === 'alwayshome' ? 'The live app: the plan rebuilds as the budget moves. Dollar figures are placeholders.' : 'Evaluation loss and perplexity, before and after LoRA fine-tuning.'}</figcaption>
           </figure>
           <div class="prow-body">
-            <span class="prow-kind">{p.data.where}</span>
             <h3>{hasPage(p) ? <a href={`/projects/${p.id}/`}>{p.data.title}</a> : p.data.title}</h3>
+            <p class="prow-kind">{p.data.where}</p>
             <p set:html={p.data.summary} />
             {p.data.metrics.length > 0 && (
               <div class="metrics">{p.data.metrics.map((m) => <span class="metric">{m}</span>)}</div>
@@ -215,7 +219,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
 <section id="about">
   <div class="wrap wide">
     <h2>About</h2>
-    <div class="card about-card">
+    <div class="about-card">
       <Fragment set:html={about} />
     </div>
   </div>
