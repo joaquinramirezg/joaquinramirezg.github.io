@@ -43,16 +43,15 @@ const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
 <meta property="og:image:alt" content={ogAlt}>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content={img}>
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f141b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f3ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121211" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" sizes="48x48 32x32 16x16" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <script is:inline>
   // Apply a saved theme choice before first paint; otherwise the system setting wins.
-  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') { document.documentElement.setAttribute('data-theme', t); document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', t === 'dark' ? '#0f141b' : '#ffffff'); }); } } catch (e) {}
+  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') { document.documentElement.setAttribute('data-theme', t); document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', t === 'dark' ? '#121211' : '#f4f3ef'); }); } } catch (e) {}
 </script>
 <!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
 <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
@@ -116,7 +115,7 @@ const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
   if (btn) btn.addEventListener('click', function () {
     var next = effective() === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
-    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', next === 'dark' ? '#0f141b' : '#ffffff'); });
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', next === 'dark' ? '#121211' : '#f4f3ef'); });
     try { localStorage.setItem('theme', next); } catch (e) {}
     try { if (window.umami) window.umami.track('theme', { to: next }); } catch (e) {}
   });

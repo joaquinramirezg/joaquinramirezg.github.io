@@ -10,7 +10,11 @@ import about from '../data/about.html?raw';
 import experience from '../data/experience.json';
 import hrRaw from '../content/work/hr-copilot.md?raw';
 import fraudRaw from '../content/work/fraud-detection.md?raw';
+import ragRaw from '../content/work/retrieval-pipeline.md?raw';
+import contractRaw from '../content/work/contract-allocation.md?raw';
 const svgOf = (md: string) => (md.match(/<svg[\s\S]*?<\/svg>/) || [''])[0];
+// Strip ids so a diagram can appear twice on the page (index preview and case study) without duplicate ids.
+const noIds = (svg: string) => svg.replace(/\sid="[^"]*"/g, '').replace(/marker-end="url\(#[^)]*\)"/g, '');
 const hrSvg = svgOf(hrRaw);
 const fraudSvg = svgOf(fraudRaw);
 
@@ -25,6 +29,17 @@ const fraud = work.find((w) => w.id === 'fraud-detection')!;
 const byId = Object.fromEntries(work.map((w) => [w.id, w]));
 const mainProjects = projects.filter((p) => !p.data.earlier);
 const earlierProjects = projects.filter((p) => p.data.earlier);
+// The work index: every system, one line each, with one result from its own metrics (verbatim).
+const years = (d: string) => { const y = d.match(/\d{4}/g) || []; const a = y[0], b = y[y.length - 1]; return a === b ? a : `${a}–${b.slice(2)}`; };
+const jobOf = Object.fromEntries(experience.flatMap((j) => j.systems.map((s) => [s, j])));
+const idx = [
+  { id: 'hr-copilot', big: '9x', small: 'copilot adoption', svg: hrSvg },
+  { id: 'retrieval-pipeline', big: '1.2M+', small: 'vectors', svg: svgOf(ragRaw) },
+  { id: 'cv-intake', big: '~250', small: 'candidates/month', svg: '' },
+  { id: 'fraud-detection', big: '~2%', small: 'flagged, real time', svg: fraudSvg },
+  { id: 'contract-allocation', big: '+55%', small: 'est. gross margin', svg: svgOf(contractRaw) },
+].map((r) => { const w = byId[r.id]; const j = jobOf[r.id]; return { ...r, title: w.data.title, where: `${j.company} · ${years(j.dates)}`, href: hasPage(w) ? `/work/${w.id}/` : `#sys-${w.id}`, preview: r.svg ? noIds(r.svg) : '' }; });
+idx.push({ id: 'alwayshome', big: '0.80', small: 'AUC', svg: '', title: 'AlwaysHome, wildfire retrofit planner', where: 'UCLA Anderson · 2026', href: '/projects/alwayshome/', preview: '<img src="/p/alwayshome.webp" alt="" width="800" height="480" loading="lazy" decoding="async">' });
 // ProfilePage dates: first commit of this site (Aug 27 2026) and the last commit touching home content.
 const jsonLd = structuredClone(homeLd);
 Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00', dateModified: lastCommit(['src/pages/index.astro', 'src/data']) });
@@ -36,95 +51,111 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   path="/"
   ogType="website"
   jsonLd={jsonLd}
-  skipTo="#featured"
+  skipTo="#index"
 >
 <header id="top" class="hero">
-  <div class="wrap wide hero-in">
-    <div class="hero-text">
-      <h1 class="enter" style="--d:0">Joaquin Ramirez</h1>
-      <p class="role enter" style="--d:1"><span class="nw">Machine Learning Engineer ·</span> <span class="nw">Data Scientist</span></p>
-      <p class="subtitle enter" style="--d:2">Machine learning engineer and data scientist who builds GenAI agents, computer vision, fraud detection, optimization and forecasting models. Over three years across B2B SaaS, IT consulting, engineering and consumer goods, most recently as Senior ML Engineer and technical lead of an AI team, taking product tradeoffs to the CEO and CTO.</p>
-      <ul class="hero-facts enter" style="--d:3">
-        <li><Icon name="pin" /> Los Angeles, California</li>
-        <li><Icon name="school" /> M.S. Business Analytics, UCLA Anderson · Class President · Dec 2027</li>
-      </ul>
-      <div class="hero-actions enter" style="--d:4">
-        <div class="links">
-          <a class="primary" href="/resume.pdf" target="_blank" rel="noopener"><Icon name="file" /> Resume</a>
-          <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="linkedin" /> LinkedIn</a>
-        </div>
-        <ul class="quiet-links">
-          <li><a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="github" /> GitHub</a></li>
-          <li><a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}><Icon name="mail" /> Copy email</a></li>
-          <li><a href="https://calendly.com/joaquinramirezg/30min" target="_blank" rel="noopener"><Icon name="calendar" /> Book a call</a></li>
-        </ul>
+  <div class="grid hero-grid">
+    <h1 class="enter" style="--d:0">Joaquin<br>Ramirez</h1>
+    <p class="intro enter" style="--d:1">Machine learning engineer and data scientist who builds GenAI agents, computer vision, fraud detection, optimization and forecasting models. Over three years across B2B SaaS, IT consulting, engineering and consumer goods, most recently as Senior ML Engineer and technical lead of an AI team, taking product tradeoffs to the CEO and CTO.</p>
+    <figure class="idx-preview" aria-hidden="true">
+      {idx.map((r, i) => r.preview && <div class={`pv${i === 0 ? ' on' : ''}`} data-pv={r.id} set:html={r.preview} />)}
+    </figure>
+    <div class="meta enter" style="--d:2">
+      <img class="meta-photo" src="/portrait-sm.webp" alt="Joaquin Ramirez" width="560" height="700" fetchpriority="high">
+      <p class="meta-facts"><strong>M.S. Business Analytics, UCLA Anderson</strong><br>Class President · Dec 2027<br>Los Angeles, California</p>
+      <p class="avail"><span class="dot" aria-hidden="true"></span>Open to Summer 2027 internships in ML engineering, data science and AI product management</p>
+      <div class="links">
+        <a class="primary" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="linkedin" /> LinkedIn</a>
       </div>
-      <p class="avail enter" style="--d:5"><span class="dot" aria-hidden="true"></span>Open to Summer 2027 internships in ML engineering, data science and AI product management</p>
+      <ul class="quiet-links">
+        <li><a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a></li>
+        <li><a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}>Copy email</a></li>
+        <li><a href="https://calendly.com/joaquinramirezg/30min" target="_blank" rel="noopener">Book a call</a></li>
+      </ul>
     </div>
-    <picture class="hero-photo enter" style="--d:1">
-      <img src="/portrait-sm.webp" alt="Joaquin Ramirez" width="560" height="700" fetchpriority="high">
-    </picture>
+    <div class="idx enter" style="--d:3" id="index">
+      <h2 class="sr-only">Work index</h2>
+      <div class="idx-head lab" aria-hidden="true"><span>No.</span><span>System</span><span>Where</span><span>Result</span></div>
+      <ol>
+        {idx.map((r, i) => (
+          <li data-row={r.id}>
+            <a href={r.href}>
+              <span class="n">{String(i + 1).padStart(2, '0')}</span>
+              <span class="t">{r.title}</span>
+              <span class="w">{r.where}</span>
+              <span class="f"><b>{r.big}</b> {r.small}</span>
+              <span class="go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
   </div>
 </header>
 
 <main id="content">
-<section id="featured" class="pc ground" aria-labelledby="featured-h">
-  <div class="wrap wide pc-grid">
-    <div class="pc-text">
-      <h2 id="featured-h">Selected work</h2>
-      <ol class="pc-steps">
-        <li class="pc-step">
-          <p class="pc-fig"><span class="pc-big">9x</span><span class="pc-label"><span class="nw">copilot adoption ·</span> <span class="nw">1300+ organizations ·</span> <span class="nw">48K+ users</span></span></p>
-          <h3><a href="/work/hr-copilot/">{copilot.data.pageTitle}</a></h3>
-          <div class="pc-more"><div>
-            <p>Agents, reliability, and whether to tell a user the data exists but is not theirs.</p>
-            <a class="case-link" href="/work/hr-copilot/">Read the case study<span> · {copilot.data.minutes} min</span></a>
-          </div></div>
-          <figure class="pc-visual pc-panel"><div class="pc-svg" set:html={hrSvg} /><figcaption>One extraction request: every output clears schema enforcement and a self critique before anyone sees it.</figcaption></figure>
-        </li>
-        <li class="pc-step">
-          <p class="pc-fig"><span class="pc-big">35</span><span class="pc-label"><span class="nw">financial institutions ·</span> <span class="nw">real time ·</span> <span class="nw">no fraud labels</span></span></p>
-          <h3><a href="/work/fraud-detection/">{fraud.data.pageTitle}</a></h3>
-          <div class="pc-more"><div>
-            <p>No fraud labels, so unsupervised. Took over an MVP flagging ~9%; redesigned features and model to the client's ~2% threshold.</p>
-            <a class="case-link" href="/work/fraud-detection/">Read the case study</a>
-          </div></div>
-          <figure class="pc-visual pc-panel"><div class="pc-svg" set:html={fraudSvg} /><figcaption>What the model sees and where its output goes: flags sized to the client's ~2% review capacity.</figcaption></figure>
-        </li>
-        <li class="pc-step">
-          <p class="pc-fig"><span class="pc-big">0.80</span><span class="pc-label"><span class="nw">AUC ·</span> <span class="nw">0.68 on unseen neighborhoods ·</span> <span class="nw">22,071 CAL FIRE inspections</span></span></p>
-          <h3><a href="/projects/alwayshome/">AlwaysHome</a></h3>
-          <div class="pc-more"><div>
-            <p>Which wildfire fixes pay back first. AI reads the policy, never sets a number.</p>
-            <span class="pc-links"><a class="case-link" href="/projects/alwayshome/">Project page</a> <a class="text-link" href={alwayshome.data.demo} target="_blank" rel="noopener">Live app ↗</a></span>
-          </div></div>
-          <figure class="pc-visual frame">
-            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{alwayshome.data.demo?.replace('https://', '')}</span></div>
-            <div class="frame-media">
-              <video class="auto-loop" muted loop playsinline preload="none" poster="/projects/alwayshome/loop-r-poster.webp" width="960" height="600" aria-label="AlwaysHome plan screen: as the budget slider moves, the ranked fire-safety fixes and the estimated chance of losing the house update">
-                <source src="/projects/alwayshome/loop-m.webm" type="video/webm" media="(max-width: 600px)">
-                <source src="/projects/alwayshome/loop-m.mp4" type="video/mp4" media="(max-width: 600px)">
-                <source src="/projects/alwayshome/loop-r.webm" type="video/webm">
-                <source src="/projects/alwayshome/loop-r.mp4" type="video/mp4">
-              </video>
-              <button class="loop-toggle" type="button" hidden>Play</button>
-            </div>
-            <figcaption>The live app: the plan rebuilds as the budget moves. Dollar figures are placeholders.</figcaption>
-          </figure>
-        </li>
-      </ol>
-    </div>
-    <div class="pc-frame" aria-hidden="true"></div>
+<section id="featured" aria-labelledby="featured-h">
+  <div class="grid">
+    <p class="lab sec-lab">Case studies</p>
+    <h2 id="featured-h" class="sec-title">Three systems, in depth</h2>
   </div>
+  <article class="feat grid">
+    <p class="lab feat-n">01</p>
+    <h3 class="feat-title"><a href="/work/hr-copilot/">{copilot.data.pageTitle}</a></h3>
+    <figure class="feat-fig panel"><div class="fig-scroll" set:html={hrSvg} /></figure>
+    <div class="feat-text">
+      <p class="feat-big"><b>9x</b> copilot adoption</p>
+      <p class="feat-facts"><span class="nw">1300+ organizations</span> · <span class="nw">48K+ users</span></p>
+      <p>Agents, reliability, and whether to tell a user the data exists but is not theirs. Every output clears schema enforcement and a self critique before anyone sees it.</p>
+      <a class="case-link" href="/work/hr-copilot/">Read the case study<span> · {copilot.data.minutes} min</span></a>
+    </div>
+  </article>
+  <article class="feat grid">
+    <p class="lab feat-n">02</p>
+    <h3 class="feat-title"><a href="/work/fraud-detection/">{fraud.data.pageTitle}</a></h3>
+    <figure class="feat-fig panel"><div class="fig-scroll" set:html={fraudSvg} /></figure>
+    <div class="feat-text">
+      <p class="feat-big"><b>35</b> financial institutions</p>
+      <p class="feat-facts"><span class="nw">real time</span> · <span class="nw">no fraud labels</span></p>
+      <p>No fraud labels, so unsupervised. Took over an MVP flagging ~9%; redesigned features and model to the client's ~2% threshold.</p>
+      <a class="case-link" href="/work/fraud-detection/">Read the case study</a>
+    </div>
+  </article>
+  <article class="feat grid">
+    <p class="lab feat-n">03</p>
+    <h3 class="feat-title"><a href="/projects/alwayshome/">AlwaysHome</a></h3>
+    <figure class="feat-fig frame">
+      <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{alwayshome.data.demo?.replace('https://', '')}</span></div>
+      <div class="frame-media">
+        <video class="auto-loop" muted loop playsinline preload="none" poster="/projects/alwayshome/loop-r-poster.webp" width="960" height="600" aria-label="AlwaysHome plan screen: as the budget slider moves, the ranked fire-safety fixes and the estimated chance of losing the house update">
+          <source src="/projects/alwayshome/loop-m.webm" type="video/webm" media="(max-width: 600px)">
+          <source src="/projects/alwayshome/loop-m.mp4" type="video/mp4" media="(max-width: 600px)">
+          <source src="/projects/alwayshome/loop-r.webm" type="video/webm">
+          <source src="/projects/alwayshome/loop-r.mp4" type="video/mp4">
+        </video>
+        <button class="loop-toggle" type="button" hidden>Play</button>
+      </div>
+      <figcaption>The live app: the plan rebuilds as the budget moves. Dollar figures are placeholders.</figcaption>
+    </figure>
+    <div class="feat-text">
+      <p class="feat-big"><b>0.80</b> AUC</p>
+      <p class="feat-facts"><span class="nw">0.68 on unseen neighborhoods</span> · <span class="nw">22,071 CAL FIRE inspections</span></p>
+      <p>Which wildfire fixes pay back first. AI reads the policy, never sets a number.</p>
+      <span class="pc-links"><a class="case-link" href="/projects/alwayshome/">Project page</a> <a class="text-link" href={alwayshome.data.demo} target="_blank" rel="noopener">Live app ↗</a></span>
+    </div>
+  </article>
 </section>
 
 <section id="work">
-  <div class="wrap wide">
-    <h2>Experience</h2>
-    <p class="section-lead">Systems built at work, most recent first. Four have a full case study: the tradeoffs, what failed, and how each result was measured.</p>
+  <div class="grid">
+    <p class="lab sec-lab">Experience</p>
+    <h2 class="sec-title">Systems built at work</h2>
+    <p class="section-lead">Most recent first. Four have a full case study: the tradeoffs, what failed, and how each result was measured.</p>
     <ol class="timeline">
       {experience.map((job) => (
         <li class="job">
+          <p class="job-years lab">{years(job.dates)}</p>
           <div class="job-head">
             <h3>{job.company}</h3>
             <p class="job-title">{job.title}</p>
@@ -133,7 +164,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
           </div>
           <div class="job-body">
             {job.systems.map((id) => byId[id]).map((w) => (
-              <article class="system">
+              <article class="system" id={`sys-${w.id}`}>
                 <h4>{hasPage(w) ? <a href={`/work/${w.id}/`}>{w.data.title}</a> : w.data.title}</h4>
                 {w.data.metrics.length > 0 && (
                   <div class="metrics">{w.data.metrics.map((m) => <span class="metric">{m}</span>)}</div>
@@ -152,10 +183,11 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   </div>
 </section>
 
-<section id="projects" class="ground">
-  <div class="wrap wide">
-    <h2>Projects</h2>
-    <p class="section-lead">Built outside a job, each with its code.</p>
+<section id="projects">
+  <div class="grid">
+    <p class="lab sec-lab">Projects</p>
+    <h2 class="sec-title">Built outside a job</h2>
+    <p class="section-lead">Each with its code.</p>
     {mainProjects.filter((p) => p.id !== 'alwayshome').map((p) => (
       <article class="prow" id={`project-${p.id}`}>
         <figure class="frame">
@@ -178,11 +210,6 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
     ))}
     <h3 class="earlier-title">More projects</h3>
     <ul class="earlier">
-      <li id="project-alwayshome">
-        <a href="/projects/alwayshome/">AlwaysHome →</a>
-        <span>Which wildfire fixes pay back first: a live app with a house-loss model and AI that reads the insurance policy.</span>
-        <span class="earlier-where">{alwayshome.data.where}</span>
-      </li>
       {earlierProjects.map((p) => (
         <li id={`project-${p.id}`}>
           <a href={p.data.code} target="_blank" rel="noopener">{p.data.short ?? p.data.title} ↗</a>
@@ -195,7 +222,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
 </section>
 
 <section id="background">
-  <div class="wrap wide background-grid">
+  <div class="grid background-grid">
     <div id="education">
       <h2>Education</h2>
       <ul class="edu-rows">
@@ -219,8 +246,8 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   </div>
 </section>
 
-<section id="about" class="ground about">
-  <div class="wrap wide about-grid">
+<section id="about">
+  <div class="grid about-grid">
     <img class="about-photo" src="/cusco.webp" alt="Joaquin Ramirez in a white t-shirt, smiling in front of an Inca stone wall" width="880" height="1100" loading="lazy">
     <div class="about-copy">
       <h2>About</h2>
@@ -239,56 +266,29 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   var k = location.hash.slice(1);
   if (map[k]) location.replace('/work/' + map[k] + '/' + location.search);
 })();
-// Selected work: pinned chapters (Taste Skill). On wide, tall screens the section holds while its
-// three stories open one at a time and the frame on the right changes to each one's picture.
-var pc = (function () {
-  var root = document.querySelector('.pc'); if (!root) return null;
-  var steps = [].slice.call(root.querySelectorAll('.pc-step'));
-  var figs = steps.map(function (s) { return s.querySelector('.pc-visual'); });
-  var frame = root.querySelector('.pc-frame');
-  var live = false, k = -1, subs = [];
-  function fits() { return !matchMedia('(prefers-reduced-motion: reduce)').matches && matchMedia('(min-width: 1024px)').matches && innerHeight >= 640; }
-  function show(i) {
-    if (i === k) return; k = i;
-    steps.forEach(function (s, n) { s.classList.toggle('is-on', n === i); });
-    figs.forEach(function (f, n) { f.classList.toggle('is-on', n === i); });
-    subs.forEach(function (fn) { fn(); });
-  }
-  function tick() {
-    if (!live) return;
-    var span = root.offsetHeight - innerHeight;
-    var p = span > 0 ? Math.min(0.999, Math.max(0, -root.getBoundingClientRect().top / span)) : 0;
-    show(Math.floor(p * steps.length));
-  }
-  function sync() {
-    var f = fits();
-    if (f && !live) { live = true; root.classList.add('is-live'); frame.removeAttribute('aria-hidden'); figs.forEach(function (fg) { frame.appendChild(fg); }); k = -1; tick(); }
-    else if (!f && live) { live = false; root.classList.remove('is-live'); frame.setAttribute('aria-hidden', 'true'); figs.forEach(function (fg, n) { fg.classList.remove('is-on'); steps[n].appendChild(fg); }); steps.forEach(function (s) { s.classList.remove('is-on'); }); k = -1; subs.forEach(function (fn) { fn(); }); }
-    else tick();
-  }
-  // Keyboard users: tabbing into a story scrolls to the point where it is open.
-  steps.forEach(function (s, n) { s.addEventListener('focusin', function () { if (live && k !== n) { scrollTo({ top: root.offsetTop + (root.offsetHeight - innerHeight) * (n + 0.5) / steps.length, behavior: 'instant' }); tick(); } }); });
-  addEventListener('scroll', tick, { passive: true });
-  addEventListener('resize', sync);
-  sync();
-  return { live: function () { return live; }, on: function (fn) { subs.push(fn); } };
+// Work index: hovering or focusing a row shows that system's diagram beside the intro (wide screens only).
+(function () {
+  var pvs = {}; document.querySelectorAll('.idx-preview .pv').forEach(function (p) { pvs[p.getAttribute('data-pv')] = p; });
+  var fig = document.querySelector('.idx-preview');
+  function show(id) { var hit = pvs[id]; if (!hit) return; Object.keys(pvs).forEach(function (k) { pvs[k].classList.toggle('on', pvs[k] === hit); }); }
+  document.querySelectorAll('.idx li').forEach(function (li) {
+    var id = li.getAttribute('data-row');
+    li.addEventListener('mouseenter', function () { show(id); fig.classList.toggle('none', !pvs[id]); });
+    li.addEventListener('focusin', function () { show(id); fig.classList.toggle('none', !pvs[id]); });
+  });
 })();
-// Muted demo loop: plays only on screen (in the pinned section, only while its story is open);
-// never under reduced motion or Save-Data.
+// Muted demo loop: plays only on screen; never under reduced motion or Save-Data.
 (function () {
   var v = document.querySelector('video.auto-loop'); if (!v) return;
   if (window.matchMedia && matchMedia('(max-width: 600px)').matches) { v.poster = '/projects/alwayshome/loop-m-poster.webp'; v.classList.add('is-m'); }
-  var fig = v.closest('.pc-visual');
   var btn = v.parentNode.querySelector('.loop-toggle'); btn.hidden = false;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var save = navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || ''));
   var userPaused = !!(reduce || save), visible = false;
-  function open() { return !pc || !pc.live() || fig.classList.contains('is-on'); }
-  function sync() { if (visible && !userPaused && open()) { v.preload = 'auto'; v.play().catch(function () {}); } else { v.pause(); } label(); }
+  function sync() { if (visible && !userPaused) { v.preload = 'auto'; v.play().catch(function () {}); } else { v.pause(); } label(); }
   function label() { btn.textContent = v.paused ? 'Play' : 'Pause'; }
   v.addEventListener('play', label); v.addEventListener('pause', label);
   btn.addEventListener('click', function () { userPaused = !userPaused; sync(); });
-  if (pc) pc.on(sync);
   if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; sync(); }, { threshold: 0.4 }).observe(v);
 })();
 // Highlight the nav link of the section on screen.
