@@ -55,13 +55,13 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
       <p class="meta-facts"><strong>M.S. Business Analytics, UCLA Anderson</strong><br>Class President · Dec 2027<br>Los Angeles, California</p>
       <p class="avail"><span class="dot" aria-hidden="true"></span>Open to Summer 2027 internships in ML engineering, data science and AI product management</p>
       <div class="links">
-        <a class="primary" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="primary" href="/resume.pdf" target="_blank" rel="noopener"><Icon name="file" /> Resume</a>
         <a href="https://www.linkedin.com/in/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="linkedin" /> LinkedIn</a>
       </div>
       <ul class="quiet-links">
-        <li><a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener">GitHub</a></li>
-        <li><a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}>Copy email</a></li>
-        <li><a href="https://calendly.com/joaquinramirezg/30min" target="_blank" rel="noopener">Book a call</a></li>
+        <li><a href="https://github.com/joaquinramirezg" target="_blank" rel="me noopener"><Icon name="github" size={14} /> GitHub</a></li>
+        <li><a href={`mailto:${EMAIL}`} data-email={EMAIL} title={EMAIL}><Icon name="mail" size={14} /> Copy email</a></li>
+        <li><a href="https://calendly.com/joaquinramirezg/30min" target="_blank" rel="noopener"><Icon name="calendar" size={14} /> Book a call</a></li>
       </ul>
     </div>
     <div class="idx enter" style="--d:3" id="index">
@@ -177,6 +177,8 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
 
 <section id="background">
   <div class="grid background-grid">
+    <p class="lab sec-lab">Background</p>
+    <h2 class="sec-title">Education, leadership and awards</h2>
     <div id="education">
       <h2>Education</h2>
       <ul class="edu-rows">
@@ -190,11 +192,17 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
       </ul>
     </div>
     <div id="leadership">
-      <h2>Leadership and recognition</h2>
-      <ul class="edu-rows lead-rows">
-        <li><h3>Class President</h3><p class="edu-details">UCLA Anderson MSBA</p></li>
-        <li><h3>Anderson Merit Fellowship</h3><p class="edu-details">UCLA Anderson</p></li>
+      <h2>Leadership</h2>
+      <ul class="edu-rows">
+        <li><h3>Class President</h3><p class="edu-details">UCLA Anderson MSBA, Class of 2027</p></li>
         <li><h3>Student Body President, Computer Science</h3><p class="edu-details">UTEC · 2022</p></li>
+      </ul>
+    </div>
+    <div id="awards">
+      <h2>Awards</h2>
+      <ul class="edu-rows">
+        <li><h3>Anderson Merit Fellowship</h3><p class="edu-details">UCLA Anderson</p></li>
+        <li><h3>Best Innovative Developer Award</h3><p class="edu-details">Canvia · 2024</p></li>
         <li><h3>Academic Excellence Scholarship, top 10% of class</h3><p class="edu-details">UTEC</p></li>
       </ul>
     </div>
@@ -213,7 +221,8 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   <div class="grid about-grid">
     <img class="about-photo" src="/cusco.webp" alt="Joaquin Ramirez in a white t-shirt, smiling in front of an Inca stone wall" width="880" height="1100" loading="lazy">
     <div class="about-copy">
-      <h2>About</h2>
+      <p class="lab about-lab">About</p>
+      <h2>From Lima to Los Angeles</h2>
       <Fragment set:html={about} />
     </div>
   </div>
