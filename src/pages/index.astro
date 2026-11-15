@@ -8,16 +8,6 @@ import skills from '../data/skills.json';
 import education from '../data/education.json';
 import about from '../data/about.html?raw';
 import experience from '../data/experience.json';
-import hrRaw from '../content/work/hr-copilot.md?raw';
-import fraudRaw from '../content/work/fraud-detection.md?raw';
-import ragRaw from '../content/work/retrieval-pipeline.md?raw';
-import contractRaw from '../content/work/contract-allocation.md?raw';
-const svgOf = (md: string) => (md.match(/<svg[\s\S]*?<\/svg>/) || [''])[0];
-// Strip ids so a diagram can appear twice on the page (index preview and case study) without duplicate ids.
-const noIds = (svg: string) => svg.replace(/\sid="[^"]*"/g, '').replace(/marker-end="url\(#[^)]*\)"/g, '');
-const hrSvg = svgOf(hrRaw);
-const fraudSvg = svgOf(fraudRaw);
-
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const hasPage = (e: { body?: string }) => !!(e.body && e.body.trim());
@@ -29,17 +19,20 @@ const fraud = work.find((w) => w.id === 'fraud-detection')!;
 const byId = Object.fromEntries(work.map((w) => [w.id, w]));
 const mainProjects = projects.filter((p) => !p.data.earlier);
 const earlierProjects = projects.filter((p) => p.data.earlier);
-// The work index: every system, one line each, with one result from its own metrics (verbatim).
+// The work index: every system on one line, with results taken verbatim from its own metrics.
+// Each result is [before, figure, after]; the figure is set larger.
 const years = (d: string) => { const y = d.match(/\d{4}/g) || []; const a = y[0], b = y[y.length - 1]; return a === b ? a : `${a}–${b.slice(2)}`; };
 const jobOf = Object.fromEntries(experience.flatMap((j) => j.systems.map((s) => [s, j])));
-const idx = [
-  { id: 'hr-copilot', big: '9x', small: 'copilot adoption', svg: hrSvg },
-  { id: 'retrieval-pipeline', big: '1.2M+', small: 'vectors', svg: svgOf(ragRaw) },
-  { id: 'cv-intake', big: '~250', small: 'candidates/month', svg: '' },
-  { id: 'fraud-detection', big: '~2%', small: 'flagged, real time', svg: fraudSvg },
-  { id: 'contract-allocation', big: '+55%', small: 'est. gross margin', svg: svgOf(contractRaw) },
-].map((r) => { const w = byId[r.id]; const j = jobOf[r.id]; return { ...r, title: w.data.title, where: `${j.company} · ${years(j.dates)}`, href: hasPage(w) ? `/work/${w.id}/` : `#sys-${w.id}`, preview: r.svg ? noIds(r.svg) : '' }; });
-idx.push({ id: 'alwayshome', big: '0.80', small: 'AUC', svg: '', title: 'AlwaysHome, wildfire retrofit planner', where: 'UCLA Anderson · 2026', href: '/projects/alwayshome/', preview: '<img src="/p/alwayshome.webp" alt="" width="800" height="480" loading="lazy" decoding="async">' });
+const rows = [
+  { id: 'hr-copilot', r: ['adoption', '9x', '· agent failures −25%'] },
+  { id: 'retrieval-pipeline', r: ['', '200-question', 'golden set'] },
+  { id: 'cv-intake', r: ['delays flagged', '2 weeks earlier', ''] },
+  { id: 'fraud-detection', r: ['', '~9% → ~2%', 'flagged, real time'] },
+  { id: 'contract-allocation', r: ['planning', '2 weeks → <20 min', ''] },
+  { id: 'sales-forecasting', r: ['forecast accuracy', '~30% better', '(wMAPE)'] },
+];
+const idx = rows.map((x) => { const w = byId[x.id]; const j = jobOf[x.id]; const page = hasPage(w); return { ...x, title: w.data.title, where: `${j.company} · ${years(j.dates)}`, about: j.about, href: page ? `/work/${w.id}/` : `#sys-${w.id}`, page }; });
+idx.splice(5, 0, { id: 'alwayshome', r: ['AUC', '0.80', '· 22,071 CAL FIRE inspections'], title: 'AlwaysHome, wildfire retrofit planner', where: 'UCLA Anderson · 2026', about: 'MSBA Vibathon, team of three', href: '/projects/alwayshome/', page: true });
 // ProfilePage dates: first commit of this site (Aug 27 2026) and the last commit touching home content.
 const jsonLd = structuredClone(homeLd);
 Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00', dateModified: lastCommit(['src/pages/index.astro', 'src/data']) });
@@ -56,10 +49,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
 <header id="top" class="hero">
   <div class="grid hero-grid">
     <h1 class="enter" style="--d:0">Joaquin<br>Ramirez</h1>
-    <p class="intro enter" style="--d:1">Machine learning engineer and data scientist who builds GenAI agents, computer vision, fraud detection, optimization and forecasting models. Over three years across B2B SaaS, IT consulting, engineering and consumer goods, most recently as Senior ML Engineer and technical lead of an AI team, taking product tradeoffs to the CEO and CTO.</p>
-    <figure class="idx-preview" aria-hidden="true">
-      {idx.map((r, i) => r.preview && <div class={`pv${i === 0 ? ' on' : ''}`} data-pv={r.id} set:html={r.preview} />)}
-    </figure>
+    <p class="intro enter" style="--d:1">Machine learning engineer and data scientist who ships AI that companies adopt: GenAI agents, fraud detection, computer vision, optimization and forecasting. Most recently Senior ML Engineer and technical lead of an AI team, taking product tradeoffs to the CEO and CTO, after work across B2B SaaS, IT consulting, engineering and consumer goods.</p>
     <div class="meta enter" style="--d:2">
       <img class="meta-photo" src="/portrait-sm.webp" alt="Joaquin Ramirez" width="560" height="700" fetchpriority="high">
       <p class="meta-facts"><strong>M.S. Business Analytics, UCLA Anderson</strong><br>Class President · Dec 2027<br>Los Angeles, California</p>
@@ -79,13 +69,14 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
       <div class="idx-head lab" aria-hidden="true"><span>No.</span><span>System</span><span>Where</span><span>Result</span></div>
       <ol>
         {idx.map((r, i) => (
-          <li data-row={r.id}>
+          <li>
             <a href={r.href}>
               <span class="n">{String(i + 1).padStart(2, '0')}</span>
               <span class="t">{r.title}</span>
-              <span class="w">{r.where}</span>
-              <span class="f"><b>{r.big}</b> {r.small}</span>
-              <span class="go" aria-hidden="true">→</span>
+              <span class="w">{r.where}<span class="w-about">{r.about}</span></span>
+              <span class="f">{r.r[0] && `${r.r[0]} `}<b>{r.r[1]}</b>{r.r[2] && ` ${r.r[2]}`}</span>
+              <span class="go" aria-hidden="true">{r.page ? '→' : '↓'}</span>
+              {!r.page && <span class="sr-only"> (details in Experience)</span>}
             </a>
           </li>
         ))}
@@ -95,63 +86,11 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
 </header>
 
 <main id="content">
-<section id="featured" aria-labelledby="featured-h">
-  <div class="grid">
-    <p class="lab sec-lab">Case studies</p>
-    <h2 id="featured-h" class="sec-title">Three systems, in depth</h2>
-  </div>
-  <article class="feat grid">
-    <p class="lab feat-n">01</p>
-    <h3 class="feat-title"><a href="/work/hr-copilot/">{copilot.data.pageTitle}</a></h3>
-    <figure class="feat-fig panel"><div class="fig-scroll" set:html={hrSvg} /></figure>
-    <div class="feat-text">
-      <p class="feat-big"><b>9x</b> copilot adoption</p>
-      <p class="feat-facts"><span class="nw">1300+ organizations</span> · <span class="nw">48K+ users</span></p>
-      <p>Agents, reliability, and whether to tell a user the data exists but is not theirs. Every output clears schema enforcement and a self critique before anyone sees it.</p>
-      <a class="case-link" href="/work/hr-copilot/">Read the case study<span> · {copilot.data.minutes} min</span></a>
-    </div>
-  </article>
-  <article class="feat grid">
-    <p class="lab feat-n">02</p>
-    <h3 class="feat-title"><a href="/work/fraud-detection/">{fraud.data.pageTitle}</a></h3>
-    <figure class="feat-fig panel"><div class="fig-scroll" set:html={fraudSvg} /></figure>
-    <div class="feat-text">
-      <p class="feat-big"><b>35</b> financial institutions</p>
-      <p class="feat-facts"><span class="nw">real time</span> · <span class="nw">no fraud labels</span></p>
-      <p>No fraud labels, so unsupervised. Took over an MVP flagging ~9%; redesigned features and model to the client's ~2% threshold.</p>
-      <a class="case-link" href="/work/fraud-detection/">Read the case study</a>
-    </div>
-  </article>
-  <article class="feat grid">
-    <p class="lab feat-n">03</p>
-    <h3 class="feat-title"><a href="/projects/alwayshome/">AlwaysHome</a></h3>
-    <figure class="feat-fig frame">
-      <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{alwayshome.data.demo?.replace('https://', '')}</span></div>
-      <div class="frame-media">
-        <video class="auto-loop" muted loop playsinline preload="none" poster="/projects/alwayshome/loop-r-poster.webp" width="960" height="600" aria-label="AlwaysHome plan screen: as the budget slider moves, the ranked fire-safety fixes and the estimated chance of losing the house update">
-          <source src="/projects/alwayshome/loop-m.webm" type="video/webm" media="(max-width: 600px)">
-          <source src="/projects/alwayshome/loop-m.mp4" type="video/mp4" media="(max-width: 600px)">
-          <source src="/projects/alwayshome/loop-r.webm" type="video/webm">
-          <source src="/projects/alwayshome/loop-r.mp4" type="video/mp4">
-        </video>
-        <button class="loop-toggle" type="button" hidden>Play</button>
-      </div>
-      <figcaption>The live app: the plan rebuilds as the budget moves. Dollar figures are placeholders.</figcaption>
-    </figure>
-    <div class="feat-text">
-      <p class="feat-big"><b>0.80</b> AUC</p>
-      <p class="feat-facts"><span class="nw">0.68 on unseen neighborhoods</span> · <span class="nw">22,071 CAL FIRE inspections</span></p>
-      <p>Which wildfire fixes pay back first. AI reads the policy, never sets a number.</p>
-      <span class="pc-links"><a class="case-link" href="/projects/alwayshome/">Project page</a> <a class="text-link" href={alwayshome.data.demo} target="_blank" rel="noopener">Live app ↗</a></span>
-    </div>
-  </article>
-</section>
-
 <section id="work">
   <div class="grid">
     <p class="lab sec-lab">Experience</p>
     <h2 class="sec-title">Systems built at work</h2>
-    <p class="section-lead">Most recent first. Four have a full case study: the tradeoffs, what failed, and how each result was measured.</p>
+    <p class="section-lead">Most recent first.</p>
     <ol class="timeline">
       {experience.map((job) => (
         <li class="job">
@@ -186,8 +125,30 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
 <section id="projects">
   <div class="grid">
     <p class="lab sec-lab">Projects</p>
-    <h2 class="sec-title">Built outside a job</h2>
-    <p class="section-lead">Each with its code.</p>
+    <h2 class="sec-title">Projects outside work</h2>
+    <article class="prow" id="project-alwayshome">
+      <figure class="frame">
+        <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{alwayshome.data.demo?.replace('https://', '')}</span></div>
+        <div class="frame-media">
+          <video class="auto-loop" muted loop playsinline preload="none" poster="/projects/alwayshome/loop-r-poster.webp" width="960" height="600" aria-label="AlwaysHome plan screen: as the budget slider moves, the ranked fire-safety fixes and the estimated chance of losing the house update">
+            <source src="/projects/alwayshome/loop-m.webm" type="video/webm" media="(max-width: 600px)">
+            <source src="/projects/alwayshome/loop-m.mp4" type="video/mp4" media="(max-width: 600px)">
+            <source src="/projects/alwayshome/loop-r.webm" type="video/webm">
+            <source src="/projects/alwayshome/loop-r.mp4" type="video/mp4">
+          </video>
+          <button class="loop-toggle" type="button" hidden>Play</button>
+        </div>
+        <figcaption>The live app: the plan rebuilds as the budget moves. Dollar figures are placeholders.</figcaption>
+      </figure>
+      <div class="prow-body">
+        <h3><a href="/projects/alwayshome/">AlwaysHome</a></h3>
+        <p class="prow-kind">{alwayshome.data.where}</p>
+        <p set:html={alwayshome.data.summary} />
+        <div class="metrics">{alwayshome.data.metrics.map((m) => <span class="metric">{m}</span>)}</div>
+        <p class="tags">{alwayshome.data.stack}</p>
+        <div class="project-links"><a class="case-link" href="/projects/alwayshome/">Project page</a> <a class="text-link" href={alwayshome.data.demo} target="_blank" rel="noopener">Live app ↗</a></div>
+      </div>
+    </article>
     {mainProjects.filter((p) => p.id !== 'alwayshome').map((p) => (
       <article class="prow" id={`project-${p.id}`}>
         <figure class="frame">
@@ -265,17 +226,6 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   var map = { 'case-copilot': 'hr-copilot', 'case-rag': 'retrieval-pipeline', 'case-fishmeal': 'contract-allocation', 'case-fraud': 'fraud-detection' };
   var k = location.hash.slice(1);
   if (map[k]) location.replace('/work/' + map[k] + '/' + location.search);
-})();
-// Work index: hovering or focusing a row shows that system's diagram beside the intro (wide screens only).
-(function () {
-  var pvs = {}; document.querySelectorAll('.idx-preview .pv').forEach(function (p) { pvs[p.getAttribute('data-pv')] = p; });
-  var fig = document.querySelector('.idx-preview');
-  function show(id) { var hit = pvs[id]; if (!hit) return; Object.keys(pvs).forEach(function (k) { pvs[k].classList.toggle('on', pvs[k] === hit); }); }
-  document.querySelectorAll('.idx li').forEach(function (li) {
-    var id = li.getAttribute('data-row');
-    li.addEventListener('mouseenter', function () { show(id); fig.classList.toggle('none', !pvs[id]); });
-    li.addEventListener('focusin', function () { show(id); fig.classList.toggle('none', !pvs[id]); });
-  });
 })();
 // Muted demo loop: plays only on screen; never under reduced motion or Save-Data.
 (function () {

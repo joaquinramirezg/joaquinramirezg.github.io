@@ -12,9 +12,9 @@ angle: "Crehana · multi-tenancy, messy inputs, and evaluation"
 description: "I built and ran the copilot's tenant-aware RAG ingestion: 10K+ documents a week into a 1.2M+ vector Qdrant corpus with OpenAI embeddings."
 tldr: {"problem": "The copilot answers from each company's own documents: 10K+ new documents a week, 1300+ organizations, and no company may ever see another's data.", "role": "I built and ran the ingestion pipeline, enforced per-organization filtering, and rebuilt preprocessing per format when companies started uploading every kind of file.", "result": "A search corpus of 1.2M+ vectors on Qdrant, reindexed every weekend, with every change scored against a 200-question golden set."}
 ---
-<h2>What actually flows in</h2>
-<p>It is not a static document pile. Information flowed continuously from the platform's HR modules into the master database as companies edited, uploaded, and generated records, more than 10K documents a week. Every weekend the pipeline reindexed that into a search corpus of 1.2M+ vectors on Qdrant, using OpenAI embeddings over overlapping chunks.</p>
-<h2>Multi-tenancy: the constraint that shapes everything</h2>
+<h2>What flows in</h2>
+<p>Information flowed continuously from the platform's HR modules into the master database as companies edited, uploaded, and generated records, more than 10K documents a week. Every weekend the pipeline reindexed that into a search corpus of 1.2M+ vectors on Qdrant, using OpenAI embeddings over overlapping chunks.</p>
+<h2>Multi-tenancy</h2>
 <p>1300+ organizations share the platform, and no company may ever see another company's data. Retrieval enforces metadata filtering per organization on the vector side, on top of tenant schemas in the relational database. I also evaluated moving to separate collections per tenant, which buys stronger isolation and much simpler offboarding when a customer leaves, at the cost of operational overhead across that many organizations. Filtered search won at our scale; separate collections become the better call once isolation matters more than operating cost.</p>
 <figure class="fig">
 <div class="fig-scroll">
@@ -55,7 +55,7 @@ tldr: {"problem": "The copilot answers from each company's own documents: 10K+ n
 <text class="dg-t" x="260" y="544" text-anchor="middle">Answer grounded in that company's own text</text>
 </svg>
 </div>
-<figcaption>The pipeline, and the line that matters. Retrieval is filtered to the asking organization, so one company's question can only ever be answered from that company's own material. Everything above that gate is shared plumbing; the gate is what makes it safe to share.</figcaption>
+<figcaption>The pipeline. Retrieval is filtered to the asking organization, so one company's question can only ever be answered from that company's own material. Everything above that gate is shared plumbing; the gate is what makes it safe to share.</figcaption>
 </figure>
 <h2>When companies started uploading every format</h2>
 <p>Companies started uploading every kind of file: Word, PowerPoint, Excel, PDFs, even audio, far beyond the HR documents the system was designed for, and they expected answers from all of it. We rebuilt preprocessing per format, redesigned chunking and indexing, and replaced single-pass similarity search with a retrieval approach that held up across all those formats. Each change had to hold up on the 200-question golden set, with no loss in speed.</p>
