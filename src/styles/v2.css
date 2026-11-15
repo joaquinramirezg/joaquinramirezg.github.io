@@ -321,3 +321,23 @@ h1, h2, h3, h4, .tile-small, .prow-kind, .tile-kind { text-wrap: balance; }
 .avail a:hover { text-decoration: underline; }
 .book-call { display: inline-flex; align-items: center; gap: 7px; font-size: var(--fs-meta); font-weight: 600; color: var(--accent); text-decoration: none; padding: 8px 12px; border: 1px solid var(--accent); border-radius: 8px; }
 .book-call:hover { background: var(--accent); color: var(--on-accent); }
+
+/* Audit pass, Nov 15 2026 (Impeccable audit + critique, Taste Skill checker) */
+.nw { white-space: nowrap; }
+.theme-toggle { font: inherit; }
+.site-nav .brand, .site-nav a.nav-link { font-size: var(--fs-meta); }
+.loop-toggle { font-size: var(--fs-label); }
+.frame-bar span { font-size: var(--fs-label); }
+.case a { color: var(--accent); overflow-wrap: anywhere; }
+@media (min-width: 761px) { .job { grid-template-columns: 250px 1fr; } }
+@media (max-width: 560px) {
+  /* Touch targets: 44px tall on phones */
+  .theme-toggle { width: 40px; height: 40px; flex: none; }
+  .site-nav a.nav-link, .site-nav .brand, .crumb, .backlink, .email-open, .footer-links a, .text-link { min-height: 44px; display: inline-flex; align-items: center; }
+  .crumb { margin-bottom: 10px; }
+  /* Start-here tiles: number on top with its label, then the text */
+  .tile { flex-direction: column; }
+  .tile-visual, .tile-visual.project-thumb { flex: none; border-right: 0; border-bottom: 1px solid var(--line); }
+  .tile-number { padding: 16px 14px 14px; align-items: flex-start; text-align: left; }
+  .tile-small { display: block; }
+}

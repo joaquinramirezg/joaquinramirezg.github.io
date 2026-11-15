@@ -52,7 +52,7 @@ const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
 <link rel="preload" href="/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <script is:inline>
   // Apply a saved theme choice before first paint; otherwise the system setting wins.
-  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') { document.documentElement.setAttribute('data-theme', t); document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', t === 'dark' ? '#0f141b' : '#ffffff'); }); } } catch (e) {}
 </script>
 <!-- Cookieless analytics (Umami Cloud): sets no cookies, stores no personal data, honors Do Not Track. -->
 <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="36142a64-7544-46cd-b173-531dcf48a387" data-do-not-track="true"></script>
@@ -67,7 +67,7 @@ const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
 <nav class="site-nav" aria-label="Site">
   <div class="nav-inner">
     <a class="brand" href="/" aria-label="Joaquin Ramirez, home"><span class="brand-full">Joaquin Ramirez</span><span class="brand-short">JR</span></a>
-    <a class="nav-link" href="/#work" aria-current={nav === 'work' ? 'true' : undefined}>Work</a>
+    <a class="nav-link" href="/#work" aria-current={nav === 'work' ? 'true' : undefined}>Experience</a>
     <a class="nav-link" href="/#projects" aria-current={nav === 'projects' ? 'true' : undefined}>Projects</a>
     <a class="nav-link" href="/#about">About</a>
     <a class="nav-link" href="/#contact">Contact</a>
@@ -116,6 +116,7 @@ const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
   if (btn) btn.addEventListener('click', function () {
     var next = effective() === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', next === 'dark' ? '#0f141b' : '#ffffff'); });
     try { localStorage.setItem('theme', next); } catch (e) {}
     try { if (window.umami) window.umami.track('theme', { to: next }); } catch (e) {}
   });

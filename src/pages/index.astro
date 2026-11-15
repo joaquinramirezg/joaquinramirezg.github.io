@@ -36,7 +36,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
 <header id="top">
   <div class="wrap wide hero-grid">
     <div class="hero-text">
-      <div class="kicker">Machine Learning Engineer · Data Scientist</div>
+      <div class="kicker"><span class="nw">Machine Learning Engineer ·</span> <span class="nw">Data Scientist</span></div>
       <h1>Joaquin Ramirez</h1>
       <p class="subtitle">Machine learning engineer and data scientist who builds GenAI agents, computer vision, fraud detection, optimization and forecasting models. Over three years across B2B SaaS, IT consulting, engineering and consumer goods, most recently as Senior ML Engineer and technical lead of an AI team, taking product tradeoffs to the CEO and CTO.</p>
       <ul class="hero-facts">
@@ -65,10 +65,10 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
       <a class="tile" href="/work/hr-copilot/">
         <div class="tile-visual tile-number">
           <span class="tile-big">9x</span>
-          <span class="tile-small">copilot adoption · 1300+ organizations · 48K+ users</span>
+          <span class="tile-small"><span class="nw">copilot adoption ·</span> <span class="nw">1300+ organizations ·</span> <span class="nw">48K+ users</span></span>
         </div>
         <div class="tile-body">
-          <span class="tile-kind">Case study · B2B HR-tech SaaS · {copilot.data.minutes} min</span>
+          <span class="tile-kind">Case study · <span class="nw">B2B HR-tech SaaS</span> · {copilot.data.minutes} min</span>
           <h3>{copilot.data.pageTitle}</h3>
           <p>Agents, reliability, and whether to tell a user the data exists but is not theirs.</p>
         </div>
@@ -76,7 +76,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
       <a class="tile" href="/work/fraud-detection/">
         <div class="tile-visual tile-number">
           <span class="tile-big">35</span>
-          <span class="tile-small">financial institutions · real time · no fraud labels</span>
+          <span class="tile-small"><span class="nw">financial institutions ·</span> <span class="nw">real time ·</span> <span class="nw">no fraud labels</span></span>
         </div>
         <div class="tile-body">
           <span class="tile-kind">Case study · IT consulting</span>
@@ -87,7 +87,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
       <a class="tile" href="/projects/alwayshome/">
         <div class="tile-visual tile-number">
           <span class="tile-big">0.80</span>
-          <span class="tile-small">AUC · 0.68 on unseen neighborhoods · 22,071 CAL FIRE inspections</span>
+          <span class="tile-small"><span class="nw">AUC ·</span> <span class="nw">0.68 on unseen neighborhoods ·</span> <span class="nw">22,071 CAL FIRE inspections</span></span>
         </div>
         <div class="tile-body">
           <span class="tile-kind">Project · live app · Nov 2026</span>
@@ -239,8 +239,9 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var save = navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || ''));
   var userPaused = !!(reduce || save), visible = false;
-  function sync() { if (visible && !userPaused) { v.play().catch(function () {}); } else { v.pause(); } btn.textContent = v.paused || userPaused ? 'Play' : 'Pause'; btn.setAttribute('aria-label', (userPaused ? 'Play' : 'Pause') + ' demo'); }
-  v.addEventListener('play', sync); v.addEventListener('pause', function () { btn.textContent = 'Play'; });
+  function sync() { if (visible && !userPaused) { v.play().catch(function () {}); } else { v.pause(); } label(); }
+  function label() { btn.textContent = v.paused ? 'Play' : 'Pause'; }
+  v.addEventListener('play', label); v.addEventListener('pause', label);
   btn.addEventListener('click', function () { userPaused = !userPaused; if (!userPaused) v.preload = 'auto'; sync(); });
   if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; if (visible && !userPaused) v.preload = 'auto'; sync(); }, { threshold: 0.4 }).observe(v);
 })();

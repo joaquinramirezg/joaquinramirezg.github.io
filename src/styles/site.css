@@ -247,7 +247,7 @@ footer a:hover { text-decoration: underline; }
 .crumb:hover { text-decoration: underline; }
 .page-head h1 { font-size: 32px; }
 .page-head .where { display: block; font-size: 14.5px; color: var(--text-soft); font-weight: 500; margin-top: 8px; }
-.page-head .lead { font-size: 17px; color: var(--text-soft); margin-top: 16px; max-width: 660px; }
+.page-head .lead { font-size: 17px; color: var(--text-soft); margin-top: 16px; }
 .page-head .metrics { margin-top: 18px; }
 .page-head .links { margin-top: 22px; }
 .note { font-size: 13.5px; color: var(--text-soft); margin-top: 12px; }
