@@ -10,7 +10,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const path = `/projects/${entry.id}/`;
-const ogImage = `/projects/${entry.id}/og.png`;
+const ogImage = `/projects/${entry.id}/og.png?v=2`;
 const name = d.title.split(':')[0];
 const ld = [{
   '@context': 'https://schema.org', '@type': 'SoftwareApplication', name, applicationCategory: 'WebApplication',

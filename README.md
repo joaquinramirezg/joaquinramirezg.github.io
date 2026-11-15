@@ -30,7 +30,7 @@ link shared on LinkedIn shows that page, not the site in general.
    optional: a non-empty body also creates `/projects/<slug>/`, so only flagship
    projects get a page.
 2. Put media in `public/projects/<slug>/` and a 16:9 card thumbnail in `public/p/`.
-3. `python3 tools/make_og.py projects <slug> --shot public/projects/<slug>/demo-poster.webp`
+3. `npm run build && node tools/make_og.mjs` (redraws every link preview; the project card uses public/projects/<slug>/demo-poster.webp)
 4. `npm run dev` to check it, then commit and push.
 
 Case studies work the same way in `src/content/work/`; the schema is in
@@ -68,5 +68,5 @@ Case studies work the same way in `src/content/work/`; the schema is in
     src/layouts/Base.astro     head, nav, footer, theme and email scripts
     src/styles/                site.css (the one stylesheet; type scale at the top)
     public/                    images, video, resume, fonts, static pages
-    tools/make_og.py           preview image generator
+    tools/make_og.mjs          link preview (og.png) generator, Playwright
     .github/workflows/         build and deploy to GitHub Pages

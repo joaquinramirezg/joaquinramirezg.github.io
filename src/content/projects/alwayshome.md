@@ -16,7 +16,7 @@ lead: "A web app that shows a Los Angeles County homeowner on the California FAI
 pageMetrics: ["est. loss chance 36% → 15% if fire reaches the home (sample home)", "AUC 0.80 (n=4,525)", "22,071 CAL FIRE inspections"]
 note: "The API runs on a free host that sleeps when idle, so the first request can take up to a minute. Pick an address under Examples to see a full run without typing."
 description: "One-day UCLA Anderson MSBA Vibathon app; I led product and AI. Ranks wildfire fixes by payback for LA FAIR Plan homeowners; house-loss model CV AUC 0.80."
-ogAlt: "AlwaysHome: estimated loss chance 36% to 15% after 7 fixes, next to the app's ranked plan"
+ogAlt: "AlwaysHome: which wildfire fixes pay back first. AUC 0.80 (n=4,525), 22,071 CAL FIRE inspections, 522 tests in CI, next to the app's ranked plan"
 ---
 <figure class="demo">
 <video class="demo-video" controls playsinline preload="none" poster="/projects/alwayshome/demo-poster.webp" width="1600" height="1000" aria-label="Demo of AlwaysHome: a sample Altadena homeowner goes through location, home, insurance, situation and plan, then moves the budget slider">
