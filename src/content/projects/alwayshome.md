@@ -20,7 +20,7 @@ ogAlt: "AlwaysHome: which wildfire fixes pay back first. AUC 0.80 (n=4,525), 22,
 ---
 <figure class="demo">
 <video class="demo-video" controls playsinline preload="none" poster="/projects/alwayshome/demo-poster.webp" width="1600" height="1000" aria-label="Demo of AlwaysHome: a sample Altadena homeowner goes through location, home, insurance, situation and plan, then moves the budget slider">
-<source src="/projects/alwayshome/demo.mp4" type="video/mp4">
+<source src="/projects/alwayshome/demo.mp4?v=2" type="video/mp4">
 </video>
 <figcaption>A 40 second run of the live app with a sample Altadena homeowner: location, home, insurance, situation, then a plan that rebuilds as the budget changes. Dollar amounts in the demo are placeholders.</figcaption>
 </figure>
