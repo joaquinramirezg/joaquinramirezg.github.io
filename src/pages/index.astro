@@ -15,6 +15,7 @@ const hasPage = (e: { body?: string }) => !!(e.body && e.body.trim());
 const EMAIL = 'joaquin.elias.ramirez.gutierrez.2027@anderson.ucla.edu';
 const copilot = work.find((w) => w.id === 'hr-copilot')!;
 const alwayshome = projects.find((p) => p.id === 'alwayshome')!;
+const radar = projects.find((p) => p.id === 'risk-radar')!;
 const fraud = work.find((w) => w.id === 'fraud-detection')!;
 const byId = Object.fromEntries(work.map((w) => [w.id, w]));
 const mainProjects = projects.filter((p) => !p.data.earlier);
@@ -32,6 +33,7 @@ const rows = [
   { id: 'sales-forecasting', r: ['forecast accuracy', '~30% better', '(wMAPE)'] },
 ];
 const idx = rows.map((x) => { const w = byId[x.id]; const j = jobOf[x.id]; const page = hasPage(w); return { ...x, title: w.data.title, where: `${j.company} · ${years(j.dates)}`, about: j.about, href: page ? `/work/${w.id}/` : `#sys-${w.id}`, page }; });
+idx.splice(5, 0, { id: 'risk-radar', r: ['answers correct', '83%', '· 808 public forecasts'], title: 'Risk Radar, S&P 100 risk filings', where: 'Solo project · 2026', about: 'AI analyst with measured accuracy', href: '/projects/risk-radar/', page: true });
 idx.splice(5, 0, { id: 'alwayshome', r: ['AUC', '0.80', '· 22,071 CAL FIRE inspections'], title: 'AlwaysHome, wildfire retrofit planner', where: 'UCLA Anderson · 2026', about: 'MSBA Vibathon, team of three', href: '/projects/alwayshome/', page: true });
 // ProfilePage dates: first commit of this site (Aug 27 2026) and the last commit touching home content.
 const jsonLd = structuredClone(homeLd);
@@ -123,11 +125,31 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   <div class="grid">
     <p class="lab sec-lab">Projects</p>
     <h2 class="sec-title">Projects outside work</h2>
+    <article class="prow" id="project-risk-radar">
+      <figure class="frame">
+        <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{radar.data.demo?.replace('https://', '')}</span></div>
+        <div class="frame-media">
+          <video class="auto-loop" muted loop playsinline preload="none" poster="/projects/risk-radar/loop-poster.webp" width="960" height="600" aria-label="Risk Radar board: the S&P 100 as tiles, relit as the theme switches from AI to tariffs, cybersecurity and ESG">
+            <source src="/projects/risk-radar/loop.webm" type="video/webm">
+            <source src="/projects/risk-radar/loop.mp4" type="video/mp4">
+          </video>
+          <button class="loop-toggle" type="button" hidden>Play</button>
+        </div>
+        <figcaption>The live site: each theme lights the companies that added it this year; ESG strikes the 26 that dropped it.</figcaption>
+      </figure>
+      <div class="prow-body">
+        <h3><a href="/projects/risk-radar/">Risk Radar</a></h3>
+        <p class="prow-kind">{radar.data.where}</p>
+        <ul class="wins">{radar.data.bullets.map((b) => <li>{b}</li>)}</ul>
+        <p class="tags">{radar.data.stack}</p>
+        <div class="project-links"><a class="case-link" href="/projects/risk-radar/">Project page</a> <a class="text-link" href={radar.data.demo} target="_blank" rel="noopener">Live site ↗</a> <a class="text-link" href={radar.data.code} target="_blank" rel="noopener">Code ↗</a></div>
+      </div>
+    </article>
     <article class="prow" id="project-alwayshome">
       <figure class="frame">
         <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{alwayshome.data.demo?.replace('https://', '')}</span></div>
         <div class="frame-media">
-          <video class="auto-loop" muted loop playsinline preload="none" poster="/projects/alwayshome/loop-r-poster.webp" width="960" height="600" aria-label="AlwaysHome plan screen: as the budget slider moves, the ranked fire-safety fixes and the estimated chance of losing the house update">
+          <video class="auto-loop" muted loop playsinline preload="none" poster="/projects/alwayshome/loop-r-poster.webp" data-poster-m="/projects/alwayshome/loop-m-poster.webp" width="960" height="600" aria-label="AlwaysHome plan screen: as the budget slider moves, the ranked fire-safety fixes and the estimated chance of losing the house update">
             <source src="/projects/alwayshome/loop-m.webm" type="video/webm" media="(max-width: 600px)">
             <source src="/projects/alwayshome/loop-m.mp4" type="video/mp4" media="(max-width: 600px)">
             <source src="/projects/alwayshome/loop-r.webm" type="video/webm">
@@ -145,7 +167,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
         <div class="project-links"><a class="case-link" href="/projects/alwayshome/">Project page</a> <a class="text-link" href={alwayshome.data.demo} target="_blank" rel="noopener">Live app ↗</a></div>
       </div>
     </article>
-    {mainProjects.filter((p) => p.id !== 'alwayshome').map((p) => (
+    {mainProjects.filter((p) => !['alwayshome', 'risk-radar'].includes(p.id)).map((p) => (
       <article class="prow" id={`project-${p.id}`}>
         <figure class="frame">
           <div class="frame-media frame-chart" set:html={p.data.thumb} />
@@ -239,9 +261,8 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   if (map[k]) location.replace('/work/' + map[k] + '/' + location.search);
 })();
 // Muted demo loop: plays only on screen; never under reduced motion or Save-Data.
-(function () {
-  var v = document.querySelector('video.auto-loop'); if (!v) return;
-  if (window.matchMedia && matchMedia('(max-width: 600px)').matches) { v.poster = '/projects/alwayshome/loop-m-poster.webp'; v.classList.add('is-m'); }
+document.querySelectorAll('video.auto-loop').forEach(function (v) {
+  if (v.dataset.posterM && window.matchMedia && matchMedia('(max-width: 600px)').matches) { v.poster = v.dataset.posterM; v.classList.add('is-m'); }
   var btn = v.parentNode.querySelector('.loop-toggle'); btn.hidden = false;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var save = navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || ''));
@@ -251,7 +272,7 @@ Object.assign(jsonLd[0]['@graph'][0], { dateCreated: '2026-08-27T16:18:34-05:00'
   v.addEventListener('play', label); v.addEventListener('pause', label);
   btn.addEventListener('click', function () { userPaused = !userPaused; sync(); });
   if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; sync(); }, { threshold: 0.4 }).observe(v);
-})();
+});
 // Highlight the nav link of the section on screen.
 (function () {
   if (!('IntersectionObserver' in window)) return;
